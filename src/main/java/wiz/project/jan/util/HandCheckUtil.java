@@ -243,6 +243,60 @@ public final class HandCheckUtil {
     }
     
     /**
+     * 和了判定 (中国麻雀)
+     *
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isChmComplete(final Map<JanPai, Integer> hand) {
+        if (hand == null) {
+            throw new NullPointerException("Hand is null.");
+        }
+        
+        final List<Map<JanPai, Integer>> excludeHeadPattern = getExcludeHeadPattern(hand);
+        if (excludeHeadPattern.isEmpty()) {
+            // 雀頭候補が存在しない
+            
+            if (isCompleteZenhukou(hand)) {
+                return true;
+            }
+            return false;
+        }
+        
+        for (final Map<JanPai, Integer> pattern : excludeHeadPattern) {
+            if (pattern.isEmpty()) {
+            // 裸単騎状態で和了
+                return true;
+            }
+            
+            final Map<JanPai, Integer> copy = deepCopyMap(pattern);
+            
+            // 順子優先パターン
+            removeShunTsu(pattern);
+            removeKohTsu(pattern);
+            if (pattern.isEmpty()) {
+                return true;
+            }
+            
+            // 刻子優先パターン
+            removeKohTsu(copy);
+            removeShunTsu(copy);
+            if (copy.isEmpty()) {
+                return true;
+            }
+        }
+        
+        // 七対は後で判定 (二盃口対策)
+        if (isCompleteNanatsui(hand)) {
+            return true;
+        }
+        if (isCompleteKokushi(hand)) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * 聴牌判定
      * 
      * @param hand 手牌。
@@ -306,6 +360,33 @@ public final class HandCheckUtil {
             typeCount++;
         }
         return headCount == 1 && typeCount == 13;
+    }
+    
+    /**
+     * 七対和了か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    private static boolean isCompleteNanatsui(final Map<JanPai, Integer> hand) {
+        int typeCount = 0;
+        for (final Map.Entry<JanPai, Integer> entry : hand.entrySet()) {
+            if (entry.getValue() % 2 != 0) {
+                return false;
+            }
+            typeCount += entry.getValue() / 2;
+        }
+        return typeCount == 7;
+    }
+    
+    /**
+     * 全不靠和了か (未実装)
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    private static boolean isCompleteZenhukou(final Map<JanPai, Integer> hand) {
+        return false;
     }
     
     /**
