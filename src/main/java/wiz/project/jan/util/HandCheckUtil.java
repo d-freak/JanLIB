@@ -35,6 +35,29 @@ public final class HandCheckUtil {
     
     
     /**
+     * 待ち牌を取得 (中国麻雀)
+     * 
+     * @param hand 手牌。
+     * @return 待ち牌リスト。
+     */
+    public static List<JanPai> getChmCompletableJanPaiList(final Map<JanPai, Integer> hand) {
+        if (hand == null) {
+            throw new NullPointerException("Hand is null.");
+        }
+        
+        final List<JanPai> resultList = new ArrayList<JanPai>();
+        for (final JanPai pai : JanPai.values()) {
+            // 既に手牌で4枚使っていても判定自体は行う
+            final Map<JanPai, Integer> pattern = deepCopyMap(hand);
+            JanPaiUtil.addJanPai(pattern, pai, 1);
+            if (isChmComplete(pattern)) {
+                resultList.add(pai);
+            }
+        }
+        return resultList;
+    }
+    
+    /**
      * 待ち牌を取得
      * 
      * @param hand 手牌。
