@@ -1,5 +1,5 @@
 /**
- * HandCheckUtil.java
+ * ChmHandCheckUtil.java
  * 
  * @Author
  *   Masasutzu
