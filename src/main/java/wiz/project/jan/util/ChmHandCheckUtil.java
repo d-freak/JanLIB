@@ -16,6 +16,7 @@ import wiz.project.jan.CompleteInfo;
 import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
+import wiz.project.jan.Kumiai;
 import wiz.project.jan.PlayerStatus;
 import wiz.project.jan.TenpaiPattern;
 import wiz.project.jan.Wind;
@@ -259,6 +260,16 @@ public final class ChmHandCheckUtil {
     
     
     /**
+     * リストをディープコピー
+     * 
+     * @param source 複製元。
+     * @return 複製結果。
+     */
+    private static <S> List<S> deepCopyList(final List<S> source) {
+        return new ArrayList<S>(source);
+    }
+    
+    /**
      * マップをディープコピー
      * 
      * @param source 複製元。
@@ -313,13 +324,71 @@ public final class ChmHandCheckUtil {
     }
     
     /**
-     * 全不靠和了か (未実装)
+     * 全不靠和了か
      * 
      * @param hand 手牌。
      * @return 判定結果。
      */
     private static boolean isCompleteZenhukou(final Map<JanPai, Integer> hand) {
-        return false;
+        removeJi(hand);
+        final List<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        switch (hand.size()) {
+        case 7:
+            for (final JanPai pai1 : JanPai.values()) {
+                if (pai1.isJi() || paiList.contains(pai1)) {
+                    // 組合竜の判定のため、字牌や既にある牌は判定せず次へ
+                    continue;
+                }
+                // 既に手牌で4枚使っていても判定自体は行う
+                final List<JanPai> pattern1 = deepCopyList(paiList);
+                pattern1.add(pai1);
+                for (final JanPai pai2 : JanPai.values()) {
+                    if (pai2.isJi() || paiList.contains(pai2)) {
+                        // 組合竜の判定のため、字牌や既にある牌は判定せず次へ
+                        continue;
+                    }
+                    // 既に手牌で4枚使っていても判定自体は行う
+                    final List<JanPai> pattern2 = deepCopyList(pattern1);
+                    pattern2.add(pai2);
+                    if (Kumiai.isKumiai(pattern2)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        case 8:
+            for (final JanPai pai : JanPai.values()) {
+                if (pai.isJi() || paiList.contains(pai)) {
+                    // 組合竜の判定のため、字牌や既にある牌は判定せず次へ
+                    continue;
+                }
+                // 既に手牌で4枚使っていても判定自体は行う
+                final List<JanPai> pattern = deepCopyList(paiList);
+                pattern.add(pai);
+                if (Kumiai.isKumiai(pattern)) {
+                    return true;
+                }
+            }
+            return false;
+        case 9:
+            return Kumiai.isKumiai(paiList);
+        default:
+            return false;
+        }
+    }
+    
+    /**
+     * 字牌を1枚ずつ削除
+     * 
+     * @param source 削除元の牌マップ。
+     */
+    private static void removeJi(final Map<JanPai, Integer> source) {
+    	final List<JanPai> paiList = new ArrayList<JanPai>(source.keySet());
+        for (final JanPai entry : paiList) {
+            if (JanPaiUtil.JI_LIST.contains(entry)) {
+                JanPaiUtil.removeJanPai(source, entry, 1);
+            }
+        }
     }
     
     /**
