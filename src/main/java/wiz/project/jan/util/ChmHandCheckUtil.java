@@ -2,7 +2,7 @@
  * HandCheckUtil.java
  * 
  * @Author
- *   Yuki Kawata
+ *   Masasutzu
  */
 
 package wiz.project.jan.util;
@@ -23,19 +23,19 @@ import wiz.project.jan.Wind;
 
 
 /**
- * 手牌確認ユーティリティ
+ * 手牌確認ユーティリティ (中国麻雀)
  */
-public final class HandCheckUtil {
+public final class ChmHandCheckUtil {
     
     /**
      * コンストラクタ利用禁止
      */
-    private HandCheckUtil() {}
+    private ChmHandCheckUtil() {}
     
     
     
     /**
-     * 待ち牌を取得
+     * 待ち牌を取得 (中国麻雀)
      * 
      * @param hand 手牌。
      * @return 待ち牌リスト。
@@ -193,7 +193,7 @@ public final class HandCheckUtil {
     }
     
     /**
-     * 和了判定
+     * 和了判定 (中国麻雀)
      *
      * @param hand 手牌。
      * @return 判定結果。
@@ -206,6 +206,10 @@ public final class HandCheckUtil {
         final List<Map<JanPai, Integer>> excludeHeadPattern = getExcludeHeadPattern(hand);
         if (excludeHeadPattern.isEmpty()) {
             // 雀頭候補が存在しない
+            
+            if (isCompleteZenhukou(hand)) {
+                return true;
+            }
             return false;
         }
         
@@ -232,8 +236,8 @@ public final class HandCheckUtil {
             }
         }
         
-        // 七対子は後で判定 (二盃口対策)
-        if (isCompleteChiToi(hand)) {
+        // 七対は後で判定 (二盃口対策)
+        if (isCompleteNanatsui(hand)) {
             return true;
         }
         if (isCompleteKokushi(hand)) {
@@ -265,24 +269,7 @@ public final class HandCheckUtil {
     }
     
     /**
-     * 七対子和了か
-     * 
-     * @param hand 手牌。
-     * @return 判定結果。
-     */
-    private static boolean isCompleteChiToi(final Map<JanPai, Integer> hand) {
-        int typeCount = 0;
-        for (final Map.Entry<JanPai, Integer> entry : hand.entrySet()) {
-            if (entry.getValue() != 2) {
-                return false;
-            }
-            typeCount++;
-        }
-        return typeCount == 7;
-    }
-    
-    /**
-     * 國士無双和了か
+     * 國士無双(=十三ヤオ)和了か
      * 
      * @param hand 手牌。
      * @return 判定結果。
@@ -306,6 +293,33 @@ public final class HandCheckUtil {
             typeCount++;
         }
         return headCount == 1 && typeCount == 13;
+    }
+    
+    /**
+     * 七対和了か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    private static boolean isCompleteNanatsui(final Map<JanPai, Integer> hand) {
+        int typeCount = 0;
+        for (final Map.Entry<JanPai, Integer> entry : hand.entrySet()) {
+            if (entry.getValue() % 2 != 0) {
+                return false;
+            }
+            typeCount += entry.getValue() / 2;
+        }
+        return typeCount == 7;
+    }
+    
+    /**
+     * 全不靠和了か (未実装)
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    private static boolean isCompleteZenhukou(final Map<JanPai, Integer> hand) {
+        return false;
     }
     
     /**
