@@ -16,7 +16,8 @@ import wiz.project.jan.CompleteInfo;
 import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
-import wiz.project.jan.Kumiai;
+import wiz.project.jan.Kumiairyu;
+import wiz.project.jan.KumiairyuType;
 import wiz.project.jan.PlayerStatus;
 import wiz.project.jan.TenpaiPattern;
 import wiz.project.jan.Wind;
@@ -220,19 +221,43 @@ public final class ChmHandCheckUtil {
                 return true;
             }
             
-            final Map<JanPai, Integer> copy = deepCopyMap(pattern);
+            final Map<JanPai, Integer> copy1 = deepCopyMap(pattern);
             
             // 順子優先パターン
-            removeShunTsu(pattern);
-            removeKohTsu(pattern);
-            if (pattern.isEmpty()) {
+            removeShunTsu(copy1);
+            removeKohTsu(copy1);
+            if (copy1.isEmpty()) {
                 return true;
             }
             
+            final Map<JanPai, Integer> copy2 = deepCopyMap(pattern);
+            
             // 刻子優先パターン
-            removeKohTsu(copy);
-            removeShunTsu(copy);
-            if (copy.isEmpty()) {
+            removeKohTsu(copy2);
+            removeShunTsu(copy2);
+            if (copy2.isEmpty()) {
+                return true;
+            }
+            
+            final List<JanPai> paiList = new ArrayList<JanPai>(pattern.keySet());
+            final KumiairyuType kumiairyuType = Kumiairyu.getKumiairyuType(paiList);
+            
+            if (kumiairyuType == KumiairyuType.NONE) {
+                continue;
+            }
+            
+            // 組合竜優先パターン
+            Kumiairyu.removeKumiairyu(pattern, kumiairyuType);
+            
+            final Map<JanPai, Integer> copy3 = deepCopyMap(pattern);
+            
+            removeShunTsu(copy3);
+            if (copy3.isEmpty()) {
+                return true;
+            }
+            
+            removeKohTsu(pattern);
+            if (pattern.isEmpty()) {
                 return true;
             }
         }
@@ -350,7 +375,7 @@ public final class ChmHandCheckUtil {
                     // 既に手牌で4枚使っていても判定自体は行う
                     final List<JanPai> pattern2 = deepCopyList(pattern1);
                     pattern2.add(pai2);
-                    if (Kumiai.isKumiai(pattern2)) {
+                    if (Kumiairyu.isKumiairyu(pattern2)) {
                         return true;
                     }
                 }
@@ -365,13 +390,13 @@ public final class ChmHandCheckUtil {
                 // 既に手牌で4枚使っていても判定自体は行う
                 final List<JanPai> pattern = deepCopyList(paiList);
                 pattern.add(pai);
-                if (Kumiai.isKumiai(pattern)) {
+                if (Kumiairyu.isKumiairyu(pattern)) {
                     return true;
                 }
             }
             return false;
         case 9:
-            return Kumiai.isKumiai(paiList);
+            return Kumiairyu.isKumiairyu(paiList);
         default:
             return false;
         }
