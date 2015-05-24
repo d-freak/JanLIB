@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import wiz.project.jan.CompleteInfo;
+import wiz.project.jan.ChmCompleteInfo;
+import wiz.project.jan.ChmYaku;
 import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.Kumiairyu;
 import wiz.project.jan.KumiairyuType;
-import wiz.project.jan.PlayerStatus;
 import wiz.project.jan.TenpaiPattern;
 import wiz.project.jan.Wind;
 
@@ -62,34 +62,76 @@ public final class ChmHandCheckUtil {
     /**
      * 和了情報を取得
      * 
-     * @param player プレイヤー。
+     * @param hand 手牌。
      * @param completePai 和了牌。
+     * @param playerWind 自風。
      * @param fieldWind 場風。
      * @return 和了情報。
      */
-    public static CompleteInfo getCompleteInfo(final PlayerStatus player, final CompleteJanPai completePai, final Wind fieldWind) {
-        if (player == null) {
-            throw new NullPointerException("Player is null.");
+    public static ChmCompleteInfo getCompleteInfo(final Hand hand, final CompleteJanPai completePai, final Wind playerWind, final Wind fieldWind) {
+        if (hand == null) {
+            throw new NullPointerException("Hand is null.");
         }
         if (completePai == null) {
             throw new NullPointerException("Complete jan pai is null.");
+        }
+        if (playerWind == null) {
+            throw new NullPointerException("Player wind is null.");
         }
         if (fieldWind == null) {
             throw new NullPointerException("Field wind is null.");
         }
         
-        final Hand hand = player.getHand();
-        final Map<JanPai, Integer> menZenMap = hand.getMenZenMap();
-        JanPaiUtil.cleanJanPaiMap(menZenMap);
+        final Map<JanPai, Integer> allPaiMap = hand.getAllJanPaiMap();
+        JanPaiUtil.addJanPai(allPaiMap, completePai.getJanPai(), 1);
+        JanPaiUtil.cleanJanPaiMap(allPaiMap);
         
         // isComplete() で和了判定する時点で既にコストが高い。
         // 和了済みであることを前提として役判定に入った方が良いかも。
-        if (!isComplete(hand.getMenZenMap())) {
+        if (!isComplete(allPaiMap)) {
             throw new IllegalArgumentException("Player is not complete.");
         }
         
-        // TODO 以降未実装
-        throw new UnsupportedOperationException();
+        List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
+        
+        if (isCompleteNanatsui(allPaiMap)) {
+            yakuList.add(ChmYaku.SEVEN_PAIRS);
+            // TODO 連七対
+        }
+        else if (isCompleteZenhukou(allPaiMap)) {
+            yakuList.add(ChmYaku.LESSER_HONORS_AND_KNITTED_TILES);
+            
+            ArrayList<JanPai> paiList = new ArrayList<JanPai>(allPaiMap.keySet());
+            
+            if (Kumiairyu.isKumiairyu(paiList)) {
+                yakuList.add(ChmYaku.KNITTED_STRAIGHT);
+            }
+            // TODO 七星不靠
+        }
+        else if (isCompleteKokushi(allPaiMap)) {
+        	yakuList.add(ChmYaku.THIRTEEN_ORPHANS);
+        }
+        
+        completeType : switch (completePai.getType()) {
+        case RON_MENZEN:
+            for (final ChmYaku yaku : yakuList) {
+                if (yaku.isMenZenOnly()) {
+                    break completeType;
+                }
+            }
+            yakuList.add(ChmYaku.CONCEALED_HAND);
+            break;
+        case TSUMO_MENZEN:
+            yakuList.add(ChmYaku.FULLY_CONCEALED);
+            break;
+        case TSUMO_NOT_MENZEN:
+            yakuList.add(ChmYaku.SELF_DRAWN);
+            break;
+        default:
+            break;
+        }
+        
+        return new ChmCompleteInfo(yakuList, completePai.getType());
     }
     
     /**
