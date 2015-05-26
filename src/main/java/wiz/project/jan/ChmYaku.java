@@ -7,6 +7,9 @@
 
 package wiz.project.jan;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 
 /**
@@ -463,6 +466,22 @@ public enum ChmYaku {
      * 十三幺
      */
     THIRTEEN_ORPHANS;
+    
+    
+    
+    /**
+     * 実装済みの役を取得
+     * 
+     * @return 実装済みの役。
+     */
+    public static List<ChmYaku> getReleased() {
+        return Arrays.asList (ChmYaku.SELF_DRAWN,
+                              ChmYaku.CONCEALED_HAND,
+                              ChmYaku.FULLY_CONCEALED,
+                              ChmYaku.LESSER_HONORS_AND_KNITTED_TILES,
+                              ChmYaku.SEVEN_PAIRS,
+                              ChmYaku.THIRTEEN_ORPHANS);
+    }
     
     
     
