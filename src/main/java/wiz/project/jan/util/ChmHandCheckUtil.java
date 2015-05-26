@@ -397,9 +397,10 @@ public final class ChmHandCheckUtil {
      * @return 判定結果。
      */
     private static boolean isCompleteZenhukou(final Map<JanPai, Integer> hand) {
-        removeJi(hand);
-        final List<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
-        switch (hand.size()) {
+        final Map<JanPai, Integer> copyHand = deepCopyMap(hand);
+        removeJi(copyHand);
+        final List<JanPai> paiList = new ArrayList<JanPai>(copyHand.keySet());
+        switch (copyHand.size()) {
         case 7:
             for (final JanPai pai1 : JanPai.values()) {
                 if (pai1.isJi() || paiList.contains(pai1)) {
