@@ -86,12 +86,6 @@ public final class ChmHandCheckUtil {
         JanPaiUtil.addJanPai(allPaiMap, completePai.getJanPai(), 1);
         JanPaiUtil.cleanJanPaiMap(allPaiMap);
         
-        // isComplete() で和了判定する時点で既にコストが高い。
-        // 和了済みであることを前提として役判定に入った方が良いかも。
-        if (!isComplete(allPaiMap)) {
-            throw new IllegalArgumentException("Player is not complete.");
-        }
-        
         List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
         
         if (isCompleteNanatsui(allPaiMap)) {
