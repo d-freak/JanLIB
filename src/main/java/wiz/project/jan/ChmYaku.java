@@ -182,6 +182,16 @@ public enum ChmYaku {
      */
     ALL_TYPES,
     
+    /**
+     * 全求人
+     */
+    MELDED_HAND,
+    
+    /**
+     * 双箭刻
+     */
+    TWO_DRAGON_PUNGS,
+    
     
     
     // 8点役
@@ -494,6 +504,11 @@ public enum ChmYaku {
         case LAST_TILE:
             return 4;
         case ALL_PUNGS:
+        case HALF_FLUSH:
+        case MIXED_SHIFTED_CHOWS:
+        case ALL_TYPES:
+        case MELDED_HAND:
+        case TWO_DRAGON_PUNGS:
             return 6;
         case MIXED_STRAIGHT:
         case REVERSIBLE_TILES:
@@ -648,6 +663,10 @@ public enum ChmYaku {
             return "三色三歩高";
         case ALL_TYPES:
             return "五門斉";
+        case MELDED_HAND:
+            return "全求人";
+        case TWO_DRAGON_PUNGS:
+            return "双箭刻";
         case MIXED_STRAIGHT:
             return "花龍";
         case REVERSIBLE_TILES:
