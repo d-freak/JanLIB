@@ -787,4 +787,21 @@ public enum ChmYaku {
         }
     }
     
+    /**
+     * 英語名の文字列に変換
+     * 
+     * @return 変換結果。
+     */
+    public String toStringUS() {
+        String string = "";
+        
+        for (String splited : name().split("_")) {
+            if (splited.equals("ALL")) {
+                splited = "A_LL";
+            }
+            string += splited.substring(0, 1).toUpperCase() + splited.substring(1).toLowerCase() + " ";
+        }
+        return string;
+    }
+    
 }
