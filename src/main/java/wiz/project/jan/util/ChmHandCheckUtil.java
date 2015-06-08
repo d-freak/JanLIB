@@ -88,7 +88,7 @@ public final class ChmHandCheckUtil {
         
         List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
         
-        if (isCompleteNanatsui(allPaiMap)) {
+        if (isCompleteNanatsui(allPaiMap) && hand.getFixedMenTsuCount() == 0) {
             yakuList.add(ChmYaku.SEVEN_PAIRS);
             // TODO 連七対
         }
@@ -103,7 +103,7 @@ public final class ChmHandCheckUtil {
             // TODO 七星不靠
         }
         else if (isCompleteKokushi(allPaiMap)) {
-        	yakuList.add(ChmYaku.THIRTEEN_ORPHANS);
+            yakuList.add(ChmYaku.THIRTEEN_ORPHANS);
         }
         
         completeType : switch (completePai.getType()) {
