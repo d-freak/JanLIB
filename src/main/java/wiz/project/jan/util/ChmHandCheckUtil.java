@@ -89,18 +89,26 @@ public final class ChmHandCheckUtil {
         List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
         
         if (isCompleteNanatsui(allPaiMap) && hand.getFixedMenTsuCount() == 0) {
-            yakuList.add(ChmYaku.SEVEN_PAIRS);
-            // TODO 連七対
+            if (ChmYakuCheckUtil.isSevenShiftedPairs(allPaiMap)) {
+                yakuList.add(ChmYaku.SEVEN_SHIFTED_PAIRS);
+            }
+            else {
+                yakuList.add(ChmYaku.SEVEN_PAIRS);
+            }
         }
         else if (isCompleteZenhukou(allPaiMap)) {
-            yakuList.add(ChmYaku.LESSER_HONORS_AND_KNITTED_TILES);
-            
-            ArrayList<JanPai> paiList = new ArrayList<JanPai>(allPaiMap.keySet());
-            
-            if (Kumiairyu.isKumiairyu(paiList)) {
-                yakuList.add(ChmYaku.KNITTED_STRAIGHT);
+            if (ChmYakuCheckUtil.isGreaterHonorsAndKnittedTiles(allPaiMap)) {
+                yakuList.add(ChmYaku.GREATER_HONORS_AND_KNITTED_TILES);
             }
-            // TODO 七星不靠
+            else {
+                yakuList.add(ChmYaku.LESSER_HONORS_AND_KNITTED_TILES);
+                
+                final ArrayList<JanPai> paiList = new ArrayList<JanPai>(allPaiMap.keySet());
+                
+                if (Kumiairyu.isKumiairyu(paiList)) {
+                    yakuList.add(ChmYaku.KNITTED_STRAIGHT);
+                }
+            }
         }
         else if (isCompleteKokushi(allPaiMap)) {
             yakuList.add(ChmYaku.THIRTEEN_ORPHANS);

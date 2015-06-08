@@ -261,6 +261,70 @@ public final class ChmHandCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(連七対)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testChmYakuNanatsui3() {
+        // あがり役：連七対
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_SHIFTED_PAIRS);
+        // 手牌：[1m] [1m] [2m] [2m] [3m] [3m] [4m] [4m] [5m] [5m] [6m] [6m] [7m]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 2);}
+            {put(JanPai.MAN_2, 2);}
+            {put(JanPai.MAN_3, 2);}
+            {put(JanPai.MAN_4, 2);}
+            {put(JanPai.MAN_5, 2);}
+            {put(JanPai.MAN_6, 2);}
+            {put(JanPai.MAN_7, 1);}
+        });
+        // あがり：[7m]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(七星不靠)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testChmYakuZenhukouSupai6() {
+        // あがり役：七星不靠
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.GREATER_HONORS_AND_KNITTED_TILES);
+        // 手牌：[1m] [4m] [2p] [5p] [3s] [6s] [東] [南] [西] [北] [白] [發] [中]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 1);}
+            {put(JanPai.MAN_4, 1);}
+            {put(JanPai.PIN_2, 1);}
+            {put(JanPai.PIN_5, 1);}
+            {put(JanPai.SOU_3, 1);}
+            {put(JanPai.SOU_6, 1);}
+            {put(JanPai.TON, 1);}
+            {put(JanPai.NAN, 1);}
+            {put(JanPai.SHA, 1);}
+            {put(JanPai.PEI, 1);}
+            {put(JanPai.HAKU, 1);}
+            {put(JanPai.HATU, 1);}
+            {put(JanPai.CHUN, 1);}
+        });
+        // あがり：[7m]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(全不靠)
      */
     @SuppressWarnings("serial")

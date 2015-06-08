@@ -480,6 +480,8 @@ public enum ChmYaku {
                               ChmYaku.FULLY_CONCEALED,
                               ChmYaku.LESSER_HONORS_AND_KNITTED_TILES,
                               ChmYaku.SEVEN_PAIRS,
+                              ChmYaku.GREATER_HONORS_AND_KNITTED_TILES,
+                              ChmYaku.SEVEN_SHIFTED_PAIRS,
                               ChmYaku.THIRTEEN_ORPHANS);
     }
     
