@@ -17,12 +17,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import wiz.project.jan.ChmYaku;
-import wiz.project.jan.CompleteJanPai;
-import wiz.project.jan.CompleteType;
-import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
-import wiz.project.jan.Wind;
 
 
 

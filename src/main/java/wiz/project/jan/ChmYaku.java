@@ -475,9 +475,13 @@ public enum ChmYaku {
      * @return 実装済みの役。
      */
     public static List<ChmYaku> getReleased() {
-        return Arrays.asList (ChmYaku.SELF_DRAWN,
+        return Arrays.asList (ChmYaku.ONE_VOIDED_SUIT,
+                              ChmYaku.SELF_DRAWN,
                               ChmYaku.CONCEALED_HAND,
+                              ChmYaku.TILE_HONG,
+                              ChmYaku.ALL_SIMPLES,
                               ChmYaku.FULLY_CONCEALED,
+                              ChmYaku.REVERSIBLE_TILES,
                               ChmYaku.LESSER_HONORS_AND_KNITTED_TILES,
                               ChmYaku.SEVEN_PAIRS,
                               ChmYaku.GREATER_HONORS_AND_KNITTED_TILES,

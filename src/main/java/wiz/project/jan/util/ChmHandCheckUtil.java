@@ -114,6 +114,21 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.THIRTEEN_ORPHANS);
         }
         
+        if (ChmYakuCheckUtil.isAllSimples(allPaiMap)) {
+            yakuList.add(ChmYaku.ALL_SIMPLES);
+        }
+        
+        if (ChmYakuCheckUtil.isReversibleTiles(allPaiMap)) {
+            yakuList.add(ChmYaku.REVERSIBLE_TILES);
+        }
+        else if (ChmYakuCheckUtil.isOneVoidedSuit(allPaiMap)) {
+            yakuList.add(ChmYaku.ONE_VOIDED_SUIT);
+        }
+        
+        for (int count = 0; count < ChmYakuCheckUtil.getTileHongCount(allPaiMap); count++) {
+            yakuList.add(ChmYaku.TILE_HONG);
+        }
+        
         completeType : switch (completePai.getType()) {
         case RON_MENZEN:
             for (final ChmYaku yaku : yakuList) {
