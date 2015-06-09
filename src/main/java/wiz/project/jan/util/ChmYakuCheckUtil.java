@@ -14,8 +14,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.JanPaiType;
+import wiz.project.jan.MenTsu;
+import wiz.project.jan.MenTsuType;
 
 
 
@@ -148,14 +151,22 @@ public final class ChmYakuCheckUtil {
      * 四帰一の該当数を取得
      * 
      * @param hand 手牌。
+     * @param paiMap 和了牌を含む手牌。
      * @return 四帰一の該当数。
      */
-    public static int getTileHongCount(final Map<JanPai, Integer> hand) {
-        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+    public static int getTileHongCount(final Hand hand, final Map<JanPai, Integer> paiMap) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(paiMap.keySet());
         int count = 0;
         
-        for (final JanPai pai : paiList) {
-            if (hand.get(pai) == 4) {
+        isTileHong: for (final JanPai pai : paiList) {
+            if (paiMap.get(pai) == 4) {
+                for (final MenTsu mentsu : hand.getFixedMenTsuList()) {
+                    if (mentsu.getMenTsuType().equals(MenTsuType.KAN_LIGHT) || mentsu.getMenTsuType().equals(MenTsuType.KAN_DARK)) {
+                        if (mentsu.hasJanPai(pai)) {
+                            continue isTileHong;
+                        }
+                    }
+                }
                 count++;
             }
         }

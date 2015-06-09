@@ -125,7 +125,7 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.ONE_VOIDED_SUIT);
         }
         
-        for (int count = 0; count < ChmYakuCheckUtil.getTileHongCount(allPaiMap); count++) {
+        for (int count = 0; count < ChmYakuCheckUtil.getTileHongCount(hand, allPaiMap); count++) {
             yakuList.add(ChmYaku.TILE_HONG);
         }
         
