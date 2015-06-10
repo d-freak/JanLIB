@@ -481,6 +481,7 @@ public enum ChmYaku {
                               ChmYaku.TILE_HONG,
                               ChmYaku.ALL_SIMPLES,
                               ChmYaku.FULLY_CONCEALED,
+                              ChmYaku.LAST_TILE,
                               ChmYaku.REVERSIBLE_TILES,
                               ChmYaku.LESSER_HONORS_AND_KNITTED_TILES,
                               ChmYaku.SEVEN_PAIRS,

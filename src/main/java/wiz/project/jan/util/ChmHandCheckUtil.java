@@ -129,6 +129,10 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.TILE_HONG);
         }
         
+        if (completePai.isLast()) {
+            yakuList.add(ChmYaku.LAST_TILE);
+        }
+        
         completeType : switch (completePai.getType()) {
         case RON_MENZEN:
             for (final ChmYaku yaku : yakuList) {

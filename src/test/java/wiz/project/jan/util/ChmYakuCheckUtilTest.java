@@ -49,7 +49,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.SOU_8, 1);}
         });
         // あがり：[8s]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_8, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_8, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -78,7 +78,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.CHUN, 1);}
         });
         // あがり：[中]面前ツモ
-        CompleteJanPai pai = new CompleteJanPai(JanPai.CHUN, CompleteType.TSUMO_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.CHUN, 2, CompleteType.TSUMO_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -113,7 +113,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.CHUN, 1);}
         });
         // あがり：[7m]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, 3, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -148,7 +148,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.CHUN, 1);}
         });
         // あがり：[南]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.NAN, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.NAN, 3, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -183,7 +183,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.PEI, 1);}
         });
         // あがり：[白]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 3, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -212,7 +212,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.HAKU, 1);}
         });
         // あがり：[白]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -241,7 +241,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.HAKU, 1);}
         });
         // あがり：[白]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -270,7 +270,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.HAKU, 1);}
         });
         // あがり：[白]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -299,7 +299,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.HAKU, 1);}
         });
         // あがり：[白]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -328,7 +328,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.PEI, 1);}
         });
         // あがり：[北]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.PEI, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.PEI, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -357,7 +357,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.MAN_7, 1);}
         });
         // あがり：[7m]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -392,7 +392,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.CHUN, 1);}
         });
         // あがり：[9m]面前ツモ
-        CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_9, CompleteType.TSUMO_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_9, 2, CompleteType.TSUMO_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -419,7 +419,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.HAKU, 1);}
         });
         // あがり：[白]面前ロン
-        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, CompleteType.RON_MENZEN);
+        CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東

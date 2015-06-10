@@ -18,10 +18,12 @@ public final class CompleteJanPai {
      * コンストラクタ
      * 
      * @param pai 牌。
+     * @param remainCount 牌の残り枚数。
      * @param type 和了タイプ
      */
-    public CompleteJanPai(final JanPai pai, final CompleteType type) {
+    public CompleteJanPai(final JanPai pai, final int remainCount, final CompleteType type) {
         setJanPai(pai);
+        setRemainCount(remainCount);
         setType(type);
     }
     
@@ -33,6 +35,7 @@ public final class CompleteJanPai {
     public CompleteJanPai(final CompleteJanPai source) {
         if (source != null) {
             _pai = source._pai;
+            _remainCount = source._remainCount;
             _type = source._type;
         }
     }
@@ -59,6 +62,7 @@ public final class CompleteJanPai {
         
         final CompleteJanPai targetPai = (CompleteJanPai)target;
         return (_pai == targetPai._pai) &&
+               (_remainCount == targetPai._remainCount) &&
                (_type == targetPai._type);
     }
     
@@ -78,6 +82,15 @@ public final class CompleteJanPai {
      */
     public CompleteType getType() {
         return _type;
+    }
+    
+    /**
+     * 最後の1枚か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isLast() {
+        return _remainCount == 0;
     }
     
     /**
@@ -117,6 +130,15 @@ public final class CompleteJanPai {
     }
     
     /**
+     * 牌の残り枚数を設定
+     * 
+     * @param count 牌の残り枚数。
+     */
+    private void setRemainCount(final int count) {
+        _remainCount = count;
+    }
+    
+    /**
      * 和了タイプを設定
      * 
      * @param type 和了タイプ。
@@ -136,6 +158,11 @@ public final class CompleteJanPai {
      * 牌
      */
     private JanPai _pai = JanPai.HAKU;
+    
+    /**
+     * 牌の残り枚数
+     */
+    private int _remainCount = 3;
     
     /**
      * 和了タイプ
