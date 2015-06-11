@@ -31,6 +31,34 @@ import wiz.project.jan.Wind;
 public final class ChmYakuCheckUtilTest {
     
     /**
+     * getCompleteInfo()のテスト(七対、緑一色、混一色、四帰一)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsAllGreen() {
+        // あがり役：七対、緑一色、混一色、四帰一
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_GREEN, ChmYaku.HALF_FLUSH, ChmYaku.TILE_HONG);
+        // 手牌：[2s] [2s] [3s] [3s] [4s] [4s] [6s] [6s] [6s] [6s] [8s] [發] [發]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.SOU_2, 2);}
+            {put(JanPai.SOU_3, 2);}
+            {put(JanPai.SOU_4, 2);}
+            {put(JanPai.SOU_6, 4);}
+            {put(JanPai.SOU_8, 1);}
+            {put(JanPai.HATU, 2);}
+        });
+        // あがり：[8s]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_8, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(七対、断幺)
      */
     @SuppressWarnings("serial")
@@ -50,6 +78,33 @@ public final class ChmYakuCheckUtilTest {
         });
         // あがり：[8s]面前ロン
         CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_8, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(七対、緑一色、断幺、清一色、四帰一、四帰一)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsFullFlush() {
+        // あがり役：七対、緑一色、断幺、清一色、四帰一、四帰一
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_GREEN, ChmYaku.ALL_SIMPLES, ChmYaku.FULL_FLUSH, ChmYaku.TILE_HONG, ChmYaku.TILE_HONG);
+        // 手牌：[2s] [2s] [3s] [3s] [4s] [4s] [6s] [6s] [6s] [6s] [8s] [8s] [8s]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.SOU_2, 2);}
+            {put(JanPai.SOU_3, 2);}
+            {put(JanPai.SOU_4, 2);}
+            {put(JanPai.SOU_6, 4);}
+            {put(JanPai.SOU_8, 3);}
+        });
+        // あがり：[8s]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_8, 3, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
@@ -114,6 +169,34 @@ public final class ChmYakuCheckUtilTest {
         });
         // あがり：[7m]面前ロン
         CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, 3, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(七対、緑一色、混一色、四帰一)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsHalfFlush() {
+        // あがり役：七対、緑一色、混一色、四帰一
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_GREEN, ChmYaku.HALF_FLUSH, ChmYaku.TILE_HONG);
+        // 手牌：[2s] [2s] [3s] [3s] [4s] [4s] [6s] [6s] [6s] [6s] [8s] [發] [發]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.SOU_2, 2);}
+            {put(JanPai.SOU_3, 2);}
+            {put(JanPai.SOU_4, 2);}
+            {put(JanPai.SOU_6, 4);}
+            {put(JanPai.SOU_8, 1);}
+            {put(JanPai.HATU, 2);}
+        });
+        // あがり：[8s]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_8, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東

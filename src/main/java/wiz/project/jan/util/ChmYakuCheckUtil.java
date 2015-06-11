@@ -10,6 +10,7 @@ package wiz.project.jan.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,23 @@ public final class ChmYakuCheckUtil {
     
     
     /**
+     * 緑一色か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isAllGreen(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        if (_allGreenList.containsAll(paiList)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    /**
      * 断幺か
      * 
      * @param hand 手牌。
@@ -51,6 +69,29 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 清一色か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isFullFlush(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        HashSet<JanPaiType> paiTypeSet = new HashSet<JanPaiType>();
+        
+        for (final JanPai pai : paiList) {
+            paiTypeSet.add(pai.getType());
+        }
+        
+        for (final JanPaiType paiType : EnumSet.of(JanPaiType.MAN, JanPaiType.PIN, JanPaiType.SOU)) {
+            if (paiTypeSet.contains(paiType) && paiTypeSet.size() == 1) {
+                // TODO 連七対との非複合
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 七星不靠か
      * 
      * @param hand 手牌。
@@ -65,6 +106,28 @@ public final class ChmYakuCheckUtil {
         else {
             return false;
         }
+    }
+    
+    /**
+     * 混一色か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isHalfFlush(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        HashSet<JanPaiType> paiTypeSet = new HashSet<JanPaiType>();
+        
+        for (final JanPai pai : paiList) {
+            paiTypeSet.add(pai.getType());
+        }
+        
+        for (final JanPaiType paiType : EnumSet.of(JanPaiType.MAN, JanPaiType.PIN, JanPaiType.SOU)) {
+            if (paiTypeSet.contains(paiType) && paiTypeSet.contains(JanPaiType.JI) && paiTypeSet.size() == 2) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
@@ -171,6 +234,17 @@ public final class ChmYakuCheckUtil {
     }
     
     
+    
+    /**
+     * 緑一色リスト
+     */
+    private static final List<JanPai> _allGreenList = Collections.unmodifiableList(Arrays.asList(JanPai.SOU_2,
+                                                                                                 JanPai.SOU_3,
+                                                                                                 JanPai.SOU_4,
+                                                                                                 JanPai.SOU_6,
+                                                                                                 JanPai.SOU_8,
+                                                                                                 JanPai.HATU)
+    );
     
     /**
      * 全字牌リスト

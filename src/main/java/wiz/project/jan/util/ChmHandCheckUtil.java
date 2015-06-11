@@ -114,11 +114,21 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.THIRTEEN_ORPHANS);
         }
         
+        if (ChmYakuCheckUtil.isAllGreen(allPaiMap)) {
+            yakuList.add(ChmYaku.ALL_GREEN);
+        }
+        
         if (ChmYakuCheckUtil.isAllSimples(allPaiMap)) {
             yakuList.add(ChmYaku.ALL_SIMPLES);
         }
         
-        if (ChmYakuCheckUtil.isReversibleTiles(allPaiMap)) {
+        if (ChmYakuCheckUtil.isFullFlush(allPaiMap)) {
+            yakuList.add(ChmYaku.FULL_FLUSH);
+        }
+        else if (ChmYakuCheckUtil.isHalfFlush(allPaiMap)) {
+            yakuList.add(ChmYaku.HALF_FLUSH);
+        }
+        else if (ChmYakuCheckUtil.isReversibleTiles(allPaiMap)) {
             yakuList.add(ChmYaku.REVERSIBLE_TILES);
         }
         else if (ChmYakuCheckUtil.isOneVoidedSuit(allPaiMap)) {
