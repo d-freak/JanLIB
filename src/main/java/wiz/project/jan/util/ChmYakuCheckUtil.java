@@ -18,7 +18,6 @@ import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.JanPaiType;
 import wiz.project.jan.MenTsu;
-import wiz.project.jan.MenTsuType;
 
 
 
@@ -161,10 +160,8 @@ public final class ChmYakuCheckUtil {
         isTileHong: for (final JanPai pai : paiList) {
             if (paiMap.get(pai) == 4) {
                 for (final MenTsu mentsu : hand.getFixedMenTsuList()) {
-                    if (mentsu.getMenTsuType().equals(MenTsuType.KAN_LIGHT) || mentsu.getMenTsuType().equals(MenTsuType.KAN_DARK)) {
-                        if (mentsu.hasJanPai(pai)) {
-                            continue isTileHong;
-                        }
+                    if (mentsu.getMenTsuType().isKanTsu() && mentsu.hasJanPai(pai)) {
+                        continue isTileHong;
                     }
                 }
                 count++;

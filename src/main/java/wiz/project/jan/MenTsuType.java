@@ -34,8 +34,8 @@ public enum MenTsuType {
         case CHI:
         case PON:
         case KAN_LIGHT:
-        case KAN_DARK:
             return true;
+        case KAN_DARK:
         default:
             return false;
         }
@@ -48,6 +48,21 @@ public enum MenTsuType {
      */
     public boolean isKouTsu() {
         return !isShunTsu();
+    }
+    
+    /**
+     * 槓子か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isKanTsu() {
+        switch (this) {
+        case KAN_LIGHT:
+        case KAN_DARK:
+            return true;
+        default:
+            return false;
+        }
     }
     
     /**

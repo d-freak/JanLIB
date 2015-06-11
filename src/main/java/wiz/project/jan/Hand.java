@@ -293,6 +293,20 @@ public final class Hand implements Cloneable {
     }
     
     /**
+     * 面前か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isMenzen() {
+        for (final MenTsu mentsu : getFixedMenTsuList()) {
+            if (mentsu.getMenTsuType().isCalled()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
      * 確定面子を削除
      * 
      * @param index 面子インデックス。
