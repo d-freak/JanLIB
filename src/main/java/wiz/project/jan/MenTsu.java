@@ -200,7 +200,7 @@ public final class MenTsu {
             _janPaiType = type;
         }
         else {
-            _janPaiType = JanPaiType.JI;
+            _janPaiType = JanPaiType.JI_DORAGON;
         }
     }
     
@@ -233,7 +233,7 @@ public final class MenTsu {
     /**
      * 牌タイプ
      */
-    private JanPaiType _janPaiType = JanPaiType.JI;
+    private JanPaiType _janPaiType = JanPaiType.JI_DORAGON;
     
 }
 

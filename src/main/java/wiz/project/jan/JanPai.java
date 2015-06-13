@@ -256,8 +256,13 @@ public enum JanPai {
         case SOU_8:
         case SOU_9:
             return JanPaiType.SOU;
+        case TON:
+        case NAN:
+        case SHA:
+        case PEI:
+            return JanPaiType.JI_WIND;
         default:
-            return JanPaiType.JI;
+            return JanPaiType.JI_DORAGON;
         }
     }
     

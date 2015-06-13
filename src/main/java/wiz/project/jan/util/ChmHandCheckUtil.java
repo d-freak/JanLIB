@@ -122,14 +122,20 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.ALL_SIMPLES);
         }
         
-        if (ChmYakuCheckUtil.isFullFlush(allPaiMap)) {
+        if (ChmYakuCheckUtil.isAllHonors(allPaiMap)) {
+            yakuList.add(ChmYaku.ALL_HONORS);
+        }
+        else if (ChmYakuCheckUtil.isFullFlush(allPaiMap)) {
             yakuList.add(ChmYaku.FULL_FLUSH);
+        }
+        else if (ChmYakuCheckUtil.isReversibleTiles(allPaiMap)) {
+            yakuList.add(ChmYaku.REVERSIBLE_TILES);
         }
         else if (ChmYakuCheckUtil.isHalfFlush(allPaiMap)) {
             yakuList.add(ChmYaku.HALF_FLUSH);
         }
-        else if (ChmYakuCheckUtil.isReversibleTiles(allPaiMap)) {
-            yakuList.add(ChmYaku.REVERSIBLE_TILES);
+        else if (ChmYakuCheckUtil.isAllTypes(allPaiMap)) {
+            yakuList.add(ChmYaku.ALL_TYPES);
         }
         else if (ChmYakuCheckUtil.isOneVoidedSuit(allPaiMap)) {
             yakuList.add(ChmYaku.ONE_VOIDED_SUIT);

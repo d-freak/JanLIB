@@ -52,6 +52,23 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 字一色か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isAllHonors(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        for (final JanPai pai : paiList) {
+            if (!pai.isJi()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
      * 断幺か
      * 
      * @param hand 手牌。
@@ -66,6 +83,26 @@ public final class ChmYakuCheckUtil {
             }
         }
         return true;
+    }
+    
+    /**
+     * 五門斉か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isAllTypes(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        HashSet<JanPaiType> paiTypeSet = new HashSet<JanPaiType>();
+        
+        for (final JanPai pai : paiList) {
+            paiTypeSet.add(pai.getType());
+        }
+        
+        if (paiTypeSet.containsAll(new HashSet<>(Arrays.asList(JanPaiType.values())))) {
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -117,15 +154,28 @@ public final class ChmYakuCheckUtil {
     public static boolean isHalfFlush(final Map<JanPai, Integer> hand) {
         final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
         HashSet<JanPaiType> paiTypeSet = new HashSet<JanPaiType>();
+        boolean hasJi = false;
         
         for (final JanPai pai : paiList) {
             paiTypeSet.add(pai.getType());
+            
+            if (pai.isJi()) {
+                hasJi = true;
+            }
         }
         
-        for (final JanPaiType paiType : EnumSet.of(JanPaiType.MAN, JanPaiType.PIN, JanPaiType.SOU)) {
-            if (paiTypeSet.contains(paiType) && paiTypeSet.contains(JanPaiType.JI) && paiTypeSet.size() == 2) {
-                return true;
-            }
+        if (!hasJi) {
+            return false;
+        }
+        
+        if (paiTypeSet.contains(JanPaiType.MAN) && !paiTypeSet.contains(JanPaiType.PIN) && !paiTypeSet.contains(JanPaiType.SOU)) {
+            return true;
+        }
+        else if (paiTypeSet.contains(JanPaiType.SOU) && !paiTypeSet.contains(JanPaiType.MAN) && !paiTypeSet.contains(JanPaiType.PIN)) {
+            return true;
+        }
+        else if (paiTypeSet.contains(JanPaiType.PIN) && !paiTypeSet.contains(JanPaiType.SOU) && !paiTypeSet.contains(JanPaiType.MAN)) {
+            return true;
         }
         return false;
     }

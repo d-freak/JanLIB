@@ -483,11 +483,13 @@ public enum ChmYaku {
                               ChmYaku.FULLY_CONCEALED,
                               ChmYaku.LAST_TILE,
                               ChmYaku.HALF_FLUSH,
+                              ChmYaku.ALL_TYPES,
                               ChmYaku.REVERSIBLE_TILES,
                               ChmYaku.LESSER_HONORS_AND_KNITTED_TILES,
                               ChmYaku.SEVEN_PAIRS,
                               ChmYaku.GREATER_HONORS_AND_KNITTED_TILES,
                               ChmYaku.FULL_FLUSH,
+                              ChmYaku.ALL_HONORS,
                               ChmYaku.ALL_GREEN,
                               ChmYaku.SEVEN_SHIFTED_PAIRS,
                               ChmYaku.THIRTEEN_ORPHANS);

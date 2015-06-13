@@ -17,7 +17,8 @@ public enum JanPaiType {
     MAN,
     PIN,
     SOU,
-    JI,
+    JI_WIND,
+    JI_DORAGON,
     
 }
 
