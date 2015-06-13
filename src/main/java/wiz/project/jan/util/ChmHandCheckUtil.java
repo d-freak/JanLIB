@@ -135,22 +135,26 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.ONE_VOIDED_SUIT);
         }
         
-        for (int count = 0; count < ChmYakuCheckUtil.getTileHongCount(hand, allPaiMap); count++) {
-            yakuList.add(ChmYaku.TILE_HONG);
+        for (int count = 0; count < ChmYakuCheckUtil.getTileHogCount(hand, allPaiMap); count++) {
+            yakuList.add(ChmYaku.TILE_HOG);
         }
         
         if (completePai.isLast()) {
             yakuList.add(ChmYaku.LAST_TILE);
         }
         
-        completeType : switch (completePai.getType()) {
+        switch (completePai.getType()) {
         case RON_MENZEN:
+            boolean isConcealedHand = true;
+            
             for (final ChmYaku yaku : yakuList) {
                 if (yaku.isMenZenOnly()) {
-                    break completeType;
+                    isConcealedHand = false;
                 }
             }
-            yakuList.add(ChmYaku.CONCEALED_HAND);
+            if (isConcealedHand) {
+                yakuList.add(ChmYaku.CONCEALED_HAND);
+            }
             break;
         case TSUMO_MENZEN:
             yakuList.add(ChmYaku.FULLY_CONCEALED);

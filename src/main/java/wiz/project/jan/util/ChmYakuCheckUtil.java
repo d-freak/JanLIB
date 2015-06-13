@@ -216,18 +216,23 @@ public final class ChmYakuCheckUtil {
      * @param paiMap 和了牌を含む手牌。
      * @return 四帰一の該当数。
      */
-    public static int getTileHongCount(final Hand hand, final Map<JanPai, Integer> paiMap) {
+    public static int getTileHogCount(final Hand hand, final Map<JanPai, Integer> paiMap) {
         final ArrayList<JanPai> paiList = new ArrayList<JanPai>(paiMap.keySet());
         int count = 0;
         
-        isTileHong: for (final JanPai pai : paiList) {
+        for (final JanPai pai : paiList) {
             if (paiMap.get(pai) == 4) {
+                boolean isTileHog = true;
+                
                 for (final MenTsu mentsu : hand.getFixedMenTsuList()) {
                     if (mentsu.getMenTsuType().isKanTsu() && mentsu.hasJanPai(pai)) {
-                        continue isTileHong;
+                        isTileHog = false;
                     }
                 }
-                count++;
+                
+                if (isTileHog) {
+                    count++;
+                }
             }
         }
         return count;

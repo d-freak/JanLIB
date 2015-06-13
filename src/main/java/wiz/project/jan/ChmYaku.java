@@ -115,7 +115,7 @@ public enum ChmYaku {
     /**
      * 四帰一
      */
-    TILE_HONG,
+    TILE_HOG,
     
     /**
      * 双同刻
@@ -478,7 +478,7 @@ public enum ChmYaku {
         return Arrays.asList (ChmYaku.ONE_VOIDED_SUIT,
                               ChmYaku.SELF_DRAWN,
                               ChmYaku.CONCEALED_HAND,
-                              ChmYaku.TILE_HONG,
+                              ChmYaku.TILE_HOG,
                               ChmYaku.ALL_SIMPLES,
                               ChmYaku.FULLY_CONCEALED,
                               ChmYaku.LAST_TILE,
@@ -521,7 +521,7 @@ public enum ChmYaku {
         case SEAT_WIND:
         case CONCEALED_HAND:
         case ALL_CHOWS:
-        case TILE_HONG:
+        case TILE_HOG:
         case DOUBLE_PUNG:
         case TWO_CONCEALED_PUNGS:
         case CONCEALED_KONG:
@@ -666,7 +666,7 @@ public enum ChmYaku {
             return "門前清";
         case ALL_CHOWS:
             return "平和";
-        case TILE_HONG:
+        case TILE_HOG:
             return "四帰一";
         case DOUBLE_PUNG:
             return "双同刻";

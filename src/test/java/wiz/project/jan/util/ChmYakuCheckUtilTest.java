@@ -37,7 +37,7 @@ public final class ChmYakuCheckUtilTest {
     @Test
     public void testIsAllGreen() {
         // あがり役：七対、緑一色、混一色、四帰一
-        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_GREEN, ChmYaku.HALF_FLUSH, ChmYaku.TILE_HONG);
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_GREEN, ChmYaku.HALF_FLUSH, ChmYaku.TILE_HOG);
         // 手牌：[2s] [2s] [3s] [3s] [4s] [4s] [6s] [6s] [6s] [6s] [8s] [發] [發]
         Hand hand = new Hand(new HashMap<JanPai, Integer>() {
             {put(JanPai.SOU_2, 2);}
@@ -94,7 +94,7 @@ public final class ChmYakuCheckUtilTest {
     @Test
     public void testIsFullFlush() {
         // あがり役：七対、緑一色、断幺、清一色、四帰一、四帰一
-        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_GREEN, ChmYaku.ALL_SIMPLES, ChmYaku.FULL_FLUSH, ChmYaku.TILE_HONG, ChmYaku.TILE_HONG);
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_GREEN, ChmYaku.ALL_SIMPLES, ChmYaku.FULL_FLUSH, ChmYaku.TILE_HOG, ChmYaku.TILE_HOG);
         // 手牌：[2s] [2s] [3s] [3s] [4s] [4s] [6s] [6s] [6s] [6s] [8s] [8s] [8s]
         Hand hand = new Hand(new HashMap<JanPai, Integer>() {
             {put(JanPai.SOU_2, 2);}
@@ -185,7 +185,7 @@ public final class ChmYakuCheckUtilTest {
     @Test
     public void testIsHalfFlush() {
         // あがり役：七対、緑一色、混一色、四帰一
-        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_GREEN, ChmYaku.HALF_FLUSH, ChmYaku.TILE_HONG);
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_GREEN, ChmYaku.HALF_FLUSH, ChmYaku.TILE_HOG);
         // 手牌：[2s] [2s] [3s] [3s] [4s] [4s] [6s] [6s] [6s] [6s] [8s] [發] [發]
         Hand hand = new Hand(new HashMap<JanPai, Integer>() {
             {put(JanPai.SOU_2, 2);}
@@ -492,7 +492,7 @@ public final class ChmYakuCheckUtilTest {
     @Test
     public void testIsTileHong() {
         // あがり役：七対、四帰一、四帰一
-        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.TILE_HONG, ChmYaku.TILE_HONG);
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.TILE_HOG, ChmYaku.TILE_HOG);
         // 手牌：[1m] [1m] [1m] [1m] [4p] [4p] [4p] [4p] [6s] [6s] [西] [西] [白]
         Hand hand = new Hand(new HashMap<JanPai, Integer>() {
             {put(JanPai.MAN_1, 4);}
