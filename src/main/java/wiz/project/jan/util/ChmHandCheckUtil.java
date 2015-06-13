@@ -129,7 +129,22 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.ALL_GREEN);
         }
         
-        if (ChmYakuCheckUtil.isAllSimples(allPaiMap)) {
+        if (ChmYakuCheckUtil.isUpperTiles(allPaiMap)) {
+            yakuList.add(ChmYaku.UPPER_TILES);
+        }
+        else if (ChmYakuCheckUtil.isMiddleTiles(allPaiMap)) {
+            yakuList.add(ChmYaku.MIDDLE_TILES);
+        }
+        else if (ChmYakuCheckUtil.isLowerTiles(allPaiMap)) {
+            yakuList.add(ChmYaku.LOWER_TILES);
+        }
+        else if (ChmYakuCheckUtil.isUpperFour(allPaiMap)) {
+            yakuList.add(ChmYaku.UPPER_FOUR);
+        }
+        else if (ChmYakuCheckUtil.isLowerFour(allPaiMap)) {
+            yakuList.add(ChmYaku.LOWER_FOUR);
+        }
+        else if (ChmYakuCheckUtil.isAllSimples(allPaiMap)) {
             yakuList.add(ChmYaku.ALL_SIMPLES);
         }
         

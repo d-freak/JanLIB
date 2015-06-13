@@ -180,6 +180,57 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 小于五か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isLowerFour(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        for (final JanPai pai : paiList) {
+            if (!pai.isLowerFour()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * 全小か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isLowerTiles(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        for (final JanPai pai : paiList) {
+            if (!pai.isLower()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * 全中か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isMiddleTiles(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        for (final JanPai pai : paiList) {
+            if (!pai.isMiddle()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
      * 缺一門か
      * 
      * @param hand 手牌。
@@ -252,6 +303,40 @@ public final class ChmYakuCheckUtil {
             }
             
             if (!paiList.contains(pai.getNext())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * 大于五か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isUpperFour(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        for (final JanPai pai : paiList) {
+            if (!pai.isUpperFour()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * 全大か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isUpperTiles(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        for (final JanPai pai : paiList) {
+            if (!pai.isUpper()) {
                 return false;
             }
         }

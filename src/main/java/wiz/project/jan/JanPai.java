@@ -287,6 +287,122 @@ public enum JanPai {
     }
     
     /**
+     * 全小の牌か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isLower() {
+        switch (this) {
+        case MAN_1:
+        case MAN_2:
+        case MAN_3:
+        case PIN_1:
+        case PIN_2:
+        case PIN_3:
+        case SOU_1:
+        case SOU_2:
+        case SOU_3:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    /**
+     * 小于五の牌か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isLowerFour() {
+        switch (this) {
+        case MAN_1:
+        case MAN_2:
+        case MAN_3:
+        case MAN_4:
+        case PIN_1:
+        case PIN_2:
+        case PIN_3:
+        case PIN_4:
+        case SOU_1:
+        case SOU_2:
+        case SOU_3:
+        case SOU_4:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    /**
+     * 全中の牌か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isMiddle() {
+        switch (this) {
+        case MAN_4:
+        case MAN_5:
+        case MAN_6:
+        case PIN_4:
+        case PIN_5:
+        case PIN_6:
+        case SOU_4:
+        case SOU_5:
+        case SOU_6:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    /**
+     * 全大の牌か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isUpper() {
+        switch (this) {
+        case MAN_7:
+        case MAN_8:
+        case MAN_9:
+        case PIN_7:
+        case PIN_8:
+        case PIN_9:
+        case SOU_7:
+        case SOU_8:
+        case SOU_9:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    /**
+     * 大于五の牌か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isUpperFour() {
+        switch (this) {
+        case MAN_6:
+        case MAN_7:
+        case MAN_8:
+        case MAN_9:
+        case PIN_6:
+        case PIN_7:
+        case PIN_8:
+        case PIN_9:
+        case SOU_6:
+        case SOU_7:
+        case SOU_8:
+        case SOU_9:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    /**
      * ヤオ九牌か
      * 
      * @return 判定結果。

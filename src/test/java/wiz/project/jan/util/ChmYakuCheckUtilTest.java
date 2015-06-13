@@ -335,6 +335,93 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(七対、小于五)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsLowerFour() {
+        // あがり役：七対、小于五
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.LOWER_FOUR);
+        // 手牌：[1m] [1m] [2m] [2m] [3m] [3m] [4p] [4p] [1s] [1s] [2s] [2s] [3s]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 2);}
+            {put(JanPai.MAN_2, 2);}
+            {put(JanPai.MAN_3, 2);}
+            {put(JanPai.PIN_4, 2);}
+            {put(JanPai.SOU_1, 2);}
+            {put(JanPai.SOU_2, 2);}
+            {put(JanPai.SOU_3, 1);}
+        });
+        // あがり：[3s]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_3, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(七対、全小)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsLowerTiles() {
+        // あがり役：七対、全小
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.LOWER_TILES);
+        // 手牌：[1m] [1m] [2m] [2m] [3m] [3m] [1p] [1p] [1s] [1s] [2s] [2s] [3s]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 2);}
+            {put(JanPai.MAN_2, 2);}
+            {put(JanPai.MAN_3, 2);}
+            {put(JanPai.PIN_1, 2);}
+            {put(JanPai.SOU_1, 2);}
+            {put(JanPai.SOU_2, 2);}
+            {put(JanPai.SOU_3, 1);}
+        });
+        // あがり：[3s]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_3, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(七対、全中)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsMiddleTiles() {
+        // あがり役：七対、全中
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.MIDDLE_TILES);
+        // 手牌：[4m] [4m] [5m] [5m] [6m] [6m] [5p] [5p] [4s] [4s] [5s] [5s] [6s]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_4, 2);}
+            {put(JanPai.MAN_5, 2);}
+            {put(JanPai.MAN_6, 2);}
+            {put(JanPai.PIN_5, 2);}
+            {put(JanPai.SOU_4, 2);}
+            {put(JanPai.SOU_5, 2);}
+            {put(JanPai.SOU_6, 1);}
+        });
+        // あがり：[6s]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_6, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(七対、缺一門)
      */
     @SuppressWarnings("serial")
@@ -561,6 +648,64 @@ public final class ChmYakuCheckUtilTest {
         });
         // あがり：[白]面前ロン
         CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(七対、大于五)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsUpperFour() {
+        // あがり役：七対、大于五
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.UPPER_FOUR);
+        // 手牌：[7m] [7m] [8m] [8m] [9m] [9m] [6p] [6p] [7s] [7s] [8s] [8s] [9s]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_7, 2);}
+            {put(JanPai.MAN_8, 2);}
+            {put(JanPai.MAN_9, 2);}
+            {put(JanPai.PIN_6, 2);}
+            {put(JanPai.SOU_7, 2);}
+            {put(JanPai.SOU_8, 2);}
+            {put(JanPai.SOU_9, 1);}
+        });
+        // あがり：[9s]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_9, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(七対、全大)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsUpperTiles() {
+        // あがり役：七対、全大
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.UPPER_TILES);
+        // 手牌：[7m] [7m] [8m] [8m] [9m] [9m] [9p] [9p] [7s] [7s] [8s] [8s] [9s]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_7, 2);}
+            {put(JanPai.MAN_8, 2);}
+            {put(JanPai.MAN_9, 2);}
+            {put(JanPai.PIN_9, 2);}
+            {put(JanPai.SOU_7, 2);}
+            {put(JanPai.SOU_8, 2);}
+            {put(JanPai.SOU_9, 1);}
+        });
+        // あがり：[9s]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_9, 2, CompleteType.RON_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東

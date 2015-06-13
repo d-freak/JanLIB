@@ -266,7 +266,7 @@ public enum ChmYaku {
     /**
      * 大于五
      */
-    UPPPER_FOUR,
+    UPPER_FOUR,
     
     /**
      * 小于五
@@ -489,9 +489,14 @@ public enum ChmYaku {
                               ChmYaku.LAST_TILE_CLAIM,
                               ChmYaku.OUT_WITH_REPLACEMENT_TILE,
                               ChmYaku.LESSER_HONORS_AND_KNITTED_TILES,
+                              ChmYaku.UPPER_FOUR,
+                              ChmYaku.LOWER_FOUR,
                               ChmYaku.SEVEN_PAIRS,
                               ChmYaku.GREATER_HONORS_AND_KNITTED_TILES,
                               ChmYaku.FULL_FLUSH,
+                              ChmYaku.UPPER_TILES,
+                              ChmYaku.MIDDLE_TILES,
+                              ChmYaku.LOWER_TILES,
                               ChmYaku.ALL_HONORS,
                               ChmYaku.ALL_GREEN,
                               ChmYaku.SEVEN_SHIFTED_PAIRS,
@@ -557,7 +562,7 @@ public enum ChmYaku {
             return 8;
         case LESSER_HONORS_AND_KNITTED_TILES:
         case KNITTED_STRAIGHT:
-        case UPPPER_FOUR:
+        case UPPER_FOUR:
         case LOWER_FOUR:
         case BIG_THREE_WINDS:
             return 12;
@@ -725,7 +730,7 @@ public enum ChmYaku {
             return "全不靠";
         case KNITTED_STRAIGHT:
             return "組合龍";
-        case UPPPER_FOUR:
+        case UPPER_FOUR:
             return "大于五";
         case LOWER_FOUR:
             return "小于五";
