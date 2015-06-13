@@ -117,6 +117,63 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(七対、清幺九、四帰一)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsAllTerminals() {
+        // あがり役：七対、清幺九、四帰一
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_TERMINALS, ChmYaku.TILE_HOG);
+        // 手牌：[1m] [1m] [9m] [9m] [1p] [1p] [9p] [9p] [1s] [1s] [9s] [9s] [9s]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 2);}
+            {put(JanPai.MAN_9, 2);}
+            {put(JanPai.PIN_1, 2);}
+            {put(JanPai.PIN_9, 2);}
+            {put(JanPai.SOU_1, 2);}
+            {put(JanPai.SOU_9, 3);}
+        });
+        // あがり：[9s]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_9, 3, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(七対、混幺九)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsAllTerminalsAndHonors() {
+        // あがり役：七対、混幺九
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.ALL_TERMINALS_AND_HONORS);
+        // 手牌：[1m] [1m] [9m] [9m] [1p] [1p] [9p] [9p] [1s] [1s] [9s] [9s] [中]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 2);}
+            {put(JanPai.MAN_9, 2);}
+            {put(JanPai.PIN_1, 2);}
+            {put(JanPai.PIN_9, 2);}
+            {put(JanPai.SOU_1, 2);}
+            {put(JanPai.SOU_9, 2);}
+            {put(JanPai.CHUN, 1);}
+        });
+        // あがり：[中]面前ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.CHUN, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(七対、五門斉)
      */
     @SuppressWarnings("serial")

@@ -86,6 +86,44 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 清幺九か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isAllTerminals(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        for (final JanPai pai : paiList) {
+            if (!pai.isYao()) {
+                return false;
+            }
+            
+            if (pai.isJi()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * 混幺九か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isAllTerminalsAndHonors(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        for (final JanPai pai : paiList) {
+            if (!pai.isYao()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
      * 五門斉か
      * 
      * @param hand 手牌。

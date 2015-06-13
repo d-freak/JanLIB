@@ -497,6 +497,8 @@ public enum ChmYaku {
                               ChmYaku.UPPER_TILES,
                               ChmYaku.MIDDLE_TILES,
                               ChmYaku.LOWER_TILES,
+                              ChmYaku.ALL_TERMINALS_AND_HONORS,
+                              ChmYaku.ALL_TERMINALS,
                               ChmYaku.ALL_HONORS,
                               ChmYaku.ALL_GREEN,
                               ChmYaku.SEVEN_SHIFTED_PAIRS,

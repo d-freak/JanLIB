@@ -148,10 +148,17 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.ALL_SIMPLES);
         }
         
-        if (ChmYakuCheckUtil.isAllHonors(allPaiMap)) {
+        if (ChmYakuCheckUtil.isAllTerminals(allPaiMap)) {
+            yakuList.add(ChmYaku.ALL_TERMINALS);
+        }
+        else if (ChmYakuCheckUtil.isAllHonors(allPaiMap)) {
             yakuList.add(ChmYaku.ALL_HONORS);
         }
-        else if (ChmYakuCheckUtil.isFullFlush(allPaiMap)) {
+        else if (ChmYakuCheckUtil.isAllTerminalsAndHonors(allPaiMap)) {
+            yakuList.add(ChmYaku.ALL_TERMINALS_AND_HONORS);
+        }
+        
+        if (ChmYakuCheckUtil.isFullFlush(allPaiMap)) {
             if (!yakuList.contains(ChmYaku.SEVEN_SHIFTED_PAIRS)) {
                 yakuList.add(ChmYaku.FULL_FLUSH);
             }
