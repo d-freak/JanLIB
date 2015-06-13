@@ -121,7 +121,6 @@ public final class ChmYakuCheckUtil {
         
         for (final JanPaiType paiType : EnumSet.of(JanPaiType.MAN, JanPaiType.PIN, JanPaiType.SOU)) {
             if (paiTypeSet.contains(paiType) && paiTypeSet.size() == 1) {
-                // TODO 連七対との非複合
                 return true;
             }
         }

@@ -137,7 +137,9 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.ALL_HONORS);
         }
         else if (ChmYakuCheckUtil.isFullFlush(allPaiMap)) {
-            yakuList.add(ChmYaku.FULL_FLUSH);
+            if (!yakuList.contains(ChmYaku.SEVEN_SHIFTED_PAIRS)) {
+                yakuList.add(ChmYaku.FULL_FLUSH);
+            }
         }
         else if (ChmYakuCheckUtil.isReversibleTiles(allPaiMap)) {
             yakuList.add(ChmYaku.REVERSIBLE_TILES);
