@@ -88,15 +88,7 @@ public final class ChmHandCheckUtil {
         
         List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
         
-        if (isCompleteNanatsui(allPaiMap) && hand.getFixedMenTsuCount() == 0) {
-            if (ChmYakuCheckUtil.isSevenShiftedPairs(allPaiMap)) {
-                yakuList.add(ChmYaku.SEVEN_SHIFTED_PAIRS);
-            }
-            else {
-                yakuList.add(ChmYaku.SEVEN_PAIRS);
-            }
-        }
-        else if (isCompleteZenhukou(allPaiMap)) {
+        if (isCompleteZenhukou(allPaiMap)) {
             if (ChmYakuCheckUtil.isGreaterHonorsAndKnittedTiles(allPaiMap)) {
                 yakuList.add(ChmYaku.GREATER_HONORS_AND_KNITTED_TILES);
             }
@@ -109,9 +101,28 @@ public final class ChmHandCheckUtil {
                     yakuList.add(ChmYaku.KNITTED_STRAIGHT);
                 }
             }
+            addCompleteJanPaiYaku(yakuList, completePai);
+            
+            return new ChmCompleteInfo(yakuList, completePai.getType());
         }
-        else if (isCompleteKokushi(allPaiMap)) {
+        
+        if (isCompleteKokushi(allPaiMap)) {
             yakuList.add(ChmYaku.THIRTEEN_ORPHANS);
+            addCompleteJanPaiYaku(yakuList, completePai);
+            
+            return new ChmCompleteInfo(yakuList, completePai.getType());
+        }
+        
+        if (isCompleteNanatsui(allPaiMap) && hand.getFixedMenTsuCount() == 0) {
+            if (ChmYakuCheckUtil.isSevenShiftedPairs(allPaiMap)) {
+                yakuList.add(ChmYaku.SEVEN_SHIFTED_PAIRS);
+            }
+            else {
+                yakuList.add(ChmYaku.SEVEN_PAIRS);
+            }
+        }
+        else {
+            // TODO 数牌系列、刻子系列の役
         }
         
         if (ChmYakuCheckUtil.isAllGreen(allPaiMap)) {
@@ -144,33 +155,7 @@ public final class ChmHandCheckUtil {
         for (int count = 0; count < ChmYakuCheckUtil.getTileHogCount(hand, allPaiMap); count++) {
             yakuList.add(ChmYaku.TILE_HOG);
         }
-        
-        if (completePai.isLast()) {
-            yakuList.add(ChmYaku.LAST_TILE);
-        }
-        
-        switch (completePai.getType()) {
-        case RON_MENZEN:
-            boolean isConcealedHand = true;
-            
-            for (final ChmYaku yaku : yakuList) {
-                if (yaku.isMenZenOnly()) {
-                    isConcealedHand = false;
-                }
-            }
-            if (isConcealedHand) {
-                yakuList.add(ChmYaku.CONCEALED_HAND);
-            }
-            break;
-        case TSUMO_MENZEN:
-            yakuList.add(ChmYaku.FULLY_CONCEALED);
-            break;
-        case TSUMO_NOT_MENZEN:
-            yakuList.add(ChmYaku.SELF_DRAWN);
-            break;
-        default:
-            break;
-        }
+        addCompleteJanPaiYaku(yakuList, completePai);
         
         return new ChmCompleteInfo(yakuList, completePai.getType());
     }
@@ -368,6 +353,58 @@ public final class ChmHandCheckUtil {
     
     
     /**
+     * 役リストに和了牌の役を追加
+     * 
+     * @param yakuList 役リスト。
+     * @param completePai 和了牌。
+     */
+    private static void addCompleteJanPaiYaku(final List<ChmYaku> yakuList, final CompleteJanPai completePai) {
+        
+        if (completePai.isLast()) {
+            yakuList.add(ChmYaku.LAST_TILE);
+        }
+        
+        switch (completePai.getType()) {
+        case RON_MENZEN:
+            if (isConcealedHand(yakuList)) {
+                yakuList.add(ChmYaku.CONCEALED_HAND);
+            }
+            break;
+        case RON_MENZEN_HO_TEI:
+            yakuList.add(ChmYaku.LAST_TILE_CLAIM);
+            if (isConcealedHand(yakuList)) {
+                yakuList.add(ChmYaku.CONCEALED_HAND);
+            }
+            break;
+        case RON_NOT_MENZEN_HO_TEI:
+            yakuList.add(ChmYaku.LAST_TILE_CLAIM);
+            break;
+        case TSUMO_MENZEN:
+            yakuList.add(ChmYaku.FULLY_CONCEALED);
+            break;
+        case TSUMO_NOT_MENZEN:
+            yakuList.add(ChmYaku.SELF_DRAWN);
+            break;
+        case TSUMO_MENZEN_HAI_TEI:
+            yakuList.add(ChmYaku.LAST_TILE_DRAW);
+            yakuList.add(ChmYaku.FULLY_CONCEALED);
+            break;
+        case TSUMO_NOT_MENZEN_HAI_TEI:
+            yakuList.add(ChmYaku.LAST_TILE_DRAW);
+            break;
+        case TSUMO_MENZEN_RIN_SYAN:
+            yakuList.add(ChmYaku.OUT_WITH_REPLACEMENT_TILE);
+            yakuList.add(ChmYaku.FULLY_CONCEALED);
+            break;
+        case TSUMO_NOT_MENZEN_RIN_SYAN:
+            yakuList.add(ChmYaku.OUT_WITH_REPLACEMENT_TILE);
+            break;
+        default:
+            break;
+        }
+    }
+    
+    /**
      * リストをディープコピー
      * 
      * @param source 複製元。
@@ -487,12 +524,27 @@ public final class ChmHandCheckUtil {
     }
     
     /**
+     * 門前清か
+     * 
+     * @param yakuList 役リスト。
+     * @return 判定結果。
+     */
+    private static boolean isConcealedHand(final List<ChmYaku> yakuList) {
+        for (final ChmYaku yaku : yakuList) {
+            if (yaku.isMenZenOnly()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
      * 字牌を1枚ずつ削除
      * 
      * @param source 削除元の牌マップ。
      */
     private static void removeJi(final Map<JanPai, Integer> source) {
-    	final List<JanPai> paiList = new ArrayList<JanPai>(source.keySet());
+        final List<JanPai> paiList = new ArrayList<JanPai>(source.keySet());
         for (final JanPai entry : paiList) {
             if (JanPaiUtil.JI_LIST.contains(entry)) {
                 JanPaiUtil.removeJanPai(source, entry, 1);

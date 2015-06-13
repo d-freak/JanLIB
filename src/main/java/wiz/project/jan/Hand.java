@@ -297,7 +297,7 @@ public final class Hand implements Cloneable {
      * 
      * @return 判定結果。
      */
-    public boolean isMenzen() {
+    public boolean isMenZen() {
         for (final MenTsu mentsu : getFixedMenTsuList()) {
             if (mentsu.getMenTsuType().isCalled()) {
                 return false;
