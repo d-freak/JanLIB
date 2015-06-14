@@ -19,6 +19,7 @@ import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.JanPaiType;
 import wiz.project.jan.MenTsu;
+import wiz.project.jan.Wind;
 
 
 
@@ -138,6 +139,137 @@ public final class ChmYakuCheckUtil {
         }
         
         if (paiTypeSet.containsAll(new HashSet<>(Arrays.asList(JanPaiType.values())))) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 大四喜か
+     * 
+     * @param hand 手牌。
+     * @param paiMap 和了牌を含む手牌。
+     * @return 判定結果。
+     */
+    public static boolean isBigFourWinds(final Hand hand, final Map<JanPai, Integer> paiMap) {
+        int windCount = 0;
+        
+        for (final Map.Entry<JanPai, Integer> entry : paiMap.entrySet()) {
+            final JanPai pai = entry.getKey();
+            final int paiCount = entry.getValue();
+            
+            if (!pai.getType().equals(JanPaiType.JI_WIND)) {
+                continue;
+            }
+            
+            if (paiCount < 3) {
+                continue;
+            }
+            
+            if (isTileHog(hand, paiMap, pai)) {
+                continue;
+            }
+            windCount++;
+        }
+        
+        if (windCount == 4) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 大三元か
+     * 
+     * @param hand 手牌。
+     * @param paiMap 和了牌を含む手牌。
+     * @return 判定結果。
+     */
+    public static boolean isBigThreeDragons(final Hand hand, final Map<JanPai, Integer> paiMap) {
+        int doragonCount = 0;
+        
+        for (final Map.Entry<JanPai, Integer> entry : paiMap.entrySet()) {
+            final JanPai pai = entry.getKey();
+            final int paiCount = entry.getValue();
+            
+            if (!pai.getType().equals(JanPaiType.JI_DORAGON)) {
+                continue;
+            }
+            
+            if (paiCount < 3) {
+                continue;
+            }
+            
+            if (isTileHog(hand, paiMap, pai)) {
+                continue;
+            }
+            doragonCount++;
+        }
+        
+        if (doragonCount == 3) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 三風刻か
+     * 
+     * @param hand 手牌。
+     * @param paiMap 和了牌を含む手牌。
+     * @return 判定結果。
+     */
+    public static boolean isBigThreeWinds(final Hand hand, final Map<JanPai, Integer> paiMap) {
+        int windCount = 0;
+        
+        for (final Map.Entry<JanPai, Integer> entry : paiMap.entrySet()) {
+            final JanPai pai = entry.getKey();
+            final int paiCount = entry.getValue();
+            
+            if (!pai.getType().equals(JanPaiType.JI_WIND)) {
+                continue;
+            }
+            
+            if (paiCount < 3) {
+                continue;
+            }
+            
+            if (isTileHog(hand, paiMap, pai)) {
+                continue;
+            }
+            windCount++;
+        }
+        
+        if (windCount == 3) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 箭刻か
+     * 
+     * @param hand 手牌。
+     * @param paiMap 和了牌を含む手牌。
+     * @return 判定結果。
+     */
+    public static boolean isDragonPung(final Hand hand, final Map<JanPai, Integer> paiMap) {
+        
+        for (final Map.Entry<JanPai, Integer> entry : paiMap.entrySet()) {
+            final JanPai pai = entry.getKey();
+            final int paiCount = entry.getValue();
+            
+            if (!pai.getType().equals(JanPaiType.JI_DORAGON)) {
+                continue;
+            }
+            
+            if (paiCount < 3) {
+                continue;
+            }
+            
+            if (isTileHog(hand, paiMap, pai)) {
+                continue;
+            }
             return true;
         }
         return false;
@@ -295,6 +427,36 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 圈風刻か
+     * 
+     * @param hand 手牌。
+     * @param paiMap 和了牌を含む手牌。
+     * @param wind 場風。
+     * @return 判定結果。
+     */
+    public static boolean isPrevalentWind(final Hand hand, final Map<JanPai, Integer> paiMap, final Wind wind) {
+        
+        for (final Map.Entry<JanPai, Integer> entry : paiMap.entrySet()) {
+            final JanPai pai = entry.getKey();
+            final int paiCount = entry.getValue();
+            
+            if (pai.toString().indexOf(wind.toString()) == -1) {
+                continue;
+            }
+            
+            if (paiCount < 3) {
+                continue;
+            }
+            
+            if (isTileHog(hand, paiMap, pai)) {
+                continue;
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * 推不倒か
      * 
      * @param hand 手牌。
@@ -309,6 +471,36 @@ public final class ChmYakuCheckUtil {
         else {
             return false;
         }
+    }
+    
+    /**
+     * 門風刻か
+     * 
+     * @param hand 手牌。
+     * @param paiMap 和了牌を含む手牌。
+     * @param wind 自風。
+     * @return 判定結果。
+     */
+    public static boolean isSeatWind(final Hand hand, final Map<JanPai, Integer> paiMap, final Wind wind) {
+        
+        for (final Map.Entry<JanPai, Integer> entry : paiMap.entrySet()) {
+            final JanPai pai = entry.getKey();
+            final int paiCount = entry.getValue();
+            
+            if (pai.toString().indexOf(wind.toString()) == -1) {
+                continue;
+            }
+            
+            if (paiCount < 3) {
+                continue;
+            }
+            
+            if (isTileHog(hand, paiMap, pai)) {
+                continue;
+            }
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -345,6 +537,40 @@ public final class ChmYakuCheckUtil {
             }
         }
         return true;
+    }
+    
+    /**
+     * 双箭刻か
+     * 
+     * @param hand 手牌。
+     * @param paiMap 和了牌を含む手牌。
+     * @return 判定結果。
+     */
+    public static boolean isTwoDragonPungs(final Hand hand, final Map<JanPai, Integer> paiMap) {
+        int doragonCount = 0;
+        
+        for (final Map.Entry<JanPai, Integer> entry : paiMap.entrySet()) {
+            final JanPai pai = entry.getKey();
+            final int paiCount = entry.getValue();
+            
+            if (!pai.getType().equals(JanPaiType.JI_DORAGON)) {
+                continue;
+            }
+            
+            if (paiCount < 3) {
+                continue;
+            }
+            
+            if (isTileHog(hand, paiMap, pai)) {
+                continue;
+            }
+            doragonCount++;
+        }
+        
+        if (doragonCount == 2) {
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -393,21 +619,35 @@ public final class ChmYakuCheckUtil {
         int count = 0;
         
         for (final JanPai pai : paiList) {
-            if (paiMap.get(pai) == 4) {
-                boolean isTileHog = true;
-                
-                for (final MenTsu mentsu : hand.getFixedMenTsuList()) {
-                    if (mentsu.getMenTsuType().isKanTsu() && mentsu.hasJanPai(pai)) {
-                        isTileHog = false;
-                    }
-                }
-                
-                if (isTileHog) {
-                    count++;
-                }
+            if (isTileHog(hand, paiMap, pai)) {
+                count++;
             }
         }
         return count;
+    }
+    
+    
+    
+    /**
+     * 指定牌が四帰一か
+     * 
+     * @param hand 手牌。
+     * @param paiMap 和了牌を含む手牌。
+     * @param pai 指定牌。
+     * @return 判定結果。
+     */
+    private static boolean isTileHog(final Hand hand, final Map<JanPai, Integer> paiMap, final JanPai pai) {
+        
+        if (paiMap.get(pai) < 4) {
+            return false;
+        }
+        
+        for (final MenTsu mentsu : hand.getFixedMenTsuList()) {
+            if (mentsu.hasJanPai(pai) && mentsu.getMenTsuType().isKanTsu()) {
+                return false;
+            }
+        }
+        return true;
     }
     
     

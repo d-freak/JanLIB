@@ -148,6 +148,60 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.ALL_SIMPLES);
         }
         
+        if (ChmYakuCheckUtil.isBigFourWinds(hand, allPaiMap)) {
+            yakuList.add(ChmYaku.BIG_FOUR_WINDS);
+        }
+        else if (ChmYakuCheckUtil.isBigThreeDragons(hand, allPaiMap)) {
+            yakuList.add(ChmYaku.BIG_THREE_DRAGONS);
+            
+            if (ChmYakuCheckUtil.isPrevalentWind(hand, allPaiMap, fieldWind)) {
+                yakuList.add(ChmYaku.PREVALENT_WIND);
+            }
+            
+            if (ChmYakuCheckUtil.isSeatWind(hand, allPaiMap, playerWind)) {
+                yakuList.add(ChmYaku.SEAT_WIND);
+            }
+        }
+        else if (ChmYakuCheckUtil.isBigThreeWinds(hand, allPaiMap)) {
+            yakuList.add(ChmYaku.BIG_THREE_WINDS);
+            
+            if (ChmYakuCheckUtil.isDragonPung(hand, allPaiMap)) {
+                yakuList.add(ChmYaku.DRAGON_PUNG);
+            }
+            
+            if (ChmYakuCheckUtil.isPrevalentWind(hand, allPaiMap, fieldWind)) {
+                yakuList.add(ChmYaku.PREVALENT_WIND);
+            }
+            
+            if (ChmYakuCheckUtil.isSeatWind(hand, allPaiMap, playerWind)) {
+                yakuList.add(ChmYaku.SEAT_WIND);
+            }
+        }
+        else if (ChmYakuCheckUtil.isTwoDragonPungs(hand, allPaiMap)) {
+            yakuList.add(ChmYaku.TWO_DRAGON_PUNGS);
+            
+            if (ChmYakuCheckUtil.isPrevalentWind(hand, allPaiMap, fieldWind)) {
+                yakuList.add(ChmYaku.PREVALENT_WIND);
+            }
+            
+            if (ChmYakuCheckUtil.isSeatWind(hand, allPaiMap, playerWind)) {
+                yakuList.add(ChmYaku.SEAT_WIND);
+            }
+        }
+        else {
+            if (ChmYakuCheckUtil.isDragonPung(hand, allPaiMap)) {
+                yakuList.add(ChmYaku.DRAGON_PUNG);
+            }
+            
+            if (ChmYakuCheckUtil.isPrevalentWind(hand, allPaiMap, fieldWind)) {
+                yakuList.add(ChmYaku.PREVALENT_WIND);
+            }
+            
+            if (ChmYakuCheckUtil.isSeatWind(hand, allPaiMap, playerWind)) {
+                yakuList.add(ChmYaku.SEAT_WIND);
+            }
+        }
+        
         if (ChmYakuCheckUtil.isAllTerminals(allPaiMap)) {
             yakuList.add(ChmYaku.ALL_TERMINALS);
         }

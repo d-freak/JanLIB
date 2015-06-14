@@ -203,6 +203,87 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(大四喜、字一色)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsBigFourWinds() {
+        // あがり役：大四喜、字一色
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.BIG_FOUR_WINDS, ChmYaku.ALL_HONORS);
+        // 手牌：[東] [東] [東] [南] [南] [南] [西] [西] [西] [北] [北] [白] [白]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.TON, 3);}
+            {put(JanPai.NAN, 3);}
+            {put(JanPai.SHA, 3);}
+            {put(JanPai.PEI, 2);}
+            {put(JanPai.HAKU, 2);}
+        });
+        // あがり：[北]ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.PEI, 1, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(大三元、圈風刻、門風刻、字一色)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsBigThreeDragons() {
+        // あがり役：大三元、圈風刻、門風刻、字一色
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.BIG_THREE_DRAGONS, ChmYaku.PREVALENT_WIND, ChmYaku.SEAT_WIND, ChmYaku.ALL_HONORS);
+        // 手牌：[東] [東] [東] [南] [南] [白] [白] [白] [發] [發] [發] [中] [中]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.TON, 3);}
+            {put(JanPai.NAN, 2);}
+            {put(JanPai.HAKU, 3);}
+            {put(JanPai.HATU, 3);}
+            {put(JanPai.CHUN, 2);}
+        });
+        // あがり：[中]ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.CHUN, 1, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(三風刻、箭刻、圈風刻、門風刻、字一色)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsBigThreeWinds() {
+        // あがり役：三風刻、箭刻、圈風刻、門風刻、字一色
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.BIG_THREE_WINDS, ChmYaku.DRAGON_PUNG, ChmYaku.PREVALENT_WIND, ChmYaku.SEAT_WIND, ChmYaku.ALL_HONORS);
+        // 手牌：[東] [東] [東] [南] [南] [南] [西] [西] [西] [白] [白] [中] [中]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.TON, 3);}
+            {put(JanPai.NAN, 3);}
+            {put(JanPai.SHA, 3);}
+            {put(JanPai.HAKU, 2);}
+            {put(JanPai.CHUN, 2);}
+        });
+        // あがり：[中]ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.CHUN, 1, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(七対、緑一色、断幺、清一色、四帰一、四帰一)
      */
     @SuppressWarnings("serial")
@@ -705,6 +786,37 @@ public final class ChmYakuCheckUtilTest {
         });
         // あがり：[白]面前ロン
         CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        Wind playerWind = Wind.TON;
+        // 場風：東
+        Wind fieldWind = Wind.TON;
+        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
+        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(双箭刻)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsTwoDragonPungs() {
+        // あがり役：双箭刻
+        List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.TWO_DRAGON_PUNGS);
+        // 手牌：[1m] [2m] [3m] [4s] [5s] [6s] [7p] [7p] [白] [白] [白] [發] [發]
+        Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 1);}
+            {put(JanPai.MAN_2, 1);}
+            {put(JanPai.MAN_3, 1);}
+            {put(JanPai.SOU_4, 1);}
+            {put(JanPai.SOU_5, 1);}
+            {put(JanPai.SOU_6, 1);}
+            {put(JanPai.PIN_7, 2);}
+            {put(JanPai.HAKU, 3);}
+            {put(JanPai.HATU, 2);}
+        });
+        // あがり：[發]ロン
+        CompleteJanPai pai = new CompleteJanPai(JanPai.HATU, 1, CompleteType.RON_NOT_MENZEN);
         // 自風：東
         Wind playerWind = Wind.TON;
         // 場風：東
