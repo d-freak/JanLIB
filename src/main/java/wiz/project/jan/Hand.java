@@ -185,6 +185,19 @@ public final class Hand implements Cloneable {
     }
     
     /**
+     * 存在しない牌を削除済みで指定牌込みの面前手牌マップを取得
+     * 
+     * @param source 手牌に追加する牌。
+     * @return 面前手牌マップ。
+     */
+    public Map<JanPai, Integer> getCleanMenZenMap(final JanPai source) {
+        final Map<JanPai, Integer> hand = deepCopyMap(_core);
+        JanPaiUtil.addJanPai(hand, source, 1);
+        JanPaiUtil.cleanJanPaiMap(hand);
+        return hand;
+    }
+    
+    /**
      * 確定面子数を取得
      * 
      * @return 確定面子数。

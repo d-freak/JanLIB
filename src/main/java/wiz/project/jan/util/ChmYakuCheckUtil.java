@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import wiz.project.jan.CompletePattern;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.JanPaiType;
@@ -34,6 +35,16 @@ public final class ChmYakuCheckUtil {
     private ChmYakuCheckUtil() {}
     
     
+    
+    /**
+     * 平和か
+     * 
+     * @param pattern 和了パターン。
+     * @return 判定結果。
+     */
+    public static boolean isAllChows(final CompletePattern pattern) {
+        return !pattern.getHead().isJi();
+    }
     
     /**
      * 緑一色か

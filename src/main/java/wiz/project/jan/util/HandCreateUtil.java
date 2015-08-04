@@ -14,6 +14,7 @@ import java.util.Map;
 
 import wiz.project.jan.JanPai;
 import wiz.project.jan.MenTsu;
+import wiz.project.jan.MenTsuType;
 
 
 
@@ -194,7 +195,7 @@ public final class HandCreateUtil {
                     for (final JanPai pai : shunTsu) {
                         JanPaiUtil.removeJanPai(source, pai, 1);
                     }
-                    resultList.add(new MenTsu(shunTsu));
+                    resultList.add(new MenTsu(shunTsu, MenTsuType.STANDARD_SHUN_TSU));
                     
                     // 順子が見つかった場合、リスト再構築 (一盃口対策)
                     foundShunTsu = true;

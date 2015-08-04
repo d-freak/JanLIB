@@ -15,10 +15,12 @@ import java.util.TreeMap;
 import wiz.project.jan.ChmCompleteInfo;
 import wiz.project.jan.ChmYaku;
 import wiz.project.jan.CompleteJanPai;
+import wiz.project.jan.CompletePattern;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.Kumiairyu;
 import wiz.project.jan.KumiairyuType;
+import wiz.project.jan.MenTsu;
 import wiz.project.jan.TenpaiPattern;
 import wiz.project.jan.Wind;
 
@@ -122,7 +124,7 @@ public final class ChmHandCheckUtil {
             }
         }
         else {
-            // TODO 数牌系列、刻子系列の役
+            addMenTsuYaku(yakuList, hand, completePai);
         }
         
         if (ChmYakuCheckUtil.isAllGreen(allPaiMap)) {
@@ -239,26 +241,86 @@ public final class ChmHandCheckUtil {
     }
     
     /**
+     * 和了パターンリストを取得
+     * 
+     * @param hand 手牌。
+     * @param completePai 和了牌。
+     * @return 和了パターンリスト。
+     */
+    public static List<CompletePattern> getCompletePatternList(final Hand hand, final CompleteJanPai completePai) {
+        if (hand == null) {
+            throw new NullPointerException("Hand is null.");
+        }
+        if (completePai == null) {
+            throw new NullPointerException("Complete jan pai is null.");
+        }
+        final Map<JanPai, Integer> handWithCompleteJanPai = hand.getCleanMenZenMap(completePai.getJanPai());
+        final Map<JanPai, Map<JanPai, Integer>> excludeHeadPattern = getExcludeHeadPattern(handWithCompleteJanPai);
+        final List<CompletePattern> resultList = new ArrayList<CompletePattern>();
+        
+        if (excludeHeadPattern.isEmpty()) {
+            // 雀頭候補が存在しない
+            return resultList;
+        }
+        
+        for (final Map.Entry<JanPai, Map<JanPai, Integer>> entry : excludeHeadPattern.entrySet()) {
+            final Map<JanPai, Integer> pattern = entry.getValue();
+            final List<MenTsu> mentsuList = hand.getFixedMenTsuList();
+            
+            if (pattern.isEmpty()) {
+                // 裸単騎状態で和了
+                resultList.add(new CompletePattern(entry.getKey(), mentsuList));
+                continue;
+            }
+            
+            final Map<JanPai, Integer> copy1 = deepCopyMap(pattern);
+            List<MenTsu> mentsuList1 = deepCopyList(mentsuList);
+            
+            // 順子優先パターン
+            mentsuList1.addAll(HandCreateUtil.getShunTsuList(copy1));
+            mentsuList1.addAll(HandCreateUtil.getKouTsuList(copy1));
+            if (copy1.isEmpty()) {
+                resultList.add(new CompletePattern(entry.getKey(), mentsuList1));
+                continue;
+            }
+            
+            final Map<JanPai, Integer> copy2 = deepCopyMap(pattern);
+            List<MenTsu> mentsuList2 = deepCopyList(mentsuList);
+            
+            // 刻子優先パターン
+            mentsuList2.addAll(HandCreateUtil.getKouTsuList(copy2));
+            mentsuList2.addAll(HandCreateUtil.getShunTsuList(copy2));
+            if (copy1.isEmpty()) {
+                resultList.add(new CompletePattern(entry.getKey(), mentsuList2));
+                continue;
+            }
+            // TODO 組合竜
+        }
+        return resultList;
+    }
+    
+    /**
      * 雀頭除外パターンを取得
      * 
      * @param hand 手牌。
      * @return 雀頭候補の除外パターン。
      */
-    public static List<Map<JanPai, Integer>> getExcludeHeadPattern(final Map<JanPai, Integer> hand) {
+    public static Map<JanPai, Map<JanPai, Integer>> getExcludeHeadPattern(final Map<JanPai, Integer> hand) {
         if (hand == null) {
             throw new NullPointerException("Hand is null.");
         }
         
-        final List<Map<JanPai, Integer>> resultList = new ArrayList<Map<JanPai, Integer>>();
+        final Map<JanPai, Map<JanPai, Integer>> resultMap = new TreeMap<JanPai, Map<JanPai, Integer>>();
         for (final Map.Entry<JanPai, Integer> entry : hand.entrySet()) {
             final int count = entry.getValue();
             if (count >= 2) {
+            	final JanPai head = entry.getKey();
                 final Map<JanPai, Integer> pattern = deepCopyMap(hand);
-                JanPaiUtil.removeJanPai(pattern, entry.getKey(), 2);
-                resultList.add(pattern);
+                JanPaiUtil.removeJanPai(pattern, head, 2);
+                resultMap.put(head, pattern);
             }
         }
-        return resultList;
+        return resultMap;
     }
     
     /**
@@ -351,7 +413,7 @@ public final class ChmHandCheckUtil {
             throw new NullPointerException("Hand is null.");
         }
         
-        final List<Map<JanPai, Integer>> excludeHeadPattern = getExcludeHeadPattern(hand);
+        final Map<JanPai, Map<JanPai, Integer>> excludeHeadPattern = getExcludeHeadPattern(hand);
         if (excludeHeadPattern.isEmpty()) {
             // 雀頭候補が存在しない
             
@@ -361,7 +423,7 @@ public final class ChmHandCheckUtil {
             return false;
         }
         
-        for (final Map<JanPai, Integer> pattern : excludeHeadPattern) {
+        for (final Map<JanPai, Integer> pattern : excludeHeadPattern.values()) {
             if (pattern.isEmpty()) {
             // 裸単騎状態で和了
                 return true;
@@ -479,6 +541,35 @@ public final class ChmHandCheckUtil {
             break;
         default:
             break;
+        }
+    }
+    
+    /**
+     * 役リストに面子の役を追加
+     * 
+     * @param yakuList 役リスト。
+     * @param hand 手牌。
+     * @param completePai 和了牌。
+     */
+    private static void addMenTsuYaku(final List<ChmYaku> yakuList, final Hand hand, final CompleteJanPai completePai) {
+        for (final CompletePattern pattern : getCompletePatternList(hand, completePai)) {
+            switch (pattern.getShunTsuCount()) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                if (ChmYakuCheckUtil.isAllChows(pattern)) {
+                    yakuList.add(ChmYaku.ALL_CHOWS);
+                }
+                break;
+            default:
+                break;
+            }
         }
     }
     
