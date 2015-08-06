@@ -19,6 +19,7 @@ import wiz.project.jan.CompletePattern;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.JanPaiType;
+import wiz.project.jan.Kumiairyu;
 import wiz.project.jan.MenTsu;
 import wiz.project.jan.Wind;
 
@@ -358,6 +359,21 @@ public final class ChmYakuCheckUtil {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * 組合龍か
+     * 
+     * @param shuntsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isKnittedStraight(final List<MenTsu> shuntsuList) {
+        final List<JanPai> paiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : shuntsuList) {
+            paiList.addAll(shuntsu.getSource());
+        }
+        return Kumiairyu.isKumiairyu(paiList);
     }
     
     /**

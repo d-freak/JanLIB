@@ -26,7 +26,9 @@ public final class CompletePattern implements Serializable {
      */
     public CompletePattern(final JanPai head, final List<MenTsu> mentsuList) {
         setHead(head);
+        setKohTsuList(mentsuList);
         setMenTsuList(mentsuList);
+        setShunTsuList(mentsuList);
     }
     
     
@@ -64,6 +66,15 @@ public final class CompletePattern implements Serializable {
     }
     
     /**
+     * 刻子リストを取得
+     * 
+     * @return 刻子リスト。
+     */
+    public List<MenTsu> getKohTsuList() {
+        return deepCopyList(_kohtsuList);
+    }
+    
+    /**
      * 面子リストを取得
      * 
      * @return 面子リスト。
@@ -78,14 +89,16 @@ public final class CompletePattern implements Serializable {
      * @return 順子の数。
      */
     public int getShunTsuCount() {
-        int shuntsuCount = 0;
-        
-        for (final MenTsu mentsu : _mentsuList) {
-            if (mentsu.getMenTsuType().isShunTsu()) {
-                shuntsuCount++;
-            }
-        }
-        return shuntsuCount;
+        return _shuntsuList.size();
+    }
+    
+    /**
+     * 順子リストを取得
+     * 
+     * @return 順子リスト。
+     */
+    public List<MenTsu> getShunTsuList() {
+        return deepCopyList(_shuntsuList);
     }
     
     /**
@@ -135,6 +148,27 @@ public final class CompletePattern implements Serializable {
     }
     
     /**
+     * 刻子リストを設定
+     * 
+     * @param mentsuList 刻子リスト。
+     */
+    private void setKohTsuList(final List<MenTsu> mentsuList) {
+        if (mentsuList != null) {
+            final List<MenTsu> kohtsuList = new ArrayList<MenTsu>();
+            
+            for (final MenTsu mentsu: mentsuList) {
+                if (mentsu.getMenTsuType().isKouTsu()) {
+                    kohtsuList.add(mentsu);
+                }
+            }
+            _kohtsuList = deepCopyList(kohtsuList);
+        }
+        else {
+            _kohtsuList.clear();
+        }
+    }
+    
+    /**
      * 面子リストを設定
      * 
      * @param mentsuList 面子リスト。
@@ -145,6 +179,27 @@ public final class CompletePattern implements Serializable {
         }
         else {
             _mentsuList.clear();
+        }
+    }
+    
+    /**
+     * 順子リストを設定
+     * 
+     * @param mentsuList 順子リスト。
+     */
+    private void setShunTsuList(final List<MenTsu> mentsuList) {
+        if (mentsuList != null) {
+            final List<MenTsu> shuntsuList = new ArrayList<MenTsu>();
+            
+            for (final MenTsu mentsu: mentsuList) {
+                if (mentsu.getMenTsuType().isShunTsu()) {
+                    shuntsuList.add(mentsu);
+                }
+            }
+            _shuntsuList = deepCopyList(shuntsuList);
+        }
+        else {
+            _shuntsuList.clear();
         }
     }
     
@@ -163,9 +218,19 @@ public final class CompletePattern implements Serializable {
     private JanPai _head = JanPai.HAKU;
     
     /**
+     * 刻子リスト
+     */
+    private List<MenTsu> _kohtsuList = new ArrayList<MenTsu>();
+    
+    /**
      * 面子リスト
      */
     private List<MenTsu> _mentsuList = new ArrayList<MenTsu>();
+    
+    /**
+     * 順子リスト
+     */
+    private List<MenTsu> _shuntsuList = new ArrayList<MenTsu>();
     
 }
 

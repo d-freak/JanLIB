@@ -294,7 +294,32 @@ public final class ChmHandCheckUtil {
                 resultList.add(new CompletePattern(entry.getKey(), mentsuList2));
                 continue;
             }
-            // TODO 組合竜
+            
+            final List<JanPai> paiList = new ArrayList<JanPai>(pattern.keySet());
+            final KumiairyuType kumiairyuType = Kumiairyu.getKumiairyuType(paiList);
+            
+            if (kumiairyuType == KumiairyuType.NONE) {
+                continue;
+            }
+            
+            // 組合竜優先パターン
+            Kumiairyu.removeKumiairyu(pattern, kumiairyuType);
+            mentsuList.addAll(Kumiairyu.getKumiairyuShunTsuList(kumiairyuType));
+            
+            final Map<JanPai, Integer> copy3 = deepCopyMap(pattern);
+            List<MenTsu> mentsuList3 = deepCopyList(mentsuList);
+            
+            mentsuList3.addAll(HandCreateUtil.getShunTsuList(copy3));
+            if (copy3.isEmpty()) {
+                resultList.add(new CompletePattern(entry.getKey(), mentsuList3));
+                continue;
+            }
+            
+            mentsuList.addAll(HandCreateUtil.getKouTsuList(pattern));
+            if (pattern.isEmpty()) {
+                resultList.add(new CompletePattern(entry.getKey(), mentsuList));
+                continue;
+            }
         }
         return resultList;
     }
@@ -545,6 +570,29 @@ public final class ChmHandCheckUtil {
     }
     
     /**
+     * 役リストに4順子、刻子なしの場合の役を追加
+     * 
+     * @param yakuList 役リスト。
+     * @param pattern 和了パターンリスト。
+     */
+    private static void addFourShunTsuYaku(final List<ChmYaku> yakuList, final CompletePattern pattern) {
+        final List<MenTsu> fourShunTsuList = pattern.getShunTsuList();
+        
+        for (final MenTsu excludeShunTsu : fourShunTsuList) {
+            final List<MenTsu> threeShunTsuList = pattern.getShunTsuList();
+            threeShunTsuList.remove(excludeShunTsu);
+            
+            if (ChmYakuCheckUtil.isKnittedStraight(threeShunTsuList)) {
+                yakuList.add(ChmYaku.KNITTED_STRAIGHT);
+            }
+        }
+        
+        if (ChmYakuCheckUtil.isAllChows(pattern)) {
+            yakuList.add(ChmYaku.ALL_CHOWS);
+        }
+    }
+    
+    /**
      * 役リストに面子の役を追加
      * 
      * @param yakuList 役リスト。
@@ -552,7 +600,12 @@ public final class ChmHandCheckUtil {
      * @param completePai 和了牌。
      */
     private static void addMenTsuYaku(final List<ChmYaku> yakuList, final Hand hand, final CompleteJanPai completePai) {
+        List<ChmYaku> preYakuList = new ArrayList<ChmYaku>();
+        int prePoint = 0;
+        
         for (final CompletePattern pattern : getCompletePatternList(hand, completePai)) {
+            final List<ChmYaku> newYakuList = new ArrayList<ChmYaku>();
+            
             switch (pattern.getShunTsuCount()) {
             case 0:
                 break;
@@ -561,15 +614,39 @@ public final class ChmHandCheckUtil {
             case 2:
                 break;
             case 3:
+                addThreeShunTsuYaku(newYakuList, pattern);
                 break;
             case 4:
-                if (ChmYakuCheckUtil.isAllChows(pattern)) {
-                    yakuList.add(ChmYaku.ALL_CHOWS);
-                }
+                addFourShunTsuYaku(newYakuList, pattern);
                 break;
             default:
                 break;
             }
+            int newPoint = 0;
+            
+            for (final ChmYaku yaku : newYakuList) {
+                newPoint += yaku.getPoint();
+            }
+            
+            if (newPoint > prePoint) {
+                preYakuList = newYakuList;
+                prePoint = newPoint;
+            }
+        }
+        yakuList.addAll(preYakuList);
+    }
+    
+    /**
+     * 役リストに3順子、1刻子の場合の役を追加
+     * 
+     * @param yakuList 役リスト。
+     * @param pattern 和了パターンリスト。
+     */
+    private static void addThreeShunTsuYaku(final List<ChmYaku> yakuList, final CompletePattern pattern) {
+        final List<MenTsu> threeShunTsuList = pattern.getShunTsuList();
+        
+        if (ChmYakuCheckUtil.isKnittedStraight(threeShunTsuList)) {
+            yakuList.add(ChmYaku.KNITTED_STRAIGHT);
         }
     }
     
