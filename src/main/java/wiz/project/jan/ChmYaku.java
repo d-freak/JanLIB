@@ -7,6 +7,7 @@
 
 package wiz.project.jan;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -515,6 +516,37 @@ public enum ChmYaku {
     }
     
     
+    
+    /**
+     * 除外役リストを取得
+     * 
+     * @return 除外役リスト。
+     */
+    public List<ChmYaku> getExcludeChmYaku() {
+        final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
+        
+        switch (this) {
+        case THIRTEEN_ORPHANS:
+            yakuList.add(CONCEALED_HAND);
+            break;
+        case SEVEN_SHIFTED_PAIRS:
+            yakuList.add(FULL_FLUSH);
+            yakuList.add(CONCEALED_HAND);
+            break;
+        case GREATER_HONORS_AND_KNITTED_TILES:
+            yakuList.add(CONCEALED_HAND);
+            break;
+        case SEVEN_PAIRS:
+            yakuList.add(CONCEALED_HAND);
+            break;
+        case LESSER_HONORS_AND_KNITTED_TILES:
+            yakuList.add(CONCEALED_HAND);
+            break;
+        default:
+            break;
+        }
+        return yakuList;
+    }
     
     /**
      * 点数を取得

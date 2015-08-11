@@ -103,14 +103,16 @@ public final class ChmHandCheckUtil {
                     yakuList.add(ChmYaku.KNITTED_STRAIGHT);
                 }
             }
-            addCompleteJanPaiYaku(yakuList, completePai);
+            yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
+            removeExcludeYaku(yakuList);
             
             return new ChmCompleteInfo(yakuList, completePai.getType());
         }
         
         if (isCompleteKokushi(allPaiMap)) {
             yakuList.add(ChmYaku.THIRTEEN_ORPHANS);
-            addCompleteJanPaiYaku(yakuList, completePai);
+            yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
+            removeExcludeYaku(yakuList);
             
             return new ChmCompleteInfo(yakuList, completePai.getType());
         }
@@ -124,7 +126,7 @@ public final class ChmHandCheckUtil {
             }
         }
         else {
-            addMenTsuYaku(yakuList, hand, completePai);
+            yakuList.addAll(getMenTsuYaku(hand, completePai));
         }
         
         if (ChmYakuCheckUtil.isAllGreen(allPaiMap)) {
@@ -215,9 +217,7 @@ public final class ChmHandCheckUtil {
         }
         
         if (ChmYakuCheckUtil.isFullFlush(allPaiMap)) {
-            if (!yakuList.contains(ChmYaku.SEVEN_SHIFTED_PAIRS)) {
-                yakuList.add(ChmYaku.FULL_FLUSH);
-            }
+            yakuList.add(ChmYaku.FULL_FLUSH);
         }
         else if (ChmYakuCheckUtil.isReversibleTiles(allPaiMap)) {
             yakuList.add(ChmYaku.REVERSIBLE_TILES);
@@ -235,7 +235,8 @@ public final class ChmHandCheckUtil {
         for (int count = 0; count < ChmYakuCheckUtil.getTileHogCount(hand, allPaiMap); count++) {
             yakuList.add(ChmYaku.TILE_HOG);
         }
-        addCompleteJanPaiYaku(yakuList, completePai);
+        yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
+        removeExcludeYaku(yakuList);
         
         return new ChmCompleteInfo(yakuList, completePai.getType());
     }
@@ -518,139 +519,6 @@ public final class ChmHandCheckUtil {
     
     
     /**
-     * 役リストに和了牌の役を追加
-     * 
-     * @param yakuList 役リスト。
-     * @param completePai 和了牌。
-     */
-    private static void addCompleteJanPaiYaku(final List<ChmYaku> yakuList, final CompleteJanPai completePai) {
-        
-        if (completePai.isLast()) {
-            yakuList.add(ChmYaku.LAST_TILE);
-        }
-        
-        switch (completePai.getType()) {
-        case RON_MENZEN:
-            if (isConcealedHand(yakuList)) {
-                yakuList.add(ChmYaku.CONCEALED_HAND);
-            }
-            break;
-        case RON_MENZEN_HO_TEI:
-            yakuList.add(ChmYaku.LAST_TILE_CLAIM);
-            if (isConcealedHand(yakuList)) {
-                yakuList.add(ChmYaku.CONCEALED_HAND);
-            }
-            break;
-        case RON_NOT_MENZEN_HO_TEI:
-            yakuList.add(ChmYaku.LAST_TILE_CLAIM);
-            break;
-        case TSUMO_MENZEN:
-            yakuList.add(ChmYaku.FULLY_CONCEALED);
-            break;
-        case TSUMO_NOT_MENZEN:
-            yakuList.add(ChmYaku.SELF_DRAWN);
-            break;
-        case TSUMO_MENZEN_HAI_TEI:
-            yakuList.add(ChmYaku.LAST_TILE_DRAW);
-            yakuList.add(ChmYaku.FULLY_CONCEALED);
-            break;
-        case TSUMO_NOT_MENZEN_HAI_TEI:
-            yakuList.add(ChmYaku.LAST_TILE_DRAW);
-            break;
-        case TSUMO_MENZEN_RIN_SYAN:
-            yakuList.add(ChmYaku.OUT_WITH_REPLACEMENT_TILE);
-            yakuList.add(ChmYaku.FULLY_CONCEALED);
-            break;
-        case TSUMO_NOT_MENZEN_RIN_SYAN:
-            yakuList.add(ChmYaku.OUT_WITH_REPLACEMENT_TILE);
-            break;
-        default:
-            break;
-        }
-    }
-    
-    /**
-     * 役リストに4順子、刻子なしの場合の役を追加
-     * 
-     * @param yakuList 役リスト。
-     * @param pattern 和了パターンリスト。
-     */
-    private static void addFourShunTsuYaku(final List<ChmYaku> yakuList, final CompletePattern pattern) {
-        final List<MenTsu> fourShunTsuList = pattern.getShunTsuList();
-        
-        for (final MenTsu excludeShunTsu : fourShunTsuList) {
-            final List<MenTsu> threeShunTsuList = pattern.getShunTsuList();
-            threeShunTsuList.remove(excludeShunTsu);
-            
-            if (ChmYakuCheckUtil.isKnittedStraight(threeShunTsuList)) {
-                yakuList.add(ChmYaku.KNITTED_STRAIGHT);
-            }
-        }
-        
-        if (ChmYakuCheckUtil.isAllChows(pattern)) {
-            yakuList.add(ChmYaku.ALL_CHOWS);
-        }
-    }
-    
-    /**
-     * 役リストに面子の役を追加
-     * 
-     * @param yakuList 役リスト。
-     * @param hand 手牌。
-     * @param completePai 和了牌。
-     */
-    private static void addMenTsuYaku(final List<ChmYaku> yakuList, final Hand hand, final CompleteJanPai completePai) {
-        List<ChmYaku> preYakuList = new ArrayList<ChmYaku>();
-        int prePoint = 0;
-        
-        for (final CompletePattern pattern : getCompletePatternList(hand, completePai)) {
-            final List<ChmYaku> newYakuList = new ArrayList<ChmYaku>();
-            
-            switch (pattern.getShunTsuCount()) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                addThreeShunTsuYaku(newYakuList, pattern);
-                break;
-            case 4:
-                addFourShunTsuYaku(newYakuList, pattern);
-                break;
-            default:
-                break;
-            }
-            int newPoint = 0;
-            
-            for (final ChmYaku yaku : newYakuList) {
-                newPoint += yaku.getPoint();
-            }
-            
-            if (newPoint > prePoint) {
-                preYakuList = newYakuList;
-                prePoint = newPoint;
-            }
-        }
-        yakuList.addAll(preYakuList);
-    }
-    
-    /**
-     * 役リストに3順子、1刻子の場合の役を追加
-     * 
-     * @param yakuList 役リスト。
-     * @param pattern 和了パターンリスト。
-     */
-    private static void addThreeShunTsuYaku(final List<ChmYaku> yakuList, final CompletePattern pattern) {
-        final List<MenTsu> threeShunTsuList = pattern.getShunTsuList();
-        
-        if (ChmYakuCheckUtil.isKnittedStraight(threeShunTsuList)) {
-            yakuList.add(ChmYaku.KNITTED_STRAIGHT);
-        }
-    }
-    
-    /**
      * リストをディープコピー
      * 
      * @param source 複製元。
@@ -668,6 +536,132 @@ public final class ChmHandCheckUtil {
      */
     private static <S, T> Map<S, T> deepCopyMap(final Map<S, T> source) {
         return new TreeMap<S, T>(source);
+    }
+    
+    /**
+     * 4順子の役リストを取得
+     * 
+     * @param fourShunTsuList 順子リスト。
+     * @return 4順子の役リスト。
+     */
+    private static List<ChmYaku> getFourShunTsuYakuList(final List<MenTsu> fourShunTsuList) {
+        if (fourShunTsuList.size() != 4) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + fourShunTsuList.size());
+        }
+        final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
+        final ChmYaku fourChowsYaku = ChmYakuCheckUtil.getFourChowsYaku(fourShunTsuList);
+        
+        if (!fourChowsYaku.equals(ChmYaku.FLOWER)) {
+            yakuList.add(fourChowsYaku);
+            return yakuList;
+        }
+        
+        for (final MenTsu excludeShunTsu : fourShunTsuList) {
+            final List<MenTsu> threeShunTsuList = deepCopyList(fourShunTsuList);
+            threeShunTsuList.remove(excludeShunTsu);
+            final ChmYaku threeChowsYaku = ChmYakuCheckUtil.getThreeChowsYaku(threeShunTsuList);
+            
+            if (!threeChowsYaku.equals(ChmYaku.FLOWER)) {
+                yakuList.add(threeChowsYaku);
+                
+                for (final MenTsu shuntsu : threeShunTsuList) {
+                    final ChmYaku twoChowsYaku = ChmYakuCheckUtil.getTwoChowsYaku(shuntsu, excludeShunTsu);
+                    
+                    if (!twoChowsYaku.equals(ChmYaku.FLOWER)) {
+                        yakuList.add(twoChowsYaku);
+                        break;
+                    }
+                }
+                return yakuList;
+            }
+        }
+        final List<ChmYaku> twoChowsYakuList = getTwoChowsYakuList(fourShunTsuList);
+        yakuList.addAll(twoChowsYakuList);
+        return yakuList;
+    }
+    
+    /**
+     * 面子役を取得
+     * 
+     * @param hand 手牌。
+     * @param completePai 和了牌。
+     * @return 面子役リスト。
+     */
+    private static List<ChmYaku> getMenTsuYaku(final Hand hand, final CompleteJanPai completePai) {
+        List<ChmYaku> preYakuList = new ArrayList<ChmYaku>();
+        int prePoint = 0;
+        
+        for (final CompletePattern pattern : getCompletePatternList(hand, completePai)) {
+            final List<ChmYaku> newYakuList = new ArrayList<ChmYaku>();
+            
+            switch (pattern.getShunTsuCount()) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                final List<MenTsu> threeShunTsuList = pattern.getShunTsuList();
+                final List<ChmYaku> threeShunTsuYakuList = getThreeShunTsuYakuList(threeShunTsuList);
+                newYakuList.addAll(threeShunTsuYakuList);
+                break;
+            case 4:
+                final List<MenTsu> fourShunTsuList = pattern.getShunTsuList();
+                final List<ChmYaku> fourShunTsuYakuList = getFourShunTsuYakuList(fourShunTsuList);
+                newYakuList.addAll(fourShunTsuYakuList);
+                
+                if (ChmYakuCheckUtil.isAllChows(pattern)) {
+                    newYakuList.add(ChmYaku.ALL_CHOWS);
+                }
+                break;
+            default:
+                break;
+            }
+            int newPoint = 0;
+            
+            for (final ChmYaku yaku : newYakuList) {
+                newPoint += yaku.getPoint();
+            }
+            
+            if (newPoint > prePoint) {
+                preYakuList = newYakuList;
+                prePoint = newPoint;
+            }
+        }
+        return preYakuList;
+    }
+    
+    /**
+     * 3順子の役リストを取得
+     * 
+     * @param threeShunTsuList 順子リスト。
+     * @return 3順子の役リスト。
+     */
+    private static List<ChmYaku> getThreeShunTsuYakuList(final List<MenTsu> threeShunTsuList) {
+        if (threeShunTsuList.size() != 3) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + threeShunTsuList.size());
+        }
+        final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
+        final ChmYaku threeChowsYaku = ChmYakuCheckUtil.getThreeChowsYaku(threeShunTsuList);
+        
+        if (!threeChowsYaku.equals(ChmYaku.FLOWER)) {
+            yakuList.add(threeChowsYaku);
+            return yakuList;
+        }
+        final List<ChmYaku> twoChowsYakuList = getTwoChowsYakuList(threeShunTsuList);
+        yakuList.addAll(twoChowsYakuList);
+        return yakuList;
+    }
+    
+    /**
+     * 2順子役リストを取得
+     * 
+     * @param shuntsuList 順子リスト。
+     * @return 2順子役リスト。
+     */
+    private static List<ChmYaku> getTwoChowsYakuList(final List<MenTsu> shuntsuList) {
+        return new ArrayList<ChmYaku>();
     }
     
     /**
@@ -770,18 +764,16 @@ public final class ChmHandCheckUtil {
     }
     
     /**
-     * 門前清か
+     * 除外役を削除
      * 
-     * @param yakuList 役リスト。
-     * @return 判定結果。
+     * @param source 削除元の役リスト。
      */
-    private static boolean isConcealedHand(final List<ChmYaku> yakuList) {
+    private static void removeExcludeYaku(final List<ChmYaku> source) {
+        final List<ChmYaku> yakuList = new ArrayList<ChmYaku>(source);
+        
         for (final ChmYaku yaku : yakuList) {
-            if (yaku.isMenZenOnly()) {
-                return false;
-            }
+            source.removeAll(yaku.getExcludeChmYaku());
         }
-        return true;
     }
     
     /**

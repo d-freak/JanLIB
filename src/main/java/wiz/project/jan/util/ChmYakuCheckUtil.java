@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import wiz.project.jan.ChmYaku;
+import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.CompletePattern;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
@@ -635,6 +637,86 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 和了牌の役を取得
+     * 
+     * @param completePai 和了牌。
+     * @return 和了牌の役リスト。
+     */
+    public static List<ChmYaku> getCompleteJanPaiYaku(final CompleteJanPai completePai) {
+        final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
+        
+        if (completePai.isLast()) {
+            yakuList.add(ChmYaku.LAST_TILE);
+        }
+        
+        switch (completePai.getType()) {
+        case RON_MENZEN:
+            yakuList.add(ChmYaku.CONCEALED_HAND);
+            break;
+        case RON_MENZEN_HO_TEI:
+            yakuList.add(ChmYaku.LAST_TILE_CLAIM);
+            yakuList.add(ChmYaku.CONCEALED_HAND);
+            break;
+        case RON_NOT_MENZEN_HO_TEI:
+            yakuList.add(ChmYaku.LAST_TILE_CLAIM);
+            break;
+        case TSUMO_MENZEN:
+            yakuList.add(ChmYaku.FULLY_CONCEALED);
+            break;
+        case TSUMO_NOT_MENZEN:
+            yakuList.add(ChmYaku.SELF_DRAWN);
+            break;
+        case TSUMO_MENZEN_HAI_TEI:
+            yakuList.add(ChmYaku.LAST_TILE_DRAW);
+            yakuList.add(ChmYaku.FULLY_CONCEALED);
+            break;
+        case TSUMO_NOT_MENZEN_HAI_TEI:
+            yakuList.add(ChmYaku.LAST_TILE_DRAW);
+            break;
+        case TSUMO_MENZEN_RIN_SYAN:
+            yakuList.add(ChmYaku.OUT_WITH_REPLACEMENT_TILE);
+            yakuList.add(ChmYaku.FULLY_CONCEALED);
+            break;
+        case TSUMO_NOT_MENZEN_RIN_SYAN:
+            yakuList.add(ChmYaku.OUT_WITH_REPLACEMENT_TILE);
+            break;
+        default:
+            break;
+        }
+        return yakuList;
+    }
+    
+    /**
+     * 4順子役を取得
+     * 
+     * @param fourShunTsuList 順子リスト。
+     * @return 4順子役。
+     */
+    public static ChmYaku getFourChowsYaku(final List<MenTsu> fourShunTsuList) {
+        if (fourShunTsuList.size() != 4) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + fourShunTsuList.size());
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
+     * 3順子役を取得
+     * 
+     * @param threeShunTsuList 順子リスト。
+     * @return 3順子役。
+     */
+    public static ChmYaku getThreeChowsYaku(final List<MenTsu> threeShunTsuList) {
+        if (threeShunTsuList.size() != 3) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + threeShunTsuList.size());
+        }
+        
+        if (ChmYakuCheckUtil.isKnittedStraight(threeShunTsuList)) {
+            return ChmYaku.KNITTED_STRAIGHT;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
      * 四帰一の該当数を取得
      * 
      * @param hand 手牌。
@@ -651,6 +733,17 @@ public final class ChmYakuCheckUtil {
             }
         }
         return count;
+    }
+    
+    /**
+     * 2順子役を取得
+     * 
+     * @param first 順子1。
+     * @param second 順子2。
+     * @return 2順子役。
+     */
+    public static ChmYaku getTwoChowsYaku(final MenTsu first, final MenTsu second) {
+        return ChmYaku.FLOWER;
     }
     
     
