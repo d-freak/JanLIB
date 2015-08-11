@@ -533,6 +533,9 @@ public enum ChmYaku {
             yakuList.add(FULL_FLUSH);
             yakuList.add(CONCEALED_HAND);
             break;
+        case MIDDLE_TILES:
+            yakuList.add(ALL_SIMPLES);
+            break;
         case GREATER_HONORS_AND_KNITTED_TILES:
             yakuList.add(CONCEALED_HAND);
             break;

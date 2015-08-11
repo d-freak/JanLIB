@@ -148,7 +148,8 @@ public final class ChmHandCheckUtil {
         else if (ChmYakuCheckUtil.isLowerFour(allPaiMap)) {
             yakuList.add(ChmYaku.LOWER_FOUR);
         }
-        else if (ChmYakuCheckUtil.isAllSimples(allPaiMap)) {
+        
+        if (ChmYakuCheckUtil.isAllSimples(allPaiMap)) {
             yakuList.add(ChmYaku.ALL_SIMPLES);
         }
         

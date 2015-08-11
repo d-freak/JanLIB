@@ -58,8 +58,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -86,8 +85,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -115,8 +113,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -144,8 +141,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -172,8 +168,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -201,8 +196,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -230,8 +224,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -257,8 +250,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -284,8 +276,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -311,8 +302,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -338,8 +328,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -367,8 +356,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -402,8 +390,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -433,8 +420,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -464,8 +450,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -492,8 +477,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -527,8 +511,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -562,8 +545,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -591,8 +573,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -620,8 +601,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -649,8 +629,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -678,8 +657,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -707,8 +685,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -736,8 +713,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -765,8 +741,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -794,8 +769,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -823,8 +797,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -858,8 +831,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -885,8 +857,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -916,8 +887,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -945,8 +915,35 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(七対、大于五、断幺)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsUpperFourAndAllSimples() {
+        // あがり役：七対、大于五、断幺
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.UPPER_FOUR, ChmYaku.ALL_SIMPLES);
+        // 手牌：[6m] [6m] [7m] [7m] [8m] [8m] [6p] [6p] [6s] [6s] [7s] [7s] [8s]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_6, 2);}
+            {put(JanPai.MAN_7, 2);}
+            {put(JanPai.MAN_8, 2);}
+            {put(JanPai.PIN_6, 2);}
+            {put(JanPai.SOU_6, 2);}
+            {put(JanPai.SOU_7, 2);}
+            {put(JanPai.SOU_8, 1);}
+        });
+        // あがり：[8s]面前ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_8, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
@@ -974,8 +971,7 @@ public final class ChmYakuCheckUtilTest {
         final Wind playerWind = Wind.TON;
         // 場風：東
         final Wind fieldWind = Wind.TON;
-        List<ChmYaku> resultList = new ArrayList<ChmYaku>();
-        resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
     
