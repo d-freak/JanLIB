@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 面子 (不変オブジェクト)
  */
-public final class MenTsu {
+public final class MenTsu implements Comparable<MenTsu> {
     
     /**
      * コンストラクタ
@@ -57,6 +57,27 @@ public final class MenTsu {
     }
     
     
+    
+    /**
+     * 面子を比較
+     * 
+     * @param mentsu 比較対象。
+     * @return 比較結果。
+     */
+    public int compareTo(MenTsu mentsu) {
+        final JanPai comparePai = mentsu.getSource().get(0);
+        final JanPai pai = getSource().get(0);
+        
+        if (pai.compareTo(comparePai) < 0) {
+            return -1;
+        }
+        else if (pai.compareTo(comparePai) > 0) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
     
     /**
      * 等価なオブジェクトか
@@ -152,6 +173,24 @@ public final class MenTsu {
      */
     public boolean hasJanPai(final JanPai target) {
         return _sourceList.contains(target);
+    }
+    
+    /**
+     * 指定面子の一色XX高面子か
+     * 
+     * @param mentsu 指定面子。
+     * @param shiftCount ずれ幅。
+     * @return 判定結果。
+     */
+    public boolean isPureShifted(final MenTsu mentsu, final int shiftCount) {
+        JanPai shiftedPai = mentsu.getSource().get(0);
+        
+        for (int i = 0; i < shiftCount; i++) {
+        	shiftedPai = shiftedPai.getNext();
+        }
+        final JanPai pai = getSource().get(0);
+        
+        return pai.equals(shiftedPai);
     }
     
     /**

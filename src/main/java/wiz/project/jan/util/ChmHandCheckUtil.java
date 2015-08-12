@@ -8,6 +8,7 @@
 package wiz.project.jan.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -271,6 +272,7 @@ public final class ChmHandCheckUtil {
             
             if (pattern.isEmpty()) {
                 // 裸単騎状態で和了
+                Collections.sort(mentsuList);
                 resultList.add(new CompletePattern(entry.getKey(), mentsuList));
                 continue;
             }
@@ -282,6 +284,7 @@ public final class ChmHandCheckUtil {
             mentsuList1.addAll(HandCreateUtil.getShunTsuList(copy1));
             mentsuList1.addAll(HandCreateUtil.getKouTsuList(copy1));
             if (copy1.isEmpty()) {
+                Collections.sort(mentsuList1);
                 resultList.add(new CompletePattern(entry.getKey(), mentsuList1));
                 continue;
             }
@@ -293,6 +296,7 @@ public final class ChmHandCheckUtil {
             mentsuList2.addAll(HandCreateUtil.getKouTsuList(copy2));
             mentsuList2.addAll(HandCreateUtil.getShunTsuList(copy2));
             if (copy1.isEmpty()) {
+                Collections.sort(mentsuList2);
                 resultList.add(new CompletePattern(entry.getKey(), mentsuList2));
                 continue;
             }
@@ -313,12 +317,14 @@ public final class ChmHandCheckUtil {
             
             mentsuList3.addAll(HandCreateUtil.getShunTsuList(copy3));
             if (copy3.isEmpty()) {
+                Collections.sort(mentsuList3);
                 resultList.add(new CompletePattern(entry.getKey(), mentsuList3));
                 continue;
             }
             
             mentsuList.addAll(HandCreateUtil.getKouTsuList(pattern));
             if (pattern.isEmpty()) {
+                Collections.sort(mentsuList);
                 resultList.add(new CompletePattern(entry.getKey(), mentsuList));
                 continue;
             }

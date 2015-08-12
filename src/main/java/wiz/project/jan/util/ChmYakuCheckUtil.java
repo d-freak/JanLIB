@@ -290,6 +290,23 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 一色四歩高か
+     * 
+     * @param fourShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isFourShiftedChows(final List<MenTsu> fourShunTsuList) {
+        final List<Integer> shiftCountList = Arrays.asList(1, 2);
+        
+        for (final int shiftCount : shiftCountList) {
+            if (isPureShiftedShunTsuList(fourShunTsuList, shiftCount)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 清一色か
      * 
      * @param hand 手牌。
@@ -481,6 +498,23 @@ public final class ChmYakuCheckUtil {
                 continue;
             }
             return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 一色三歩高か
+     * 
+     * @param threeShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isPureShiftedChows(final List<MenTsu> threeShunTsuList) {
+        final List<Integer> shiftCountList = Arrays.asList(1, 2);
+        
+        for (final int shiftCount : shiftCountList) {
+            if (isPureShiftedShunTsuList(threeShunTsuList, shiftCount)) {
+                return true;
+            }
         }
         return false;
     }
@@ -696,6 +730,10 @@ public final class ChmYakuCheckUtil {
         if (fourShunTsuList.size() != 4) {
             throw new IllegalArgumentException("Invalid MenTsu size" + fourShunTsuList.size());
         }
+        
+        if (ChmYakuCheckUtil.isFourShiftedChows(fourShunTsuList)) {
+            return ChmYaku.FOUR_SHIFTED_CHOWS;
+        }
         return ChmYaku.FLOWER;
     }
     
@@ -708,6 +746,10 @@ public final class ChmYakuCheckUtil {
     public static ChmYaku getThreeChowsYaku(final List<MenTsu> threeShunTsuList) {
         if (threeShunTsuList.size() != 3) {
             throw new IllegalArgumentException("Invalid MenTsu size" + threeShunTsuList.size());
+        }
+        
+        if (ChmYakuCheckUtil.isPureShiftedChows(threeShunTsuList)) {
+            return ChmYaku.PURE_SHIFTED_CHOWS;
         }
         
         if (ChmYakuCheckUtil.isKnittedStraight(threeShunTsuList)) {
@@ -747,6 +789,25 @@ public final class ChmYakuCheckUtil {
     }
     
     
+    
+    /**
+     * 一色X歩高か
+     * 
+     * @param shuntsuList 順子リスト。
+     * @param shiftCount ずれ幅。
+     * @return 判定結果。
+     */
+    private static boolean isPureShiftedShunTsuList(final List<MenTsu> shuntsuList, final int shiftCount) {
+        for (int j = 0; j < shuntsuList.size() - 1; j++) {
+            final MenTsu first = shuntsuList.get(j);
+            final MenTsu second = shuntsuList.get(j + 1);
+            
+            if (!second.isPureShifted(first, shiftCount)) {
+                return false;
+            }
+        }
+        return true;
+    }
     
     /**
      * 指定牌が四帰一か
