@@ -7,6 +7,10 @@
 
 package wiz.project.jan;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 
 /**
@@ -58,6 +62,75 @@ public enum JanPai {
     CHUN;
     
     
+    
+    /**
+     * 他色の次の牌リストを取得
+     * 
+     * @return 他色の次の牌リスト。
+     */
+    public List<JanPai> getMixedNextJanPaiList() {
+        final List<JanPai> paiList = new ArrayList<JanPai>();
+        
+        switch (this) {
+        case MAN_1:
+            paiList.addAll(Arrays.asList(PIN_2, SOU_2));
+            break;
+        case MAN_2:
+            paiList.addAll(Arrays.asList(PIN_3, SOU_3));
+            break;
+        case MAN_3:
+            paiList.addAll(Arrays.asList(PIN_4, SOU_4));
+            break;
+        case MAN_4:
+            paiList.addAll(Arrays.asList(PIN_5, SOU_5));
+            break;
+        case MAN_5:
+            paiList.addAll(Arrays.asList(PIN_6, SOU_6));
+            break;
+        case MAN_6:
+            paiList.addAll(Arrays.asList(PIN_7, SOU_7));
+            break;
+        case PIN_1:
+            paiList.addAll(Arrays.asList(SOU_2, MAN_2));
+            break;
+        case PIN_2:
+            paiList.addAll(Arrays.asList(SOU_3, MAN_3));
+            break;
+        case PIN_3:
+            paiList.addAll(Arrays.asList(SOU_4, MAN_4));
+            break;
+        case PIN_4:
+            paiList.addAll(Arrays.asList(SOU_5, MAN_5));
+            break;
+        case PIN_5:
+            paiList.addAll(Arrays.asList(SOU_6, MAN_6));
+            break;
+        case PIN_6:
+            paiList.addAll(Arrays.asList(SOU_7, MAN_7));
+            break;
+        case SOU_1:
+            paiList.addAll(Arrays.asList(MAN_2, PIN_2));
+            break;
+        case SOU_2:
+            paiList.addAll(Arrays.asList(MAN_3, PIN_3));
+            break;
+        case SOU_3:
+            paiList.addAll(Arrays.asList(MAN_4, PIN_4));
+            break;
+        case SOU_4:
+            paiList.addAll(Arrays.asList(MAN_5, PIN_5));
+            break;
+        case SOU_5:
+            paiList.addAll(Arrays.asList(MAN_6, PIN_6));
+            break;
+        case SOU_6:
+            paiList.addAll(Arrays.asList(MAN_7, PIN_7));
+            break;
+        default:
+            break;
+        }
+        return paiList;
+    }
     
     /**
      * 次の牌を取得

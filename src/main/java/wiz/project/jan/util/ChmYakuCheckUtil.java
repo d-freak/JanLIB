@@ -296,12 +296,42 @@ public final class ChmYakuCheckUtil {
      * @return 判定結果。
      */
     public static boolean isFourShiftedChows(final List<MenTsu> fourShunTsuList) {
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : fourShunTsuList) {
+            topJanPaiList.add(shuntsu.getTopJanPai());
+        }
         final List<Integer> shiftCountList = Arrays.asList(1, 2);
         
         for (final int shiftCount : shiftCountList) {
-            if (isPureShiftedShunTsuList(fourShunTsuList, shiftCount)) {
-                return true;
+            JanPai first = topJanPaiList.get(0);
+            
+            for (int Count = 0; Count < shiftCount; Count++) {
+                first = first.getNext();
             }
+            
+            if (!topJanPaiList.contains(first)) {
+                continue;
+            }
+            JanPai second = first;
+            
+            for (int Count = 0; Count < shiftCount; Count++) {
+                second = second.getNext();
+            }
+            
+            if (first.getType() != second.getType() || !topJanPaiList.contains(second)) {
+                continue;
+            }
+            JanPai third = second;
+            
+            for (int Count = 0; Count < shiftCount; Count++) {
+            	third = third.getNext();
+            }
+            
+            if (second.getType() != third.getType() || !topJanPaiList.contains(third)) {
+                continue;
+            }
+            return true;
         }
         return false;
     }
@@ -447,6 +477,42 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 三色三歩高か
+     * 
+     * @param threeShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isMixedShiftedChows(final List<MenTsu> threeShunTsuList) {
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : threeShunTsuList) {
+            topJanPaiList.add(shuntsu.getTopJanPai());
+        }
+        
+        for (final JanPai entryPai : topJanPaiList) {
+            for (final JanPai first : entryPai.getMixedNextJanPaiList()) {
+                if (topJanPaiList.contains(first)) {
+                    for (final JanPai second : first.getMixedNextJanPaiList()) {
+                        if (topJanPaiList.contains(second)) {
+                            final List<JanPai> paiList = Arrays.asList(entryPai, first, second);
+                            final List<JanPaiType> typeList = new ArrayList<JanPaiType>(Arrays.asList(JanPaiType.MAN, JanPaiType.PIN, JanPaiType.SOU));
+                            
+                            for (final JanPai pai : paiList) {
+                                typeList.remove(pai.getType());
+                            }
+                            
+                            if (typeList.isEmpty()) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 缺一門か
      * 
      * @param hand 手牌。
@@ -509,12 +575,33 @@ public final class ChmYakuCheckUtil {
      * @return 判定結果。
      */
     public static boolean isPureShiftedChows(final List<MenTsu> threeShunTsuList) {
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : threeShunTsuList) {
+            topJanPaiList.add(shuntsu.getTopJanPai());
+        }
         final List<Integer> shiftCountList = Arrays.asList(1, 2);
         
         for (final int shiftCount : shiftCountList) {
-            if (isPureShiftedShunTsuList(threeShunTsuList, shiftCount)) {
-                return true;
+            JanPai first = topJanPaiList.get(0);
+            
+            for (int Count = 0; Count < shiftCount; Count++) {
+                first = first.getNext();
             }
+            
+            if (!topJanPaiList.contains(first)) {
+                continue;
+            }
+            JanPai second = first;
+            
+            for (int Count = 0; Count < shiftCount; Count++) {
+                second = second.getNext();
+            }
+            
+            if (!topJanPaiList.contains(second)) {
+                continue;
+            }
+            return true;
         }
         return false;
     }
@@ -755,6 +842,10 @@ public final class ChmYakuCheckUtil {
         if (ChmYakuCheckUtil.isKnittedStraight(threeShunTsuList)) {
             return ChmYaku.KNITTED_STRAIGHT;
         }
+        
+        if (ChmYakuCheckUtil.isMixedShiftedChows(threeShunTsuList)) {
+            return ChmYaku.MIXED_SHIFTED_CHOWS;
+        }
         return ChmYaku.FLOWER;
     }
     
@@ -789,25 +880,6 @@ public final class ChmYakuCheckUtil {
     }
     
     
-    
-    /**
-     * 一色X歩高か
-     * 
-     * @param shuntsuList 順子リスト。
-     * @param shiftCount ずれ幅。
-     * @return 判定結果。
-     */
-    private static boolean isPureShiftedShunTsuList(final List<MenTsu> shuntsuList, final int shiftCount) {
-        for (int j = 0; j < shuntsuList.size() - 1; j++) {
-            final MenTsu first = shuntsuList.get(j);
-            final MenTsu second = shuntsuList.get(j + 1);
-            
-            if (!second.isPureShifted(first, shiftCount)) {
-                return false;
-            }
-        }
-        return true;
-    }
     
     /**
      * 指定牌が四帰一か

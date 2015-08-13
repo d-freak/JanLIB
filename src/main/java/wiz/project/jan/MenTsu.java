@@ -156,6 +156,15 @@ public final class MenTsu implements Comparable<MenTsu> {
     }
     
     /**
+     * 先頭の牌を取得
+     * 
+     * @return 先頭の牌。
+     */
+    public JanPai getTopJanPai() {
+        return getSource().get(0);
+    }
+    
+    /**
      * ハッシュコードを取得
      * 
      * @return ハッシュコード。
@@ -173,24 +182,6 @@ public final class MenTsu implements Comparable<MenTsu> {
      */
     public boolean hasJanPai(final JanPai target) {
         return _sourceList.contains(target);
-    }
-    
-    /**
-     * 指定面子の一色XX高面子か
-     * 
-     * @param mentsu 指定面子。
-     * @param shiftCount ずれ幅。
-     * @return 判定結果。
-     */
-    public boolean isPureShifted(final MenTsu mentsu, final int shiftCount) {
-        JanPai shiftedPai = mentsu.getSource().get(0);
-        
-        for (int i = 0; i < shiftCount; i++) {
-        	shiftedPai = shiftedPai.getNext();
-        }
-        final JanPai pai = getSource().get(0);
-        
-        return pai.equals(shiftedPai);
     }
     
     /**

@@ -691,6 +691,37 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(三色三歩高、平和)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsMixedShiftedChows() {
+        // あがり役：三色三歩高
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.MIXED_SHIFTED_CHOWS);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_2, JanPai.MAN_3, JanPai.MAN_4), MenTsuType.CHI));
+        // 手牌： [6m] [7m] [8m] [2s] [3s] [3p] [4p] [5p] [東] [東]  [2m][3m][4m]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_6, 1);}
+            {put(JanPai.MAN_7, 1);}
+            {put(JanPai.MAN_8, 1);}
+            {put(JanPai.SOU_2, 1);}
+            {put(JanPai.SOU_3, 1);}
+            {put(JanPai.PIN_3, 1);}
+            {put(JanPai.PIN_4, 1);}
+            {put(JanPai.PIN_5, 1);}
+            {put(JanPai.TON, 2);}}, mentsuList);
+        // あがり：[1s]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_1, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(七対、缺一門)
      */
     @SuppressWarnings("serial")
@@ -784,7 +815,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.PURE_SHIFTED_CHOWS, ChmYaku.ALL_CHOWS);
         final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
         mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_2, JanPai.MAN_3, JanPai.MAN_4), MenTsuType.CHI));
-        // 手牌： [2m] [3m] [3m] [4m] [5m] [5p] [6p [7p] [7s] [7s]  [2m][3m][4m]
+        // 手牌： [2m] [3m] [3m] [4m] [5m] [5p] [6p] [7p] [7s] [7s]  [2m][3m][4m]
         final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
             {put(JanPai.MAN_2, 1);}
             {put(JanPai.MAN_3, 2);}

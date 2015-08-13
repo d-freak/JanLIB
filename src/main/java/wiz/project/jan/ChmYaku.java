@@ -488,6 +488,7 @@ public enum ChmYaku {
                               ChmYaku.FULLY_CONCEALED,
                               ChmYaku.LAST_TILE,
                               ChmYaku.HALF_FLUSH,
+                              ChmYaku.MIXED_SHIFTED_CHOWS,
                               ChmYaku.ALL_TYPES,
                               ChmYaku.TWO_DRAGON_PUNGS,
                               ChmYaku.REVERSIBLE_TILES,
