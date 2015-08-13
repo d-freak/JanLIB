@@ -15,12 +15,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import wiz.project.jan.Chinryu;
 import wiz.project.jan.ChmYaku;
 import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.CompletePattern;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.JanPaiType;
+import wiz.project.jan.Karyu;
 import wiz.project.jan.Kumiairyu;
 import wiz.project.jan.MenTsu;
 import wiz.project.jan.Wind;
@@ -319,7 +321,7 @@ public final class ChmYakuCheckUtil {
                 second = second.getNext();
             }
             
-            if (first.getType() != second.getType() || !topJanPaiList.contains(second)) {
+            if (second.getType() != first.getType() || !topJanPaiList.contains(second)) {
                 continue;
             }
             JanPai third = second;
@@ -328,7 +330,7 @@ public final class ChmYakuCheckUtil {
             	third = third.getNext();
             }
             
-            if (second.getType() != third.getType() || !topJanPaiList.contains(third)) {
+            if (third.getType() != second.getType() || !topJanPaiList.contains(third)) {
                 continue;
             }
             return true;
@@ -513,6 +515,27 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 花龍か
+     * 
+     * @param threeShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isMixedStraight(final List<MenTsu> threeShunTsuList) {
+        final List<JanPai> paiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : threeShunTsuList) {
+            paiList.addAll(shuntsu.getSource());
+        }
+        
+        for (final Karyu karyu: Karyu.values()) {
+            if (paiList.containsAll(karyu.getPaiList())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 缺一門か
      * 
      * @param hand 手牌。
@@ -598,10 +621,31 @@ public final class ChmYakuCheckUtil {
                 second = second.getNext();
             }
             
-            if (!topJanPaiList.contains(second)) {
+            if (second.getType() != first.getType() || !topJanPaiList.contains(second)) {
                 continue;
             }
             return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 清龍か
+     * 
+     * @param threeShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isPureStraight(final List<MenTsu> threeShunTsuList) {
+        final List<JanPai> paiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : threeShunTsuList) {
+            paiList.addAll(shuntsu.getSource());
+        }
+        
+        for (final Chinryu chinryu: Chinryu.values()) {
+            if (paiList.containsAll(chinryu.getPaiList())) {
+                return true;
+            }
         }
         return false;
     }
@@ -835,12 +879,20 @@ public final class ChmYakuCheckUtil {
             throw new IllegalArgumentException("Invalid MenTsu size" + threeShunTsuList.size());
         }
         
+        if (ChmYakuCheckUtil.isPureStraight(threeShunTsuList)) {
+            return ChmYaku.PURE_STRAIGHT;
+        }
+        
         if (ChmYakuCheckUtil.isPureShiftedChows(threeShunTsuList)) {
             return ChmYaku.PURE_SHIFTED_CHOWS;
         }
         
         if (ChmYakuCheckUtil.isKnittedStraight(threeShunTsuList)) {
             return ChmYaku.KNITTED_STRAIGHT;
+        }
+        
+        if (ChmYakuCheckUtil.isMixedStraight(threeShunTsuList)) {
+            return ChmYaku.MIXED_STRAIGHT;
         }
         
         if (ChmYakuCheckUtil.isMixedShiftedChows(threeShunTsuList)) {
