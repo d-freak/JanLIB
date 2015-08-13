@@ -536,6 +536,59 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 三色三同順か
+     * 
+     * @param threeShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isMixedTripleChow(final List<MenTsu> threeShunTsuList) {
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : threeShunTsuList) {
+            topJanPaiList.add(shuntsu.getTopJanPai());
+        }
+        
+        for (final JanPai entryPai : topJanPaiList) {
+            for (final JanPai first : entryPai.getMixedJanPaiList()) {
+                if (topJanPaiList.contains(first)) {
+                    for (final JanPai second : first.getMixedJanPaiList()) {
+                        if (topJanPaiList.contains(second)) {
+                            final List<JanPai> paiList = Arrays.asList(entryPai, first, second);
+                            final List<JanPaiType> typeList = new ArrayList<JanPaiType>(Arrays.asList(JanPaiType.MAN, JanPaiType.PIN, JanPaiType.SOU));
+                            
+                            for (final JanPai pai : paiList) {
+                                typeList.remove(pai.getType());
+                            }
+                            
+                            if (typeList.isEmpty()) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * 無字か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isNoHonors(final Map<JanPai, Integer> hand) {
+        final ArrayList<JanPai> paiList = new ArrayList<JanPai>(hand.keySet());
+        
+        for (final JanPai pai : paiList) {
+            if (pai.isJi()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
      * 缺一門か
      * 
      * @param hand 手牌。
@@ -646,6 +699,44 @@ public final class ChmYakuCheckUtil {
             if (paiList.containsAll(chinryu.getPaiList())) {
                 return true;
             }
+        }
+        return false;
+    }
+    
+    /**
+     * 一色三同順か
+     * 
+     * @param threeShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isPureTripleChow(final List<MenTsu> threeShunTsuList) {
+        final HashSet<JanPai> topJanPaiSet = new HashSet<JanPai>();
+        
+        for (final MenTsu shuntsu : threeShunTsuList) {
+            topJanPaiSet.add(shuntsu.getTopJanPai());
+        }
+        
+        if (topJanPaiSet.size() == 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 一色四同順か
+     * 
+     * @param fourShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isQuadrupleChow(final List<MenTsu> fourShunTsuList) {
+        final HashSet<JanPai> topJanPaiSet = new HashSet<JanPai>();
+        
+        for (final MenTsu shuntsu : fourShunTsuList) {
+            topJanPaiSet.add(shuntsu.getTopJanPai());
+        }
+        
+        if (topJanPaiSet.size() == 1) {
+            return true;
         }
         return false;
     }
@@ -862,6 +953,10 @@ public final class ChmYakuCheckUtil {
             throw new IllegalArgumentException("Invalid MenTsu size" + fourShunTsuList.size());
         }
         
+        if (ChmYakuCheckUtil.isQuadrupleChow(fourShunTsuList)) {
+            return ChmYaku.QUADRUPLE_CHOW;
+        }
+        
         if (ChmYakuCheckUtil.isFourShiftedChows(fourShunTsuList)) {
             return ChmYaku.FOUR_SHIFTED_CHOWS;
         }
@@ -879,6 +974,10 @@ public final class ChmYakuCheckUtil {
             throw new IllegalArgumentException("Invalid MenTsu size" + threeShunTsuList.size());
         }
         
+        if (ChmYakuCheckUtil.isPureTripleChow(threeShunTsuList)) {
+            return ChmYaku.PURE_TRIPLE_CHOW;
+        }
+        
         if (ChmYakuCheckUtil.isPureStraight(threeShunTsuList)) {
             return ChmYaku.PURE_STRAIGHT;
         }
@@ -893,6 +992,10 @@ public final class ChmYakuCheckUtil {
         
         if (ChmYakuCheckUtil.isMixedStraight(threeShunTsuList)) {
             return ChmYaku.MIXED_STRAIGHT;
+        }
+        
+        if (ChmYakuCheckUtil.isMixedTripleChow(threeShunTsuList)) {
+            return ChmYaku.MIXED_TRIPLE_CHOW;
         }
         
         if (ChmYakuCheckUtil.isMixedShiftedChows(threeShunTsuList)) {

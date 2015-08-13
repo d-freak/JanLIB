@@ -477,6 +477,7 @@ public enum ChmYaku {
      */
     public static List<ChmYaku> getReleased() {
         return Arrays.asList (ChmYaku.ONE_VOIDED_SUIT,
+                              ChmYaku.NO_HONORS,
                               ChmYaku.SELF_DRAWN,
                               ChmYaku.DRAGON_PUNG,
                               ChmYaku.PREVALENT_WIND,
@@ -493,6 +494,7 @@ public enum ChmYaku {
                               ChmYaku.TWO_DRAGON_PUNGS,
                               ChmYaku.MIXED_STRAIGHT,
                               ChmYaku.REVERSIBLE_TILES,
+                              ChmYaku.MIXED_TRIPLE_CHOW,
                               ChmYaku.LAST_TILE_DRAW,
                               ChmYaku.LAST_TILE_CLAIM,
                               ChmYaku.OUT_WITH_REPLACEMENT_TILE,
@@ -506,11 +508,13 @@ public enum ChmYaku {
                               ChmYaku.SEVEN_PAIRS,
                               ChmYaku.GREATER_HONORS_AND_KNITTED_TILES,
                               ChmYaku.FULL_FLUSH,
+                              ChmYaku.PURE_TRIPLE_CHOW,
                               ChmYaku.UPPER_TILES,
                               ChmYaku.MIDDLE_TILES,
                               ChmYaku.LOWER_TILES,
                               ChmYaku.FOUR_SHIFTED_CHOWS,
                               ChmYaku.ALL_TERMINALS_AND_HONORS,
+                              ChmYaku.QUADRUPLE_CHOW,
                               ChmYaku.ALL_TERMINALS,
                               ChmYaku.ALL_HONORS,
                               ChmYaku.BIG_FOUR_WINDS,
@@ -538,8 +542,26 @@ public enum ChmYaku {
             yakuList.add(FULL_FLUSH);
             yakuList.add(CONCEALED_HAND);
             break;
+        case ALL_TERMINALS:
+            yakuList.add(NO_HONORS);
+            break;
+        case QUADRUPLE_CHOW:
+            yakuList.add(TILE_HOG);
+            yakuList.add(TILE_HOG);
+            yakuList.add(TILE_HOG);
+            break;
+        case FULL_FLUSH:
+            yakuList.add(NO_HONORS);
+            break;
+        case UPPER_TILES:
+            yakuList.add(NO_HONORS);
+            break;
         case MIDDLE_TILES:
             yakuList.add(ALL_SIMPLES);
+            yakuList.add(NO_HONORS);
+            break;
+        case LOWER_TILES:
+            yakuList.add(NO_HONORS);
             break;
         case GREATER_HONORS_AND_KNITTED_TILES:
             yakuList.add(CONCEALED_HAND);
@@ -549,6 +571,18 @@ public enum ChmYaku {
             break;
         case LESSER_HONORS_AND_KNITTED_TILES:
             yakuList.add(CONCEALED_HAND);
+            break;
+        case UPPER_FOUR:
+            yakuList.add(NO_HONORS);
+            break;
+        case LOWER_FOUR:
+            yakuList.add(NO_HONORS);
+            break;
+        case ALL_SIMPLES:
+            yakuList.add(NO_HONORS);
+            break;
+        case ALL_CHOWS:
+            yakuList.add(NO_HONORS);
             break;
         default:
             break;

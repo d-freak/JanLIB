@@ -234,6 +234,10 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.ONE_VOIDED_SUIT);
         }
         
+        if (ChmYakuCheckUtil.isNoHonors(allPaiMap)) {
+            yakuList.add(ChmYaku.NO_HONORS);
+        }
+        
         for (int count = 0; count < ChmYakuCheckUtil.getTileHogCount(hand, allPaiMap); count++) {
             yakuList.add(ChmYaku.TILE_HOG);
         }
