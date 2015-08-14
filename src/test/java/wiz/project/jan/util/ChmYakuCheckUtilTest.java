@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import wiz.project.jan.ChmYaku;
 import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.CompleteType;
 import wiz.project.jan.Hand;
@@ -24,6 +23,7 @@ import wiz.project.jan.JanPai;
 import wiz.project.jan.MenTsu;
 import wiz.project.jan.MenTsuType;
 import wiz.project.jan.Wind;
+import wiz.project.jan.yaku.ChmYaku;
 
 
 

@@ -5,7 +5,7 @@
  *   Yuki Kawata
  */
 
-package wiz.project.jan;
+package wiz.project.jan.yaku;
 
 
 

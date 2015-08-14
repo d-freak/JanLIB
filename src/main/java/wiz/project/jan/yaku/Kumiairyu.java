@@ -5,12 +5,15 @@
  *   Masasutzu
  */
 
-package wiz.project.jan;
+package wiz.project.jan.yaku;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import wiz.project.jan.JanPai;
+import wiz.project.jan.MenTsu;
+import wiz.project.jan.MenTsuType;
 import wiz.project.jan.util.JanPaiUtil;
 
 

@@ -15,17 +15,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import wiz.project.jan.Chinryu;
-import wiz.project.jan.ChmYaku;
 import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.CompletePattern;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.JanPaiType;
-import wiz.project.jan.Karyu;
-import wiz.project.jan.Kumiairyu;
 import wiz.project.jan.MenTsu;
 import wiz.project.jan.Wind;
+import wiz.project.jan.yaku.Chinryu;
+import wiz.project.jan.yaku.ChmYaku;
+import wiz.project.jan.yaku.Karyu;
+import wiz.project.jan.yaku.Kumiairyu;
 
 
 

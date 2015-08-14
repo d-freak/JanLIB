@@ -10,6 +10,8 @@ package wiz.project.jan;
 import java.util.ArrayList;
 import java.util.List;
 
+import wiz.project.jan.yaku.ChmYaku;
+
 
 
 /**

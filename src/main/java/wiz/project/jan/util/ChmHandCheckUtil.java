@@ -14,16 +14,16 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import wiz.project.jan.ChmCompleteInfo;
-import wiz.project.jan.ChmYaku;
 import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.CompletePattern;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
-import wiz.project.jan.Kumiairyu;
-import wiz.project.jan.KumiairyuType;
 import wiz.project.jan.MenTsu;
 import wiz.project.jan.TenpaiPattern;
 import wiz.project.jan.Wind;
+import wiz.project.jan.yaku.ChmYaku;
+import wiz.project.jan.yaku.Kumiairyu;
+import wiz.project.jan.yaku.KumiairyuType;
 
 
 

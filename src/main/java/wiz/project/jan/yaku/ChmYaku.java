@@ -5,7 +5,7 @@
  *   Masasutzu
  */
 
-package wiz.project.jan;
+package wiz.project.jan.yaku;
 
 import java.util.ArrayList;
 import java.util.Arrays;
