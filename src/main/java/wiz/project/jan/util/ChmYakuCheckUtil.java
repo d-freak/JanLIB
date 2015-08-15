@@ -24,8 +24,10 @@ import wiz.project.jan.MenTsu;
 import wiz.project.jan.Wind;
 import wiz.project.jan.yaku.Chinryu;
 import wiz.project.jan.yaku.ChmYaku;
+import wiz.project.jan.yaku.IsshokuSouryukai;
 import wiz.project.jan.yaku.Karyu;
 import wiz.project.jan.yaku.Kumiairyu;
+import wiz.project.jan.yaku.SanshokuSouryukai;
 
 
 
@@ -536,6 +538,23 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 三色双龍会か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isThreeSuitedTerminalChows(final Map<JanPai, Integer> hand) {
+        for (final SanshokuSouryukai souryukai : SanshokuSouryukai.values()) {
+            final Map<JanPai, Integer> souryukaiMap = souryukai.getPaiMap();
+            
+            if (hand.equals(souryukaiMap)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 三色三同順か
      * 
      * @param threeShunTsuList 順子リスト。
@@ -697,6 +716,23 @@ public final class ChmYakuCheckUtil {
         
         for (final Chinryu chinryu: Chinryu.values()) {
             if (paiList.containsAll(chinryu.getPaiList())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * 一色双龍会か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isPureTerminalChows(final Map<JanPai, Integer> hand) {
+        for (final IsshokuSouryukai souryukai : IsshokuSouryukai.values()) {
+            final Map<JanPai, Integer> souryukaiMap = souryukai.getPaiMap();
+            
+            if (hand.equals(souryukaiMap)) {
                 return true;
             }
         }
@@ -959,6 +995,23 @@ public final class ChmYakuCheckUtil {
         
         if (ChmYakuCheckUtil.isFourShiftedChows(fourShunTsuList)) {
             return ChmYaku.FOUR_SHIFTED_CHOWS;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
+     * X色双龍会を取得
+     * 
+     * @param hand 手牌。
+     * @return X色双龍会。
+     */
+    public static ChmYaku getTerminalChows(final Map<JanPai, Integer> hand) {
+        if (isPureTerminalChows(hand)) {
+            return ChmYaku.PURE_TERMINAL_CHOWS;
+        }
+        
+        if (isThreeSuitedTerminalChows(hand)) {
+            return ChmYaku.THREE_SUITED_TERMINAL_CHOWS;
         }
         return ChmYaku.FLOWER;
     }

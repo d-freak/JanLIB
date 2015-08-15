@@ -117,6 +117,15 @@ public final class ChmHandCheckUtil {
             
             return new ChmCompleteInfo(yakuList, completePai.getType());
         }
+        final ChmYaku terminalChows = ChmYakuCheckUtil.getTerminalChows(allPaiMap);
+        
+        if (terminalChows != ChmYaku.FLOWER) {
+            yakuList.add(terminalChows);
+            yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
+            removeExcludeYaku(yakuList);
+            
+            return new ChmCompleteInfo(yakuList, completePai.getType());
+        }
         
         if (isCompleteNanatsui(allPaiMap) && hand.getFixedMenTsuCount() == 0) {
             if (ChmYakuCheckUtil.isSevenShiftedPairs(allPaiMap)) {
