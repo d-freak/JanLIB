@@ -10,6 +10,8 @@ package wiz.project.jan;
 import java.util.ArrayList;
 import java.util.List;
 
+import wiz.project.jan.util.JanPaiUtil;
+
 
 
 /**
@@ -182,6 +184,19 @@ public final class MenTsu implements Comparable<MenTsu> {
      */
     public boolean hasJanPai(final JanPai target) {
         return _sourceList.contains(target);
+    }
+    
+    /**
+     * 順子か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isShunTsu() {
+        final JanPai first = getTopJanPai();
+        final JanPai second = getSource().get(1);
+        final JanPai third = getSource().get(2);
+        
+        return JanPaiUtil.isShunTsu(first, second, third);
     }
     
     /**

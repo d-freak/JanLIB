@@ -476,7 +476,11 @@ public enum ChmYaku {
      * @return 実装済みの役。
      */
     public static List<ChmYaku> getReleased() {
-        return Arrays.asList (ChmYaku.ONE_VOIDED_SUIT,
+        return Arrays.asList (ChmYaku.PURE_DOUBLE_CHOW,
+                              ChmYaku.MIXED_DOUBLE_CHOW,
+                              ChmYaku.SHORT_STRAIGHT,
+                              ChmYaku.TWO_TERMINAL_CHOWS,
+                              ChmYaku.ONE_VOIDED_SUIT,
                               ChmYaku.NO_HONORS,
                               ChmYaku.SELF_DRAWN,
                               ChmYaku.DRAGON_PUNG,

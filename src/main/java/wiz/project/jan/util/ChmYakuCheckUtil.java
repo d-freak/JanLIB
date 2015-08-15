@@ -300,6 +300,9 @@ public final class ChmYakuCheckUtil {
      * @return 判定結果。
      */
     public static boolean isFourShiftedChows(final List<MenTsu> fourShunTsuList) {
+        if (!isShunTsuList(fourShunTsuList)) {
+            return false;
+        }
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : fourShunTsuList) {
@@ -481,12 +484,41 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 喜相逢か
+     * 
+     * @param twoShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isMixedDoubleChow(final List<MenTsu> twoShunTsuList) {
+        if (!isShunTsuList(twoShunTsuList)) {
+            return false;
+        }
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : twoShunTsuList) {
+            topJanPaiList.add(shuntsu.getTopJanPai());
+        }
+        
+        for (final JanPai entryPai : topJanPaiList) {
+            for (final JanPai first : entryPai.getMixedJanPaiList()) {
+                if (topJanPaiList.contains(first)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 三色三歩高か
      * 
      * @param threeShunTsuList 順子リスト。
      * @return 判定結果。
      */
     public static boolean isMixedShiftedChows(final List<MenTsu> threeShunTsuList) {
+        if (!isShunTsuList(threeShunTsuList)) {
+            return false;
+        }
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : threeShunTsuList) {
@@ -538,29 +570,15 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
-     * 三色双龍会か
-     * 
-     * @param hand 手牌。
-     * @return 判定結果。
-     */
-    public static boolean isThreeSuitedTerminalChows(final Map<JanPai, Integer> hand) {
-        for (final SanshokuSouryukai souryukai : SanshokuSouryukai.values()) {
-            final Map<JanPai, Integer> souryukaiMap = souryukai.getPaiMap();
-            
-            if (hand.equals(souryukaiMap)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    /**
      * 三色三同順か
      * 
      * @param threeShunTsuList 順子リスト。
      * @return 判定結果。
      */
     public static boolean isMixedTripleChow(final List<MenTsu> threeShunTsuList) {
+        if (!isShunTsuList(threeShunTsuList)) {
+            return false;
+        }
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : threeShunTsuList) {
@@ -664,12 +682,37 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 一般高か
+     * 
+     * @param twoShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isPureDoubleChow(final List<MenTsu> twoShunTsuList) {
+        if (!isShunTsuList(twoShunTsuList)) {
+            return false;
+        }
+        final HashSet<JanPai> topJanPaiSet = new HashSet<JanPai>();
+        
+        for (final MenTsu shuntsu : twoShunTsuList) {
+            topJanPaiSet.add(shuntsu.getTopJanPai());
+        }
+        
+        if (topJanPaiSet.size() == 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * 一色三歩高か
      * 
      * @param threeShunTsuList 順子リスト。
      * @return 判定結果。
      */
     public static boolean isPureShiftedChows(final List<MenTsu> threeShunTsuList) {
+        if (!isShunTsuList(threeShunTsuList)) {
+            return false;
+        }
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : threeShunTsuList) {
@@ -746,6 +789,9 @@ public final class ChmYakuCheckUtil {
      * @return 判定結果。
      */
     public static boolean isPureTripleChow(final List<MenTsu> threeShunTsuList) {
+        if (!isShunTsuList(threeShunTsuList)) {
+            return false;
+        }
         final HashSet<JanPai> topJanPaiSet = new HashSet<JanPai>();
         
         for (final MenTsu shuntsu : threeShunTsuList) {
@@ -765,6 +811,9 @@ public final class ChmYakuCheckUtil {
      * @return 判定結果。
      */
     public static boolean isQuadrupleChow(final List<MenTsu> fourShunTsuList) {
+        if (!isShunTsuList(fourShunTsuList)) {
+            return false;
+        }
         final HashSet<JanPai> topJanPaiSet = new HashSet<JanPai>();
         
         for (final MenTsu shuntsu : fourShunTsuList) {
@@ -861,6 +910,52 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 連六か
+     * 
+     * @param twoShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isShortStraight(final List<MenTsu> twoShunTsuList) {
+        if (!isShunTsuList(twoShunTsuList)) {
+            return false;
+        }
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : twoShunTsuList) {
+            topJanPaiList.add(shuntsu.getTopJanPai());
+        }
+        JanPai first = topJanPaiList.get(0);
+        final JanPaiType type = first.getType();
+        final int shiftCount = 3;
+        
+        for (int Count = 0; Count < shiftCount; Count++) {
+            first = first.getNext();
+        }
+        
+        if (first.getType() != type || !topJanPaiList.contains(first)) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * 三色双龍会か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isThreeSuitedTerminalChows(final Map<JanPai, Integer> hand) {
+        for (final SanshokuSouryukai souryukai : SanshokuSouryukai.values()) {
+            final Map<JanPai, Integer> souryukaiMap = souryukai.getPaiMap();
+            
+            if (hand.equals(souryukaiMap)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 双箭刻か
      * 
      * @param hand 手牌。
@@ -892,6 +987,35 @@ public final class ChmYakuCheckUtil {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * 老少副か
+     * 
+     * @param twoShunTsuList 順子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isTwoTerminalChows(final List<MenTsu> twoShunTsuList) {
+        if (!isShunTsuList(twoShunTsuList)) {
+            return false;
+        }
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu shuntsu : twoShunTsuList) {
+            topJanPaiList.add(shuntsu.getTopJanPai());
+        }
+        JanPai first = topJanPaiList.get(0);
+        final JanPaiType type = first.getType();
+        final int shiftCount = 6;
+        
+        for (int Count = 0; Count < shiftCount; Count++) {
+            first = first.getNext();
+        }
+        
+        if (first.getType() != type || !topJanPaiList.contains(first)) {
+            return false;
+        }
+        return true;
     }
     
     /**
@@ -1079,15 +1203,48 @@ public final class ChmYakuCheckUtil {
     /**
      * 2順子役を取得
      * 
-     * @param first 順子1。
-     * @param second 順子2。
+     * @param twoShunTsuList 順子リスト。
      * @return 2順子役。
      */
-    public static ChmYaku getTwoChowsYaku(final MenTsu first, final MenTsu second) {
+    public static ChmYaku getTwoChowsYaku(final List<MenTsu> twoShunTsuList) {
+        if (twoShunTsuList.size() != 2) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + twoShunTsuList.size());
+        }
+        
+        if (ChmYakuCheckUtil.isPureDoubleChow(twoShunTsuList)) {
+            return ChmYaku.PURE_DOUBLE_CHOW;
+        }
+        
+        if (ChmYakuCheckUtil.isMixedDoubleChow(twoShunTsuList)) {
+            return ChmYaku.MIXED_DOUBLE_CHOW;
+        }
+        
+        if (ChmYakuCheckUtil.isShortStraight(twoShunTsuList)) {
+            return ChmYaku.SHORT_STRAIGHT;
+        }
+        
+        if (ChmYakuCheckUtil.isTwoTerminalChows(twoShunTsuList)) {
+            return ChmYaku.TWO_TERMINAL_CHOWS;
+        }
         return ChmYaku.FLOWER;
     }
     
     
+    
+    /**
+     * 順子リストか
+     * 
+     * @param shuntsuList 順子リスト。
+     * @return 判定結果。
+     */
+    private static boolean isShunTsuList(final List<MenTsu> shuntsuList) {
+        for (final MenTsu shuntsu : shuntsuList) {
+            if (!shuntsu.isShunTsu()) {
+                return false;
+            }
+        }
+        return true;
+    }
     
     /**
      * 指定牌が四帰一か

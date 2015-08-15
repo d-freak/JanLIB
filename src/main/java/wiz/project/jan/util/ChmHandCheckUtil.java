@@ -8,6 +8,7 @@
 package wiz.project.jan.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -308,7 +309,7 @@ public final class ChmHandCheckUtil {
             // 刻子優先パターン
             mentsuList2.addAll(HandCreateUtil.getKouTsuList(copy2));
             mentsuList2.addAll(HandCreateUtil.getShunTsuList(copy2));
-            if (copy1.isEmpty()) {
+            if (copy2.isEmpty()) {
                 Collections.sort(mentsuList2);
                 resultList.add(new CompletePattern(entry.getKey(), mentsuList2));
                 continue;
@@ -585,7 +586,9 @@ public final class ChmHandCheckUtil {
                 yakuList.add(threeChowsYaku);
                 
                 for (final MenTsu shuntsu : threeShunTsuList) {
-                    final ChmYaku twoChowsYaku = ChmYakuCheckUtil.getTwoChowsYaku(shuntsu, excludeShunTsu);
+                    final List<MenTsu> shuntsuList = new ArrayList<MenTsu>(Arrays.asList(shuntsu, excludeShunTsu));
+                    Collections.sort(shuntsuList);
+                    final ChmYaku twoChowsYaku = ChmYakuCheckUtil.getTwoChowsYaku(shuntsuList);
                     
                     if (!twoChowsYaku.equals(ChmYaku.FLOWER)) {
                         yakuList.add(twoChowsYaku);
@@ -595,7 +598,7 @@ public final class ChmHandCheckUtil {
                 return yakuList;
             }
         }
-        final List<ChmYaku> twoChowsYakuList = getTwoChowsYakuList(fourShunTsuList);
+        final List<ChmYaku> twoChowsYakuList = getTwoShunTsuYakuList(fourShunTsuList);
         yakuList.addAll(twoChowsYakuList);
         return yakuList;
     }
@@ -620,6 +623,12 @@ public final class ChmHandCheckUtil {
             case 1:
                 break;
             case 2:
+                final List<MenTsu> twoShunTsuList = pattern.getShunTsuList();
+                final ChmYaku twoChowsYaku = ChmYakuCheckUtil.getTwoChowsYaku(twoShunTsuList);
+                
+                if (!twoChowsYaku.equals(ChmYaku.FLOWER)) {
+                    newYakuList.add(twoChowsYaku);
+                }
                 break;
             case 3:
                 final List<MenTsu> threeShunTsuList = pattern.getShunTsuList();
@@ -669,7 +678,7 @@ public final class ChmHandCheckUtil {
             yakuList.add(threeChowsYaku);
             return yakuList;
         }
-        final List<ChmYaku> twoChowsYakuList = getTwoChowsYakuList(threeShunTsuList);
+        final List<ChmYaku> twoChowsYakuList = getTwoShunTsuYakuList(threeShunTsuList);
         yakuList.addAll(twoChowsYakuList);
         return yakuList;
     }
@@ -680,8 +689,27 @@ public final class ChmHandCheckUtil {
      * @param shuntsuList 順子リスト。
      * @return 2順子役リスト。
      */
-    private static List<ChmYaku> getTwoChowsYakuList(final List<MenTsu> shuntsuList) {
-        return new ArrayList<ChmYaku>();
+    private static List<ChmYaku> getTwoShunTsuYakuList(final List<MenTsu> shuntsuList) {
+        final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
+        final List<MenTsu> excludedList = deepCopyList(shuntsuList);
+        
+        for (final MenTsu first : shuntsuList) {
+            excludedList.remove(first);
+            
+            for (final MenTsu second : excludedList) {
+                final List<MenTsu> twoShunTsuList = new ArrayList<MenTsu>(Arrays.asList(first, second));
+                final ChmYaku twoChowsYaku = ChmYakuCheckUtil.getTwoChowsYaku(twoShunTsuList);
+                
+                if (!twoChowsYaku.equals(ChmYaku.FLOWER)) {
+                    yakuList.add(twoChowsYaku);
+                    
+                    if (yakuList.size() == 3) {
+                        return yakuList;
+                    }
+                }
+            }
+        }
+        return yakuList;
     }
     
     /**
