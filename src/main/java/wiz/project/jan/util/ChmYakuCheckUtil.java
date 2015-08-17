@@ -54,6 +54,21 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 全帯五か
+     * 
+     * @param pattern 和了パターン。
+     * @return 判定結果。
+     */
+    public static boolean isAllFives(final CompletePattern pattern) {
+        for (final MenTsu mentsu : pattern.getMenTsuList()) {
+            if (!mentsu.hasFive()) {
+                return false;
+            }
+        }
+        return pattern.getHead().isFive();
+    }
+    
+    /**
      * 緑一色か
      * 
      * @param hand 手牌。
@@ -467,6 +482,26 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 全求人か
+     * 
+     * @param hand 手牌。
+     * @param completePai 和了牌。
+     * @return 判定結果。
+     */
+    public static boolean isMeldedHand(final Hand hand, final CompleteJanPai completePai) {
+        if (hand.getFixedMenTsuCount() != 4) {
+            return false;
+        }
+        
+        for (final MenTsu mentsu : hand.getFixedMenTsuList()) {
+            if (!mentsu.getMenTsuType().isCalled()) {
+                return false;
+            }
+        }
+        return completePai.getType().isRon();
+    }
+    
+    /**
      * 全中か
      * 
      * @param hand 手牌。
@@ -649,6 +684,21 @@ public final class ChmYakuCheckUtil {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * 全帯幺か
+     * 
+     * @param pattern 和了パターン。
+     * @return 判定結果。
+     */
+    public static boolean isOutsideHand(final CompletePattern pattern) {
+        for (final MenTsu mentsu : pattern.getMenTsuList()) {
+            if (!mentsu.hasYao()) {
+                return false;
+            }
+        }
+        return pattern.getHead().isYao();
     }
     
     /**

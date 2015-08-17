@@ -92,6 +92,10 @@ public final class ChmHandCheckUtil {
         
         List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
         
+        if (ChmYakuCheckUtil.isMeldedHand(hand, completePai)) {
+            yakuList.add(ChmYaku.MELDED_HAND);
+        }
+        
         if (isCompleteZenhukou(allPaiMap)) {
             if (ChmYakuCheckUtil.isGreaterHonorsAndKnittedTiles(allPaiMap)) {
                 yakuList.add(ChmYaku.GREATER_HONORS_AND_KNITTED_TILES);
@@ -619,6 +623,7 @@ public final class ChmHandCheckUtil {
             
             switch (pattern.getShunTsuCount()) {
             case 0:
+                newYakuList.add(ChmYaku.ALL_PUNGS);
                 break;
             case 1:
                 break;
@@ -644,6 +649,15 @@ public final class ChmHandCheckUtil {
             default:
                 break;
             }
+            
+            if (ChmYakuCheckUtil.isAllFives(pattern)) {
+                newYakuList.add(ChmYaku.ALL_FIVES);
+            }
+            else if (ChmYakuCheckUtil.isOutsideHand(pattern)) {
+                newYakuList.add(ChmYaku.OUTSIDE_HAND);
+            }
+            removeExcludeYaku(newYakuList);
+            
             int newPoint = 0;
             
             for (final ChmYaku yaku : newYakuList) {

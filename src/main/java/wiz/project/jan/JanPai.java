@@ -418,6 +418,22 @@ public enum JanPai {
     }
     
     /**
+     * 5か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isFive() {
+        switch (this) {
+        case MAN_5:
+        case PIN_5:
+        case SOU_5:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    /**
      * 字牌か
      * 
      * @return 判定結果。
@@ -554,7 +570,7 @@ public enum JanPai {
     }
     
     /**
-     * ヤオ九牌か
+     * 幺九牌か
      * 
      * @return 判定結果。
      */

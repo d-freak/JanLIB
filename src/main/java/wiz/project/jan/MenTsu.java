@@ -177,6 +177,20 @@ public final class MenTsu implements Comparable<MenTsu> {
     }
     
     /**
+     * 5を持っているか
+     * 
+     * @return 判定結果。
+     */
+    public boolean hasFive() {
+        for (final JanPai pai : getSource()) {
+            if (pai.isFive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 指定牌を持っているか
      * 
      * @param target 検索対象。
@@ -184,6 +198,20 @@ public final class MenTsu implements Comparable<MenTsu> {
      */
     public boolean hasJanPai(final JanPai target) {
         return _sourceList.contains(target);
+    }
+    
+    /**
+     * 幺九牌を持っているか
+     * 
+     * @return 判定結果。
+     */
+    public boolean hasYao() {
+        for (final JanPai pai : getSource()) {
+            if (pai.isYao()) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
