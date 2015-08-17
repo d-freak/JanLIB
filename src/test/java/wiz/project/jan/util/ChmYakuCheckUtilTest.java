@@ -955,6 +955,35 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(一般高、喜相逢)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsPureDoubleChowAndMixedDoubleChow() {
+        // あがり役：一般高、喜相逢
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.PURE_DOUBLE_CHOW, ChmYaku.MIXED_DOUBLE_CHOW);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_5, JanPai.MAN_6, JanPai.MAN_7), MenTsuType.CHI));
+        // 手牌：[5m] [6m] [7m] [1p] [1p] [1p] [5s] [6s] [發] [發]  [5m][6m][7m]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_5, 1);}
+            {put(JanPai.MAN_6, 1);}
+            {put(JanPai.MAN_7, 1);}
+            {put(JanPai.PIN_1, 3);}
+            {put(JanPai.SOU_5, 1);}
+            {put(JanPai.SOU_6, 1);}
+            {put(JanPai.HATU, 2);}}, mentsuList);
+        // あがり：[7s]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_7, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(一色三歩高、平和)
      */
     @SuppressWarnings("serial")

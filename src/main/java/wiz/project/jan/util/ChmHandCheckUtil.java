@@ -137,7 +137,7 @@ public final class ChmHandCheckUtil {
             }
         }
         else {
-            yakuList.addAll(getMenTsuYaku(hand, completePai));
+            yakuList.addAll(getMenTsuYakuList(hand, completePai));
         }
         
         if (ChmYakuCheckUtil.isAllGreen(allPaiMap)) {
@@ -598,19 +598,19 @@ public final class ChmHandCheckUtil {
                 return yakuList;
             }
         }
-        final List<ChmYaku> twoChowsYakuList = getTwoShunTsuYakuList(fourShunTsuList);
+        final List<ChmYaku> twoChowsYakuList = getTwoShunTsuYakuList(fourShunTsuList, 3);
         yakuList.addAll(twoChowsYakuList);
         return yakuList;
     }
     
     /**
-     * 面子役を取得
+     * 面子役リストを取得
      * 
      * @param hand 手牌。
      * @param completePai 和了牌。
      * @return 面子役リスト。
      */
-    private static List<ChmYaku> getMenTsuYaku(final Hand hand, final CompleteJanPai completePai) {
+    private static List<ChmYaku> getMenTsuYakuList(final Hand hand, final CompleteJanPai completePai) {
         List<ChmYaku> preYakuList = new ArrayList<ChmYaku>();
         int prePoint = 0;
         
@@ -624,11 +624,8 @@ public final class ChmHandCheckUtil {
                 break;
             case 2:
                 final List<MenTsu> twoShunTsuList = pattern.getShunTsuList();
-                final ChmYaku twoChowsYaku = ChmYakuCheckUtil.getTwoChowsYaku(twoShunTsuList);
-                
-                if (!twoChowsYaku.equals(ChmYaku.FLOWER)) {
-                    newYakuList.add(twoChowsYaku);
-                }
+                final List<ChmYaku> twoChowsYakuList = getTwoShunTsuYakuList(twoShunTsuList, 1);
+                newYakuList.addAll(twoChowsYakuList);
                 break;
             case 3:
                 final List<MenTsu> threeShunTsuList = pattern.getShunTsuList();
@@ -678,7 +675,7 @@ public final class ChmHandCheckUtil {
             yakuList.add(threeChowsYaku);
             return yakuList;
         }
-        final List<ChmYaku> twoChowsYakuList = getTwoShunTsuYakuList(threeShunTsuList);
+        final List<ChmYaku> twoChowsYakuList = getTwoShunTsuYakuList(threeShunTsuList, 2);
         yakuList.addAll(twoChowsYakuList);
         return yakuList;
     }
@@ -687,9 +684,10 @@ public final class ChmHandCheckUtil {
      * 2順子役リストを取得
      * 
      * @param shuntsuList 順子リスト。
+     * @param maxSize 2順子役リストの最大サイズ。
      * @return 2順子役リスト。
      */
-    private static List<ChmYaku> getTwoShunTsuYakuList(final List<MenTsu> shuntsuList) {
+    private static List<ChmYaku> getTwoShunTsuYakuList(final List<MenTsu> shuntsuList, final int maxSize) {
         final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
         final List<MenTsu> excludedList = deepCopyList(shuntsuList);
         
@@ -703,7 +701,7 @@ public final class ChmHandCheckUtil {
                 if (!twoChowsYaku.equals(ChmYaku.FLOWER)) {
                     yakuList.add(twoChowsYaku);
                     
-                    if (yakuList.size() == 3) {
+                    if (yakuList.size() == maxSize) {
                         return yakuList;
                     }
                 }
