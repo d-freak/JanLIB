@@ -46,7 +46,7 @@ public enum MenTsuType {
      * 
      * @return 判定結果。
      */
-    public boolean isKouTsu() {
+    public boolean isKohTsu() {
         return !isShunTsu();
     }
     

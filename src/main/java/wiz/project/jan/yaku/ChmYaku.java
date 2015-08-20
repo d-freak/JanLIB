@@ -480,6 +480,7 @@ public enum ChmYaku {
                               ChmYaku.MIXED_DOUBLE_CHOW,
                               ChmYaku.SHORT_STRAIGHT,
                               ChmYaku.TWO_TERMINAL_CHOWS,
+                              ChmYaku.MELDED_KONG,
                               ChmYaku.ONE_VOIDED_SUIT,
                               ChmYaku.NO_HONORS,
                               ChmYaku.SELF_DRAWN,
@@ -489,9 +490,12 @@ public enum ChmYaku {
                               ChmYaku.CONCEALED_HAND,
                               ChmYaku.ALL_CHOWS,
                               ChmYaku.TILE_HOG,
+                              ChmYaku.TWO_CONCEALED_PUNGS,
+                              ChmYaku.CONCEALED_KONG,
                               ChmYaku.ALL_SIMPLES,
                               ChmYaku.OUTSIDE_HAND,
                               ChmYaku.FULLY_CONCEALED,
+                              ChmYaku.TWO_MELDED_KONGS,
                               ChmYaku.LAST_TILE,
                               ChmYaku.ALL_PUNGS,
                               ChmYaku.HALF_FLUSH,
@@ -505,6 +509,7 @@ public enum ChmYaku {
                               ChmYaku.LAST_TILE_DRAW,
                               ChmYaku.LAST_TILE_CLAIM,
                               ChmYaku.OUT_WITH_REPLACEMENT_TILE,
+                              ChmYaku.TWO_CONCEALED_KONGS,
                               ChmYaku.LESSER_HONORS_AND_KNITTED_TILES,
                               ChmYaku.KNITTED_STRAIGHT,
                               ChmYaku.UPPER_FOUR,
@@ -514,6 +519,7 @@ public enum ChmYaku {
                               ChmYaku.THREE_SUITED_TERMINAL_CHOWS,
                               ChmYaku.PURE_SHIFTED_CHOWS,
                               ChmYaku.ALL_FIVES,
+                              ChmYaku.THREE_CONCEALED_PUNGS,
                               ChmYaku.SEVEN_PAIRS,
                               ChmYaku.GREATER_HONORS_AND_KNITTED_TILES,
                               ChmYaku.FULL_FLUSH,
@@ -522,14 +528,17 @@ public enum ChmYaku {
                               ChmYaku.MIDDLE_TILES,
                               ChmYaku.LOWER_TILES,
                               ChmYaku.FOUR_SHIFTED_CHOWS,
+                              ChmYaku.THREE_KONGS,
                               ChmYaku.ALL_TERMINALS_AND_HONORS,
                               ChmYaku.QUADRUPLE_CHOW,
                               ChmYaku.ALL_TERMINALS,
                               ChmYaku.ALL_HONORS,
+                              ChmYaku.FOUR_CONCEALED_PUNGS,
                               ChmYaku.PURE_TERMINAL_CHOWS,
                               ChmYaku.BIG_FOUR_WINDS,
                               ChmYaku.BIG_THREE_DRAGONS,
                               ChmYaku.ALL_GREEN,
+                              ChmYaku.FOUR_KONGS,
                               ChmYaku.SEVEN_SHIFTED_PAIRS,
                               ChmYaku.THIRTEEN_ORPHANS);
     }
@@ -552,8 +561,16 @@ public enum ChmYaku {
             yakuList.add(FULL_FLUSH);
             yakuList.add(CONCEALED_HAND);
             break;
+        case FOUR_KONGS:
+            yakuList.add(ALL_PUNGS);
+            yakuList.add(MELDED_HAND);
+            break;
         case BIG_FOUR_WINDS:
             yakuList.add(ALL_PUNGS);
+            break;
+        case FOUR_CONCEALED_PUNGS:
+            yakuList.add(ALL_PUNGS);
+            yakuList.add(CONCEALED_HAND);
             break;
         case ALL_HONORS:
             yakuList.add(ALL_PUNGS);
@@ -604,8 +621,15 @@ public enum ChmYaku {
         case LOWER_FOUR:
             yakuList.add(NO_HONORS);
             break;
+        case TWO_CONCEALED_KONGS:
+            yakuList.add(TWO_MELDED_KONGS);
+            yakuList.add(TWO_CONCEALED_PUNGS);
+            break;
         case ALL_SIMPLES:
             yakuList.add(NO_HONORS);
+            break;
+        case CONCEALED_KONG:
+            yakuList.add(MELDED_KONG);
             break;
         case ALL_CHOWS:
             yakuList.add(NO_HONORS);

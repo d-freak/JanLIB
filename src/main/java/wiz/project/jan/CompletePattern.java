@@ -157,7 +157,7 @@ public final class CompletePattern implements Serializable {
             final List<MenTsu> kohtsuList = new ArrayList<MenTsu>();
             
             for (final MenTsu mentsu: mentsuList) {
-                if (mentsu.getMenTsuType().isKouTsu()) {
+                if (mentsu.getMenTsuType().isKohTsu()) {
                     kohtsuList.add(mentsu);
                 }
             }

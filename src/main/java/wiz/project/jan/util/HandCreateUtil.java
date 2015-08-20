@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.MenTsu;
 import wiz.project.jan.MenTsuType;
@@ -36,7 +37,7 @@ public final class HandCreateUtil {
      * @param source 取得元。取得分の牌が削除される。
      * @return 字牌刻子リスト。
      */
-    public static List<MenTsu> getJiKouTsuList(final Map<JanPai, Integer> source) {
+    public static List<MenTsu> getJiKohTsuList(final Map<JanPai, Integer> source) {
         final List<MenTsu> resultList = new ArrayList<MenTsu>();
         for (final JanPai pai : JanPaiUtil.JI_LIST) {
             if (!source.containsKey(pai)) {
@@ -45,11 +46,11 @@ public final class HandCreateUtil {
             final int count = source.get(pai);
             if (count == 3) {
                 source.remove(pai);
-                final List<JanPai> kouTsu = new ArrayList<JanPai>();
+                final List<JanPai> kohTsu = new ArrayList<JanPai>();
                 for (int i = 0; i < 3; i++) {
-                    kouTsu.add(pai);
+                    kohTsu.add(pai);
                 }
-                resultList.add(new MenTsu(kouTsu));
+                resultList.add(new MenTsu(kohTsu));
             }
         }
         return resultList;
@@ -61,7 +62,7 @@ public final class HandCreateUtil {
      * @param source 取得元。取得分の牌が削除される。
      * @return 字牌四枚刻子リスト。
      */
-    public static List<MenTsu> getJiKouTsuExList(final Map<JanPai, Integer> source) {
+    public static List<MenTsu> getJiKohTsuExList(final Map<JanPai, Integer> source) {
         final List<MenTsu> resultList = new ArrayList<MenTsu>();
         for (final JanPai pai : JanPaiUtil.JI_LIST) {
             if (!source.containsKey(pai)) {
@@ -70,11 +71,11 @@ public final class HandCreateUtil {
             final int count = source.get(pai);
             if (count >= 4) {
                 source.remove(pai);
-                final List<JanPai> kouTsuEx = new ArrayList<JanPai>();
+                final List<JanPai> kohTsuEx = new ArrayList<JanPai>();
                 for (int i = 0; i < count; i++) {
-                    kouTsuEx.add(pai);
+                    kohTsuEx.add(pai);
                 }
-                resultList.add(new MenTsu(kouTsuEx));
+                resultList.add(new MenTsu(kohTsuEx));
             }
         }
         return resultList;
@@ -107,7 +108,7 @@ public final class HandCreateUtil {
      * @param source 取得元。取得分の牌が削除される。
      * @return 刻子リスト。
      */
-    public static List<MenTsu> getKouTsuList(final Map<JanPai, Integer> source) {
+    public static List<MenTsu> getKohTsuList(final Map<JanPai, Integer> source, final CompleteJanPai completePai) {
         final List<MenTsu> resultList = new ArrayList<MenTsu>();
         for (final JanPai pai : JanPai.values()) {
             if (!source.containsKey(pai)) {
@@ -116,11 +117,16 @@ public final class HandCreateUtil {
             final int count = source.get(pai);
             if (count == 3) {
                 source.remove(pai);
-                final List<JanPai> kouTsu = new ArrayList<JanPai>();
+                final List<JanPai> kohTsu = new ArrayList<JanPai>();
                 for (int i = 0; i < 3; i++) {
-                    kouTsu.add(pai);
+                    kohTsu.add(pai);
                 }
-                resultList.add(new MenTsu(kouTsu));
+                if (pai.equals(completePai.getJanPai()) && completePai.getType().isRon()) {
+                	resultList.add(new MenTsu(kohTsu, MenTsuType.PON));
+                }
+                else {
+                    resultList.add(new MenTsu(kohTsu, MenTsuType.STANDARD_KOU_TSU));
+                }
             }
         }
         return resultList;
@@ -132,7 +138,7 @@ public final class HandCreateUtil {
      * @param source 取得元。取得分の牌が削除される。
      * @return 四枚刻子リスト。
      */
-    public static List<MenTsu> getKouTsuExList(final Map<JanPai, Integer> source) {
+    public static List<MenTsu> getKohTsuExList(final Map<JanPai, Integer> source) {
         final List<MenTsu> resultList = new ArrayList<MenTsu>();
         for (final JanPai pai : JanPai.values()) {
             if (!source.containsKey(pai)) {
@@ -141,11 +147,11 @@ public final class HandCreateUtil {
             final int count = source.get(pai);
             if (count >= 4) {
                 source.remove(pai);
-                final List<JanPai> kouTsuEx = new ArrayList<JanPai>();
+                final List<JanPai> kohTsuEx = new ArrayList<JanPai>();
                 for (int i = 0; i < count; i++) {
-                    kouTsuEx.add(pai);
+                    kohTsuEx.add(pai);
                 }
-                resultList.add(new MenTsu(kouTsuEx));
+                resultList.add(new MenTsu(kohTsuEx));
             }
         }
         return resultList;

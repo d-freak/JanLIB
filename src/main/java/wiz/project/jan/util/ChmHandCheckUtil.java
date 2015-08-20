@@ -20,6 +20,7 @@ import wiz.project.jan.CompletePattern;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
 import wiz.project.jan.MenTsu;
+import wiz.project.jan.MenTsuType;
 import wiz.project.jan.TenpaiPattern;
 import wiz.project.jan.Wind;
 import wiz.project.jan.yaku.ChmYaku;
@@ -300,7 +301,7 @@ public final class ChmHandCheckUtil {
             
             // 順子優先パターン
             mentsuList1.addAll(HandCreateUtil.getShunTsuList(copy1));
-            mentsuList1.addAll(HandCreateUtil.getKouTsuList(copy1));
+            mentsuList1.addAll(HandCreateUtil.getKohTsuList(copy1, completePai));
             if (copy1.isEmpty()) {
                 Collections.sort(mentsuList1);
                 resultList.add(new CompletePattern(entry.getKey(), mentsuList1));
@@ -311,7 +312,7 @@ public final class ChmHandCheckUtil {
             List<MenTsu> mentsuList2 = deepCopyList(mentsuList);
             
             // 刻子優先パターン
-            mentsuList2.addAll(HandCreateUtil.getKouTsuList(copy2));
+            mentsuList2.addAll(HandCreateUtil.getKohTsuList(copy2, completePai));
             mentsuList2.addAll(HandCreateUtil.getShunTsuList(copy2));
             if (copy2.isEmpty()) {
                 Collections.sort(mentsuList2);
@@ -340,7 +341,7 @@ public final class ChmHandCheckUtil {
                 continue;
             }
             
-            mentsuList.addAll(HandCreateUtil.getKouTsuList(pattern));
+            mentsuList.addAll(HandCreateUtil.getKohTsuList(pattern, completePai));
             if (pattern.isEmpty()) {
                 Collections.sort(mentsuList);
                 resultList.add(new CompletePattern(entry.getKey(), mentsuList));
@@ -564,6 +565,96 @@ public final class ChmHandCheckUtil {
     }
     
     /**
+     * 暗槓数の役を取得
+     * 
+     * @param kohtsuList 刻子リスト。
+     * @return 暗槓数の役。
+     */
+    private static ChmYaku getAnkanYaku(final List<MenTsu> kohtsuList) {
+        int ankanCount = 0;
+        
+        for (final MenTsu kohtsu : kohtsuList) {
+            final MenTsuType type = kohtsu.getMenTsuType();
+            
+            if (type.equals(MenTsuType.KAN_DARK)) {
+                ankanCount++;
+            }
+        }
+        
+        switch (ankanCount) {
+        case 2:
+            return ChmYaku.TWO_CONCEALED_KONGS;
+        case 1:
+            return ChmYaku.CONCEALED_KONG;
+        default:
+            break;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
+     * 暗刻数の役を取得
+     * 
+     * @param kohtsuList 刻子リスト。
+     * @return 暗刻数の役。
+     */
+    private static ChmYaku getAnkoYaku(final List<MenTsu> kohtsuList) {
+        int ankoCount = 0;
+        
+        for (final MenTsu kohtsu : kohtsuList) {
+            final MenTsuType type = kohtsu.getMenTsuType();
+            
+            if (type.equals(MenTsuType.KAN_DARK) || type.equals(MenTsuType.STANDARD_KOU_TSU)) {
+                ankoCount++;
+            }
+        }
+        
+        switch (ankoCount) {
+        case 4:
+            return ChmYaku.FOUR_CONCEALED_PUNGS;
+        case 3:
+            return ChmYaku.THREE_CONCEALED_PUNGS;
+        case 2:
+            return ChmYaku.TWO_CONCEALED_PUNGS;
+        default:
+            break;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
+     * 槓子数の役を取得
+     * 
+     * @param kohtsuList 刻子リスト。
+     * @return 槓子数の役。
+     */
+    private static ChmYaku getKanTsuYaku(final List<MenTsu> kohtsuList) {
+        int kantsuCount = 0;
+        
+        for (final MenTsu kohtsu : kohtsuList) {
+            final MenTsuType type = kohtsu.getMenTsuType();
+            
+            if (type.equals(MenTsuType.KAN_DARK) || type.equals(MenTsuType.KAN_LIGHT)) {
+                kantsuCount++;
+            }
+        }
+        
+        switch (kantsuCount) {
+        case 4:
+            return ChmYaku.FOUR_KONGS;
+        case 3:
+            return ChmYaku.THREE_KONGS;
+        case 2:
+            return ChmYaku.TWO_MELDED_KONGS;
+        case 1:
+            return ChmYaku.MELDED_KONG;
+        default:
+            break;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
      * 4順子の役リストを取得
      * 
      * @param fourShunTsuList 順子リスト。
@@ -648,6 +739,21 @@ public final class ChmHandCheckUtil {
                 break;
             default:
                 break;
+            }
+            final ChmYaku kantsuYaku = getKanTsuYaku(pattern.getKohTsuList());
+            
+            if (!kantsuYaku .equals(ChmYaku.FLOWER)) {
+                newYakuList.add(kantsuYaku);
+            }
+            final ChmYaku ankanYaku = getAnkanYaku(pattern.getKohTsuList());
+            
+            if (!ankanYaku .equals(ChmYaku.FLOWER)) {
+                newYakuList.add(ankanYaku);
+            }
+            final ChmYaku ankoYaku = getAnkoYaku(pattern.getKohTsuList());
+            
+            if (!ankoYaku .equals(ChmYaku.FLOWER)) {
+                newYakuList.add(ankoYaku);
             }
             
             if (ChmYakuCheckUtil.isAllFives(pattern)) {
