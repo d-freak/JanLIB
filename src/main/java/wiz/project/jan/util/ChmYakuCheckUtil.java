@@ -54,6 +54,26 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 全双刻か
+     * 
+     * @param pattern 和了パターン。
+     * @return 判定結果。
+     */
+    public static boolean isAllEvenPungs(final CompletePattern pattern) {
+        for (final MenTsu mentsu : pattern.getMenTsuList()) {
+            if (!mentsu.isEvenKohTsu()) {
+                return false;
+            }
+        }
+        final JanPai pai = pattern.getHead();
+        
+        if (pai.isEven()) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * 全帯五か
      * 
      * @param pattern 和了パターン。
@@ -280,6 +300,29 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 双同刻か
+     * 
+     * @param twoKohTsuList 刻子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isDoublePung(final List<MenTsu> twoKohTsuList) {
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu kohtsu : twoKohTsuList) {
+            topJanPaiList.add(kohtsu.getTopJanPai());
+        }
+        
+        for (final JanPai pai : topJanPaiList) {
+            for (final JanPai mixedPai : pai.getMixedJanPaiList()) {
+                if (topJanPaiList.contains(mixedPai)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 箭刻か
      * 
      * @param hand 手牌。
@@ -306,6 +349,41 @@ public final class ChmYakuCheckUtil {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * 一色四節高か
+     * 
+     * @param fourKohTsuList 刻子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isFourPureShiftedPungs(final List<MenTsu> fourKohTsuList) {
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu kohtsu : fourKohTsuList) {
+            topJanPaiList.add(kohtsu.getTopJanPai());
+        }
+        final JanPai first = topJanPaiList.get(0);
+        
+        if (first.isJi()) {
+            return false;
+        }
+        final JanPai second = first.getNext();
+        
+        if (second.getType() != first.getType() || !topJanPaiList.contains(second)) {
+            return false;
+        }
+        final JanPai third = second.getNext();
+        
+        if (third.getType() != second.getType() || !topJanPaiList.contains(third)) {
+            return false;
+        }
+        final JanPai fourth = third.getNext();
+        
+        if (fourth.getType() != third.getType() || !topJanPaiList.contains(fourth)) {
+            return false;
+        }
+        return true;
     }
     
     /**
@@ -347,7 +425,7 @@ public final class ChmYakuCheckUtil {
             JanPai third = second;
             
             for (int Count = 0; Count < shiftCount; Count++) {
-            	third = third.getNext();
+                third = third.getNext();
             }
             
             if (third.getType() != second.getType() || !topJanPaiList.contains(third)) {
@@ -558,6 +636,42 @@ public final class ChmYakuCheckUtil {
         
         for (final MenTsu shuntsu : threeShunTsuList) {
             topJanPaiList.add(shuntsu.getTopJanPai());
+        }
+        
+        for (final JanPai entryPai : topJanPaiList) {
+            for (final JanPai first : entryPai.getMixedNextJanPaiList()) {
+                if (topJanPaiList.contains(first)) {
+                    for (final JanPai second : first.getMixedNextJanPaiList()) {
+                        if (topJanPaiList.contains(second)) {
+                            final List<JanPai> paiList = Arrays.asList(entryPai, first, second);
+                            final List<JanPaiType> typeList = new ArrayList<JanPaiType>(Arrays.asList(JanPaiType.MAN, JanPaiType.PIN, JanPaiType.SOU));
+                            
+                            for (final JanPai pai : paiList) {
+                                typeList.remove(pai.getType());
+                            }
+                            
+                            if (typeList.isEmpty()) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * 三色三節高か
+     * 
+     * @param threeKohTsuList 刻子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isMixedShiftedPungs(final List<MenTsu> threeKohTsuList) {
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu kohtsu : threeKohTsuList) {
+            topJanPaiList.add(kohtsu.getTopJanPai());
         }
         
         for (final JanPai entryPai : topJanPaiList) {
@@ -795,6 +909,36 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 一色三節高か
+     * 
+     * @param threeKohTsuList 刻子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isPureShiftedPungs(final List<MenTsu> threeKohTsuList) {
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu kohtsu : threeKohTsuList) {
+            topJanPaiList.add(kohtsu.getTopJanPai());
+        }
+        final JanPai first = topJanPaiList.get(0);
+        
+        if (first.isJi()) {
+            return false;
+        }
+        final JanPai second = first.getNext();
+        
+        if (second.getType() != first.getType() || !topJanPaiList.contains(second)) {
+            return false;
+        }
+        final JanPai third = second.getNext();
+        
+        if (third.getType() != second.getType() || !topJanPaiList.contains(third)) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
      * 清龍か
      * 
      * @param threeShunTsuList 順子リスト。
@@ -1006,6 +1150,42 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 三同刻か
+     * 
+     * @param threeKohTsuList 刻子リスト。
+     * @return 判定結果。
+     */
+    public static boolean isTriplePung(final List<MenTsu> threeKohTsuList) {
+        final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
+        
+        for (final MenTsu kohtsu : threeKohTsuList) {
+            topJanPaiList.add(kohtsu.getTopJanPai());
+        }
+        
+        for (final JanPai entryPai : topJanPaiList) {
+            for (final JanPai first : entryPai.getMixedJanPaiList()) {
+                if (topJanPaiList.contains(first)) {
+                    for (final JanPai second : first.getMixedJanPaiList()) {
+                        if (topJanPaiList.contains(second)) {
+                            final List<JanPai> paiList = Arrays.asList(entryPai, first, second);
+                            final List<JanPaiType> typeList = new ArrayList<JanPaiType>(Arrays.asList(JanPaiType.MAN, JanPaiType.PIN, JanPaiType.SOU));
+                            
+                            for (final JanPai pai : paiList) {
+                                typeList.remove(pai.getType());
+                            }
+                            
+                            if (typeList.isEmpty()) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
      * 双箭刻か
      * 
      * @param hand 手牌。
@@ -1174,6 +1354,23 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 4刻子役を取得
+     * 
+     * @param fourKohTsuList 刻子リスト。
+     * @return 4刻子役。
+     */
+    public static ChmYaku getFourPungsYaku(final List<MenTsu> fourKohTsuList) {
+        if (fourKohTsuList.size() != 4) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + fourKohTsuList.size());
+        }
+        
+        if (ChmYakuCheckUtil.isFourPureShiftedPungs(fourKohTsuList)) {
+            return ChmYaku.FOUR_PURE_SHIFTED_PUNGS;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
      * X色双龍会を取得
      * 
      * @param hand 手牌。
@@ -1232,6 +1429,31 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 3刻子役を取得
+     * 
+     * @param threeKohTsuList 刻子リスト。
+     * @return 3刻子役。
+     */
+    public static ChmYaku getThreePungsYaku(final List<MenTsu> threeKohTsuList) {
+        if (threeKohTsuList.size() != 3) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + threeKohTsuList.size());
+        }
+        
+        if (ChmYakuCheckUtil.isPureShiftedPungs(threeKohTsuList)) {
+            return ChmYaku.PURE_SHIFTED_PUNGS;
+        }
+        
+        if (ChmYakuCheckUtil.isTriplePung(threeKohTsuList)) {
+            return ChmYaku.TRIPLE_PUNG;
+        }
+        
+        if (ChmYakuCheckUtil.isMixedShiftedPungs(threeKohTsuList)) {
+            return ChmYaku.MIXED_SHIFTED_PUNGS;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
      * 四帰一の該当数を取得
      * 
      * @param hand 手牌。
@@ -1275,6 +1497,23 @@ public final class ChmYakuCheckUtil {
         
         if (ChmYakuCheckUtil.isTwoTerminalChows(twoShunTsuList)) {
             return ChmYaku.TWO_TERMINAL_CHOWS;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
+     * 2刻子役を取得
+     * 
+     * @param twoKohTsuList 刻子リスト。
+     * @return 2刻子役。
+     */
+    public static ChmYaku getTwoPungsYaku(final List<MenTsu> twoKohTsuList) {
+        if (twoKohTsuList.size() != 2) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + twoKohTsuList.size());
+        }
+        
+        if (ChmYakuCheckUtil.isDoublePung(twoKohTsuList)) {
+            return ChmYaku.DOUBLE_PUNG;
         }
         return ChmYaku.FLOWER;
     }

@@ -655,6 +655,50 @@ public final class ChmHandCheckUtil {
     }
     
     /**
+     * 4刻子の役リストを取得
+     * 
+     * @param fourKohTsuList 刻子リスト。
+     * @return 4刻子の役リスト。
+     */
+    private static List<ChmYaku> getFourKohTsuYakuList(final List<MenTsu> fourKohTsuList) {
+        if (fourKohTsuList.size() != 4) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + fourKohTsuList.size());
+        }
+        final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
+        final ChmYaku fourPungsYaku = ChmYakuCheckUtil.getFourPungsYaku(fourKohTsuList);
+        
+        if (!fourPungsYaku.equals(ChmYaku.FLOWER)) {
+            yakuList.add(fourPungsYaku);
+            return yakuList;
+        }
+        
+        for (final MenTsu excludeKohTsu : fourKohTsuList) {
+            final List<MenTsu> threeKohTsuList = deepCopyList(fourKohTsuList);
+            threeKohTsuList.remove(excludeKohTsu);
+            final ChmYaku threePungsYaku = ChmYakuCheckUtil.getThreePungsYaku(threeKohTsuList);
+            
+            if (!threePungsYaku.equals(ChmYaku.FLOWER)) {
+                yakuList.add(threePungsYaku);
+                
+                for (final MenTsu kohtsu : threeKohTsuList) {
+                    final List<MenTsu> kohtsuList = new ArrayList<MenTsu>(Arrays.asList(kohtsu, excludeKohTsu));
+                    Collections.sort(kohtsuList);
+                    final ChmYaku twoPungsYaku = ChmYakuCheckUtil.getTwoPungsYaku(kohtsuList);
+                    
+                    if (!twoPungsYaku.equals(ChmYaku.FLOWER)) {
+                        yakuList.add(twoPungsYaku);
+                        break;
+                    }
+                }
+                return yakuList;
+            }
+        }
+        final List<ChmYaku> twoPungsYakuList = getTwoKohTsuYakuList(fourKohTsuList, 2);
+        yakuList.addAll(twoPungsYakuList);
+        return yakuList;
+    }
+    
+    /**
      * 4順子の役リストを取得
      * 
      * @param fourShunTsuList 順子リスト。
@@ -714,11 +758,26 @@ public final class ChmHandCheckUtil {
             
             switch (pattern.getShunTsuCount()) {
             case 0:
-                newYakuList.add(ChmYaku.ALL_PUNGS);
+                if (ChmYakuCheckUtil.isAllEvenPungs(pattern)) {
+                    newYakuList.add(ChmYaku.ALL_EVEN_PUNGS);
+                }
+                else {
+                    newYakuList.add(ChmYaku.ALL_PUNGS);
+                }
+                final List<MenTsu> fourKohTsuList = pattern.getKohTsuList();
+                final List<ChmYaku> fourKohTsuYakuList = getFourKohTsuYakuList(fourKohTsuList);
+                newYakuList.addAll(fourKohTsuYakuList);
                 break;
             case 1:
+                final List<MenTsu> threeKohTsuList = pattern.getKohTsuList();
+                final List<ChmYaku> threeKohTsuYakuList = getThreeKohTsuYakuList(threeKohTsuList);
+                newYakuList.addAll(threeKohTsuYakuList);
                 break;
             case 2:
+                final List<MenTsu> twoKohTsuList = pattern.getKohTsuList();
+                final List<ChmYaku> twoPungsYakuList = getTwoKohTsuYakuList(twoKohTsuList, 1);
+                newYakuList.addAll(twoPungsYakuList);
+                
                 final List<MenTsu> twoShunTsuList = pattern.getShunTsuList();
                 final List<ChmYaku> twoChowsYakuList = getTwoShunTsuYakuList(twoShunTsuList, 1);
                 newYakuList.addAll(twoChowsYakuList);
@@ -779,6 +838,28 @@ public final class ChmHandCheckUtil {
     }
     
     /**
+     * 3刻子の役リストを取得
+     * 
+     * @param threeKohTsuList 刻子リスト。
+     * @return 3刻子の役リスト。
+     */
+    private static List<ChmYaku> getThreeKohTsuYakuList(final List<MenTsu> threeKohTsuList) {
+        if (threeKohTsuList.size() != 3) {
+            throw new IllegalArgumentException("Invalid MenTsu size" + threeKohTsuList.size());
+        }
+        final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
+        final ChmYaku threePungsYaku = ChmYakuCheckUtil.getThreePungsYaku(threeKohTsuList);
+        
+        if (!threePungsYaku.equals(ChmYaku.FLOWER)) {
+            yakuList.add(threePungsYaku);
+            return yakuList;
+        }
+        final List<ChmYaku> twoPungsYakuList = getTwoKohTsuYakuList(threeKohTsuList, 1);
+        yakuList.addAll(twoPungsYakuList);
+        return yakuList;
+    }
+    
+    /**
      * 3順子の役リストを取得
      * 
      * @param threeShunTsuList 順子リスト。
@@ -797,6 +878,36 @@ public final class ChmHandCheckUtil {
         }
         final List<ChmYaku> twoChowsYakuList = getTwoShunTsuYakuList(threeShunTsuList, 2);
         yakuList.addAll(twoChowsYakuList);
+        return yakuList;
+    }
+    
+    /**
+     * 2刻子役リストを取得
+     * 
+     * @param kohtsuList 刻子リスト。
+     * @param maxSize 2刻子役リストの最大サイズ。
+     * @return 2刻子役リスト。
+     */
+    private static List<ChmYaku> getTwoKohTsuYakuList(final List<MenTsu> kohtsuList, final int maxSize) {
+        final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
+        final List<MenTsu> excludedList = deepCopyList(kohtsuList);
+        
+        for (final MenTsu first : kohtsuList) {
+            excludedList.remove(first);
+            
+            for (final MenTsu second : excludedList) {
+                final List<MenTsu> twoKohTsuList = new ArrayList<MenTsu>(Arrays.asList(first, second));
+                final ChmYaku twoPungsYaku = ChmYakuCheckUtil.getTwoPungsYaku(twoKohTsuList);
+                
+                if (!twoPungsYaku.equals(ChmYaku.FLOWER)) {
+                    yakuList.add(twoPungsYaku);
+                    
+                    if (yakuList.size() == maxSize) {
+                        return yakuList;
+                    }
+                }
+            }
+        }
         return yakuList;
     }
     

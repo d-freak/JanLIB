@@ -418,6 +418,31 @@ public enum JanPai {
     }
     
     /**
+     * 偶数か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isEven() {
+        switch (this) {
+        case MAN_2:
+        case MAN_4:
+        case MAN_6:
+        case MAN_8:
+        case PIN_2:
+        case PIN_4:
+        case PIN_6:
+        case PIN_8:
+        case SOU_2:
+        case SOU_4:
+        case SOU_6:
+        case SOU_8:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    /**
      * 5か
      * 
      * @return 判定結果。

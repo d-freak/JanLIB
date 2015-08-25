@@ -215,6 +215,24 @@ public final class MenTsu implements Comparable<MenTsu> {
     }
     
     /**
+     * 偶数の刻子か
+     * 
+     * @return 判定結果。
+     */
+    public boolean isEvenKohTsu() {
+        final JanPai pai = getTopJanPai();
+        
+        if (isShunTsu()) {
+            return false;
+        }
+        
+        if (pai.isEven()) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * 順子か
      * 
      * @return 判定結果。
