@@ -814,6 +814,12 @@ public final class ChmHandCheckUtil {
             if (!ankoYaku .equals(ChmYaku.FLOWER)) {
                 newYakuList.add(ankoYaku);
             }
+            final List<MenTsu> kohtsuList = pattern.getKohTsuList();
+            final int PungOfTerminalsOrHonorsCount = ChmYakuCheckUtil.getPungOfTerminalsOrHonorsCount(kohtsuList);
+            
+            for (int count = 0; count < PungOfTerminalsOrHonorsCount; count++) {
+                newYakuList.add(ChmYaku.PUNG_OF_TERMINALS_OR_HONORS);
+            }
             
             if (ChmYakuCheckUtil.isAllFives(pattern)) {
                 newYakuList.add(ChmYaku.ALL_FIVES);

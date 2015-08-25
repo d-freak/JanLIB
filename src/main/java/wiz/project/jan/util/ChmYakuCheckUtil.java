@@ -1371,6 +1371,25 @@ public final class ChmYakuCheckUtil {
     }
     
     /**
+     * 幺九刻の該当数を取得
+     * 
+     * @param kohtsuList 刻子リスト。
+     * @return 幺九刻の該当数。
+     */
+    public static int getPungOfTerminalsOrHonorsCount(final List<MenTsu> kohtsuList) {
+        int count = 0;
+        
+        for (final MenTsu kohtsu : kohtsuList) {
+            final JanPai pai = kohtsu.getTopJanPai();
+            
+            if (pai.isYao()) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    /**
      * X色双龍会を取得
      * 
      * @param hand 手牌。

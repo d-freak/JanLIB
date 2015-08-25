@@ -480,6 +480,7 @@ public enum ChmYaku {
                               ChmYaku.MIXED_DOUBLE_CHOW,
                               ChmYaku.SHORT_STRAIGHT,
                               ChmYaku.TWO_TERMINAL_CHOWS,
+                              ChmYaku.PUNG_OF_TERMINALS_OR_HONORS,
                               ChmYaku.MELDED_KONG,
                               ChmYaku.ONE_VOIDED_SUIT,
                               ChmYaku.NO_HONORS,
@@ -562,6 +563,15 @@ public enum ChmYaku {
         switch (this) {
         case BIG_FOUR_WINDS:
             yakuList.add(ALL_PUNGS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            break;
+        case BIG_THREE_DRAGONS:
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             break;
         case FOUR_KONGS:
             yakuList.add(ALL_PUNGS);
@@ -577,11 +587,19 @@ public enum ChmYaku {
         case ALL_TERMINALS:
             yakuList.add(ALL_PUNGS);
             yakuList.add(OUTSIDE_HAND);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             yakuList.add(NO_HONORS);
             break;
         case ALL_HONORS:
             yakuList.add(ALL_PUNGS);
             yakuList.add(OUTSIDE_HAND);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             break;
         case FOUR_CONCEALED_PUNGS:
             yakuList.add(ALL_PUNGS);
@@ -598,6 +616,10 @@ public enum ChmYaku {
         case ALL_TERMINALS_AND_HONORS:
             yakuList.add(ALL_PUNGS);
             yakuList.add(OUTSIDE_HAND);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             break;
         case SEVEN_PAIRS:
             yakuList.add(CONCEALED_HAND);
@@ -636,6 +658,19 @@ public enum ChmYaku {
         case TWO_CONCEALED_KONGS:
             yakuList.add(TWO_MELDED_KONGS);
             yakuList.add(TWO_CONCEALED_PUNGS);
+            break;
+        case TWO_DRAGON_PUNGS:
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            break;
+        case DRAGON_PUNG:
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            break;
+        case PREVALENT_WIND:
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            break;
+        case SEAT_WIND:
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             break;
         case ALL_CHOWS:
             yakuList.add(NO_HONORS);
