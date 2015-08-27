@@ -88,6 +88,7 @@ public final class ChmHandCheckUtil {
         }
         
         final Map<JanPai, Integer> allPaiMap = hand.getAllJanPaiMap();
+        final boolean isDouble = playerWind.equals(fieldWind);
         JanPaiUtil.addJanPai(allPaiMap, completePai.getJanPai(), 1);
         JanPaiUtil.cleanJanPaiMap(allPaiMap);
         
@@ -111,7 +112,7 @@ public final class ChmHandCheckUtil {
                 }
             }
             yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
-            removeExcludeYaku(yakuList);
+            removeExcludeYaku(yakuList, isDouble);
             
             return new ChmCompleteInfo(yakuList, completePai.getType());
         }
@@ -119,7 +120,7 @@ public final class ChmHandCheckUtil {
         if (isCompleteKokushi(allPaiMap)) {
             yakuList.add(ChmYaku.THIRTEEN_ORPHANS);
             yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
-            removeExcludeYaku(yakuList);
+            removeExcludeYaku(yakuList, isDouble);
             
             return new ChmCompleteInfo(yakuList, completePai.getType());
         }
@@ -128,7 +129,7 @@ public final class ChmHandCheckUtil {
         if (terminalChows != ChmYaku.FLOWER) {
             yakuList.add(terminalChows);
             yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
-            removeExcludeYaku(yakuList);
+            removeExcludeYaku(yakuList, isDouble);
             
             return new ChmCompleteInfo(yakuList, completePai.getType());
         }
@@ -257,7 +258,7 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.TILE_HOG);
         }
         yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
-        removeExcludeYaku(yakuList);
+        removeExcludeYaku(yakuList, isDouble);
         
         return new ChmCompleteInfo(yakuList, completePai.getType());
     }
@@ -827,7 +828,6 @@ public final class ChmHandCheckUtil {
             else if (ChmYakuCheckUtil.isOutsideHand(pattern)) {
                 newYakuList.add(ChmYaku.OUTSIDE_HAND);
             }
-            removeExcludeYaku(newYakuList);
             
             int newPoint = 0;
             
@@ -1050,12 +1050,20 @@ public final class ChmHandCheckUtil {
      * 除外役を削除
      * 
      * @param source 削除元の役リスト。
+     * @param isDouble 場風と自風が同じか。
      */
-    private static void removeExcludeYaku(final List<ChmYaku> source) {
+    private static void removeExcludeYaku(final List<ChmYaku> source, final boolean isDouble) {
         final List<ChmYaku> yakuList = new ArrayList<ChmYaku>(source);
         
         for (final ChmYaku yaku : yakuList) {
-            source.removeAll(yaku.getExcludeChmYaku());
+            if (yaku.equals(ChmYaku.PREVALENT_WIND) && isDouble) {
+                continue;
+            }
+            final List<ChmYaku> excludeYakuList = yaku.getExcludeChmYaku();
+            
+            for (final ChmYaku excludeYaku : excludeYakuList) {
+                source.remove(excludeYaku);
+            }
         }
     }
     
