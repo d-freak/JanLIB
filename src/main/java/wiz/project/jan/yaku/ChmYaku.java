@@ -580,6 +580,7 @@ public enum ChmYaku {
         case FOUR_KONGS:
             yakuList.add(ALL_PUNGS);
             yakuList.add(MELDED_HAND);
+            yakuList.add(SINGLE_WAIT);
             break;
         case SEVEN_SHIFTED_PAIRS:
             yakuList.add(FULL_FLUSH);

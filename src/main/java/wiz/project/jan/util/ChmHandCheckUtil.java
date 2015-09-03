@@ -831,7 +831,7 @@ public final class ChmHandCheckUtil {
             else if (ChmYakuCheckUtil.isOutsideHand(pattern)) {
                 newYakuList.add(ChmYaku.OUTSIDE_HAND);
             }
-            final Map<JanPai, Integer> allPaiMap = hand.getAllJanPaiMap();
+            final Map<JanPai, Integer> allPaiMap = hand.getMenZenMap();
             JanPaiUtil.cleanJanPaiMap(allPaiMap);
             
             final List<JanPai> completablePaiList = getCompletableJanPaiList(allPaiMap);
