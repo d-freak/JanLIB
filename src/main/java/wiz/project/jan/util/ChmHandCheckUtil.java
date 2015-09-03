@@ -1010,7 +1010,11 @@ public final class ChmHandCheckUtil {
      */
     private static boolean isCompleteZenhukou(final Map<JanPai, Integer> hand) {
         final Map<JanPai, Integer> copyHand = deepCopyMap(hand);
-        removeJi(copyHand);
+        final int removeCount = removeJi(copyHand);
+        
+        if (removeCount < 5) {
+            return false;
+        }
         final List<JanPai> paiList = new ArrayList<JanPai>(copyHand.keySet());
         switch (copyHand.size()) {
         case 7:
@@ -1082,14 +1086,19 @@ public final class ChmHandCheckUtil {
      * 字牌を1枚ずつ削除
      * 
      * @param source 削除元の牌マップ。
+     * @return 削除した字牌の種類の数。
      */
-    private static void removeJi(final Map<JanPai, Integer> source) {
+    private static int removeJi(final Map<JanPai, Integer> source) {
         final List<JanPai> paiList = new ArrayList<JanPai>(source.keySet());
+        int removeCount = 0;
+        
         for (final JanPai entry : paiList) {
             if (JanPaiUtil.JI_LIST.contains(entry)) {
                 JanPaiUtil.removeJanPai(source, entry, 1);
+                removeCount++;
             }
         }
+        return removeCount;
     }
     
     /**

@@ -82,6 +82,29 @@ public final class ChmHandCheckUtilTest {
     }
     
     /**
+     * isZenhukou()のテスト(副露しているためNG)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsZenhukouNG() {
+        // あがり牌：なし
+        List<JanPai> expectedResultList = Arrays.asList();
+        // 手牌：[1m] [4m] [2p] [5p] [3s] [6s] [9s]  [2m][2m][2m] [3p][4p][5p]
+        Map<JanPai, Integer> hand = new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 1);}
+            {put(JanPai.MAN_4, 1);}
+            {put(JanPai.PIN_2, 1);}
+            {put(JanPai.PIN_5, 1);}
+            {put(JanPai.SOU_3, 1);}
+            {put(JanPai.SOU_6, 1);}
+            {put(JanPai.SOU_9, 1);}
+        };
+        List<JanPai> resultList = new ArrayList<JanPai>();
+        resultList = ChmHandCheckUtil.getCompletableJanPaiList(hand);
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * isZenhukou()のテスト(数牌6枚=七星不靠確定)
      */
     @SuppressWarnings("serial")
