@@ -937,9 +937,14 @@ public final class ChmHandCheckUtil {
      */
     private static List<ChmYaku> getTwoShunTsuYakuList(final List<MenTsu> shuntsuList, final int maxSize) {
         final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
-        final List<MenTsu> excludedList = deepCopyList(shuntsuList);
+        final List<MenTsu> targetList = deepCopyList(shuntsuList);
         
-        for (final MenTsu first : shuntsuList) {
+        if (removeIpeikou(targetList)) {
+            yakuList.add(ChmYaku.PURE_DOUBLE_CHOW);
+        }
+        final List<MenTsu> excludedList = deepCopyList(targetList);
+        
+        for (final MenTsu first : targetList) {
             excludedList.remove(first);
             
             for (final MenTsu second : excludedList) {
@@ -1080,6 +1085,31 @@ public final class ChmHandCheckUtil {
                 source.remove(excludeYaku);
             }
         }
+    }
+    
+    /**
+     * 一盃口を削除
+     * 
+     * @param source 削除元の面子リスト。
+     * @return 削除したか。
+     */
+    private static boolean removeIpeikou(final List<MenTsu> source) {
+        final List<MenTsu> targetList = deepCopyList(source);
+        final List<MenTsu> excludedList = deepCopyList(targetList);
+        
+        for (final MenTsu first : targetList) {
+            excludedList.remove(first);
+            
+            for (final MenTsu second : excludedList) {
+                final List<MenTsu> twoShunTsuList = new ArrayList<MenTsu>(Arrays.asList(first, second));
+                
+                if (ChmYakuCheckUtil.isPureDoubleChow(twoShunTsuList)) {
+                    source.remove(first);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     /**
