@@ -309,7 +309,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu kohtsu : twoKohTsuList) {
-            topJanPaiList.add(kohtsu.getTopJanPai());
+            topJanPaiList.add(kohtsu.getHead());
         }
         
         for (final JanPai pai : topJanPaiList) {
@@ -361,7 +361,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu kohtsu : fourKohTsuList) {
-            topJanPaiList.add(kohtsu.getTopJanPai());
+            topJanPaiList.add(kohtsu.getHead());
         }
         final JanPai first = topJanPaiList.get(0);
         
@@ -399,7 +399,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : fourShunTsuList) {
-            topJanPaiList.add(shuntsu.getTopJanPai());
+            topJanPaiList.add(shuntsu.getHead());
         }
         final List<Integer> shiftCountList = Arrays.asList(1, 2);
         
@@ -609,7 +609,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : twoShunTsuList) {
-            topJanPaiList.add(shuntsu.getTopJanPai());
+            topJanPaiList.add(shuntsu.getHead());
         }
         
         for (final JanPai entryPai : topJanPaiList) {
@@ -635,7 +635,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : threeShunTsuList) {
-            topJanPaiList.add(shuntsu.getTopJanPai());
+            topJanPaiList.add(shuntsu.getHead());
         }
         
         for (final JanPai entryPai : topJanPaiList) {
@@ -671,7 +671,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu kohtsu : threeKohTsuList) {
-            topJanPaiList.add(kohtsu.getTopJanPai());
+            topJanPaiList.add(kohtsu.getHead());
         }
         
         for (final JanPai entryPai : topJanPaiList) {
@@ -731,7 +731,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : threeShunTsuList) {
-            topJanPaiList.add(shuntsu.getTopJanPai());
+            topJanPaiList.add(shuntsu.getHead());
         }
         
         for (final JanPai entryPai : topJanPaiList) {
@@ -858,7 +858,7 @@ public final class ChmYakuCheckUtil {
         final HashSet<JanPai> topJanPaiSet = new HashSet<JanPai>();
         
         for (final MenTsu shuntsu : twoShunTsuList) {
-            topJanPaiSet.add(shuntsu.getTopJanPai());
+            topJanPaiSet.add(shuntsu.getHead());
         }
         
         if (topJanPaiSet.size() == 1) {
@@ -880,7 +880,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : threeShunTsuList) {
-            topJanPaiList.add(shuntsu.getTopJanPai());
+            topJanPaiList.add(shuntsu.getHead());
         }
         final List<Integer> shiftCountList = Arrays.asList(1, 2);
         
@@ -918,7 +918,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu kohtsu : threeKohTsuList) {
-            topJanPaiList.add(kohtsu.getTopJanPai());
+            topJanPaiList.add(kohtsu.getHead());
         }
         final JanPai first = topJanPaiList.get(0);
         
@@ -989,7 +989,7 @@ public final class ChmYakuCheckUtil {
         final HashSet<JanPai> topJanPaiSet = new HashSet<JanPai>();
         
         for (final MenTsu shuntsu : threeShunTsuList) {
-            topJanPaiSet.add(shuntsu.getTopJanPai());
+            topJanPaiSet.add(shuntsu.getHead());
         }
         
         if (topJanPaiSet.size() == 1) {
@@ -1011,7 +1011,7 @@ public final class ChmYakuCheckUtil {
         final HashSet<JanPai> topJanPaiSet = new HashSet<JanPai>();
         
         for (final MenTsu shuntsu : fourShunTsuList) {
-            topJanPaiSet.add(shuntsu.getTopJanPai());
+            topJanPaiSet.add(shuntsu.getHead());
         }
         
         if (topJanPaiSet.size() == 1) {
@@ -1116,7 +1116,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : twoShunTsuList) {
-            topJanPaiList.add(shuntsu.getTopJanPai());
+            topJanPaiList.add(shuntsu.getHead());
         }
         JanPai first = topJanPaiList.get(0);
         final JanPaiType type = first.getType();
@@ -1159,7 +1159,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu kohtsu : threeKohTsuList) {
-            topJanPaiList.add(kohtsu.getTopJanPai());
+            topJanPaiList.add(kohtsu.getHead());
         }
         
         for (final JanPai entryPai : topJanPaiList) {
@@ -1232,7 +1232,7 @@ public final class ChmYakuCheckUtil {
         final List<JanPai> topJanPaiList = new ArrayList<JanPai>();
         
         for (final MenTsu shuntsu : twoShunTsuList) {
-            topJanPaiList.add(shuntsu.getTopJanPai());
+            topJanPaiList.add(shuntsu.getHead());
         }
         JanPai first = topJanPaiList.get(0);
         final JanPaiType type = first.getType();
@@ -1380,7 +1380,7 @@ public final class ChmYakuCheckUtil {
         int count = 0;
         
         for (final MenTsu kohtsu : kohtsuList) {
-            final JanPai pai = kohtsu.getTopJanPai();
+            final JanPai pai = kohtsu.getHead();
             
             if (pai.isYao()) {
                 count++;
@@ -1533,6 +1533,38 @@ public final class ChmYakuCheckUtil {
         
         if (ChmYakuCheckUtil.isDoublePung(twoKohTsuList)) {
             return ChmYaku.DOUBLE_PUNG;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
+     * 待ち役を取得
+     * 
+     * @param pattern  和了パターンリスト。
+     * @param completePai 和了牌。
+     * @param completablePaiList 待ち牌リスト。
+     * @return 待ち役。
+     */
+    public static ChmYaku getWaitYaku(final CompletePattern pattern, final CompleteJanPai completePai, final List<JanPai> completablePaiList) {
+        if (completablePaiList.size() != 1) {
+            return ChmYaku.FLOWER;
+        }
+        final JanPai head = pattern.getHead();
+        final JanPai pai = completePai.getJanPai();
+        
+        if (head.equals(pai)) {
+            return ChmYaku.SINGLE_WAIT;
+        }
+        final List<MenTsu> shuntsuList = pattern.getShunTsuList();
+        
+        for (final MenTsu shuntsu : shuntsuList) {
+            if (pai.isClosed(shuntsu)) {
+                return ChmYaku.CLOSED_WAIT;
+            }
+            
+            if (pai.isEdge(shuntsu)) {
+                return ChmYaku.EDGE_WAIT;
+            }
         }
         return ChmYaku.FLOWER;
     }

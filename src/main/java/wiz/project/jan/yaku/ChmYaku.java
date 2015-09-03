@@ -484,6 +484,9 @@ public enum ChmYaku {
                               ChmYaku.MELDED_KONG,
                               ChmYaku.ONE_VOIDED_SUIT,
                               ChmYaku.NO_HONORS,
+                              ChmYaku.EDGE_WAIT,
+                              ChmYaku.CLOSED_WAIT,
+                              ChmYaku.SINGLE_WAIT,
                               ChmYaku.SELF_DRAWN,
                               ChmYaku.DRAGON_PUNG,
                               ChmYaku.PREVALENT_WIND,
@@ -509,6 +512,7 @@ public enum ChmYaku {
                               ChmYaku.REVERSIBLE_TILES,
                               ChmYaku.MIXED_TRIPLE_CHOW,
                               ChmYaku.MIXED_SHIFTED_PUNGS,
+                              ChmYaku.CHICKEN_HAND,
                               ChmYaku.LAST_TILE_DRAW,
                               ChmYaku.LAST_TILE_CLAIM,
                               ChmYaku.OUT_WITH_REPLACEMENT_TILE,
@@ -658,6 +662,9 @@ public enum ChmYaku {
         case TWO_CONCEALED_KONGS:
             yakuList.add(TWO_MELDED_KONGS);
             yakuList.add(TWO_CONCEALED_PUNGS);
+            break;
+        case MELDED_HAND:
+            yakuList.add(SINGLE_WAIT);
             break;
         case TWO_DRAGON_PUNGS:
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);

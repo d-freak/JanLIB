@@ -106,21 +106,12 @@ public final class MenTsu implements Comparable<MenTsu> {
     }
     
     /**
-     * 牌枚数を取得
+     * 先頭の牌を取得
      * 
-     * @return 牌枚数。
+     * @return 先頭の牌。
      */
-    public int getSize() {
-        return _sourceList.size();
-    }
-    
-    /**
-     * 牌リストを取得
-     * 
-     * @return 牌リスト。
-     */
-    public List<JanPai> getSource() {
-        return deepCopyList(_sourceList);
+    public JanPai getHead() {
+        return getSource().get(0);
     }
     
     /**
@@ -158,12 +149,39 @@ public final class MenTsu implements Comparable<MenTsu> {
     }
     
     /**
-     * 先頭の牌を取得
+     * 中央の牌を取得
      * 
-     * @return 先頭の牌。
+     * @return 中央の牌。
      */
-    public JanPai getTopJanPai() {
-        return getSource().get(0);
+    public JanPai getMiddle() {
+        return getSource().get(1);
+    }
+    
+    /**
+     * 牌枚数を取得
+     * 
+     * @return 牌枚数。
+     */
+    public int getSize() {
+        return _sourceList.size();
+    }
+    
+    /**
+     * 牌リストを取得
+     * 
+     * @return 牌リスト。
+     */
+    public List<JanPai> getSource() {
+        return deepCopyList(_sourceList);
+    }
+    
+    /**
+     * 末尾の牌を取得
+     * 
+     * @return 末尾の牌。
+     */
+    public JanPai getTail() {
+        return getSource().get(2);
     }
     
     /**
@@ -220,11 +238,10 @@ public final class MenTsu implements Comparable<MenTsu> {
      * @return 判定結果。
      */
     public boolean isEvenKohTsu() {
-        final JanPai pai = getTopJanPai();
-        
         if (isShunTsu()) {
             return false;
         }
+        final JanPai pai = getHead();
         
         if (pai.isEven()) {
             return true;
@@ -238,11 +255,11 @@ public final class MenTsu implements Comparable<MenTsu> {
      * @return 判定結果。
      */
     public boolean isShunTsu() {
-        final JanPai first = getTopJanPai();
-        final JanPai second = getSource().get(1);
-        final JanPai third = getSource().get(2);
+        final JanPai head = getHead();
+        final JanPai middle = getMiddle();
+        final JanPai tail = getTail();
         
-        return JanPaiUtil.isShunTsu(first, second, third);
+        return JanPaiUtil.isShunTsu(head, middle, tail);
     }
     
     /**

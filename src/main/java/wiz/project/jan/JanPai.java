@@ -418,6 +418,62 @@ public enum JanPai {
     }
     
     /**
+     * 坎張の牌か
+     * 
+     * @param shuntsu 順子。
+     * @return 判定結果。
+     */
+    public boolean isClosed(final MenTsu shuntsu) {
+        if (!shuntsu.isShunTsu()) {
+            return false;
+        }
+        final JanPai middle = shuntsu.getMiddle();
+        
+        if (this.equals(middle)) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 辺張の牌か
+     * 
+     * @param shuntsu 順子。
+     * @return 判定結果。
+     */
+    public boolean isEdge(final MenTsu shuntsu) {
+        if (!shuntsu.isShunTsu()) {
+            return false;
+        }
+        final JanPai head = shuntsu.getHead();
+        
+        if (head.equals(MAN_1) && this.equals(MAN_3)) {
+            return true;
+        }
+        
+        if (head.equals(MAN_7) && this.equals(MAN_7)) {
+            return true;
+        }
+        
+        if (head.equals(PIN_1) && this.equals(PIN_3)) {
+            return true;
+        }
+        
+        if (head.equals(PIN_7) && this.equals(PIN_7)) {
+            return true;
+        }
+        
+        if (head.equals(SOU_1) && this.equals(SOU_3)) {
+            return true;
+        }
+        
+        if (head.equals(SOU_7) && this.equals(SOU_7)) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * 偶数か
      * 
      * @return 判定結果。

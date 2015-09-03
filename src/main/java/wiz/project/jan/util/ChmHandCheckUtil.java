@@ -260,6 +260,9 @@ public final class ChmHandCheckUtil {
         yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
         removeExcludeYaku(yakuList, isDouble);
         
+        if (yakuList.isEmpty()) {
+            yakuList.add(ChmYaku.CHICKEN_HAND);
+        }
         return new ChmCompleteInfo(yakuList, completePai.getType());
     }
     
@@ -828,7 +831,15 @@ public final class ChmHandCheckUtil {
             else if (ChmYakuCheckUtil.isOutsideHand(pattern)) {
                 newYakuList.add(ChmYaku.OUTSIDE_HAND);
             }
+            final Map<JanPai, Integer> allPaiMap = hand.getAllJanPaiMap();
+            JanPaiUtil.cleanJanPaiMap(allPaiMap);
             
+            final List<JanPai> completablePaiList = getCompletableJanPaiList(allPaiMap);
+            final ChmYaku waitYaku = ChmYakuCheckUtil.getWaitYaku(pattern, completePai, completablePaiList);
+            
+            if (!waitYaku.equals(ChmYaku.FLOWER)) {
+                newYakuList.add(waitYaku);
+            }
             int newPoint = 0;
             
             for (final ChmYaku yaku : newYakuList) {
