@@ -533,7 +533,7 @@ public final class ChmYakuCheckUtilTest {
      */
     @SuppressWarnings("serial")
     @Test
-    public void testIsDoublePung() {
+    public void testIsDoublePung1() {
         // あがり役：双同刻
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.DOUBLE_PUNG);
         final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
@@ -542,6 +542,33 @@ public final class ChmYakuCheckUtilTest {
         // 手牌：[5p] [5p] [5p] [3s] [4s] [發] [發]  [5m][5m][5m] [2s][2s][2s]
         final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
             {put(JanPai.PIN_5, 3);}
+            {put(JanPai.SOU_3, 1);}
+            {put(JanPai.SOU_4, 1);}
+            {put(JanPai.HATU, 2);}}, mentsuList);
+        // あがり：[5s]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_5, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(双同刻、幺九刻、幺九刻)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsDoublePung2() {
+        // あがり役：双同刻、幺九刻、幺九刻
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.DOUBLE_PUNG, ChmYaku.PUNG_OF_TERMINALS_OR_HONORS, ChmYaku.PUNG_OF_TERMINALS_OR_HONORS);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_9, JanPai.MAN_9, JanPai.MAN_9), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.SOU_2, JanPai.SOU_2, JanPai.SOU_2), MenTsuType.PON));
+        // 手牌：[9p] [9p] [9p] [3s] [4s] [發] [發]  [9m][9m][9m] [2s][2s][2s]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.PIN_9, 3);}
             {put(JanPai.SOU_3, 1);}
             {put(JanPai.SOU_4, 1);}
             {put(JanPai.HATU, 2);}}, mentsuList);
@@ -2354,7 +2381,7 @@ public final class ChmYakuCheckUtilTest {
      */
     @SuppressWarnings("serial")
     @Test
-    public void testIsTriplePung() {
+    public void testIsTriplePung1() {
         // あがり役：三同刻、断幺
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.TRIPLE_PUNG, ChmYaku.ALL_SIMPLES);
         final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
@@ -2366,6 +2393,33 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.MAN_3, 1);}
             {put(JanPai.MAN_4, 1);}
             {put(JanPai.SOU_8, 2);}}, mentsuList);
+        // あがり：[5m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_5, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(三同刻、断幺)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsTriplePung2() {
+        // あがり役：三同刻、断幺
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.TRIPLE_PUNG, ChmYaku.ALL_SIMPLES);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_8, JanPai.MAN_8, JanPai.MAN_8), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.PIN_8, JanPai.PIN_8, JanPai.PIN_8), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.SOU_8, JanPai.SOU_8, JanPai.SOU_8), MenTsuType.PON));
+        // 手牌：[3m] [4m] [6s] [6s]  [8m][8m][8m] [8p][8p][8p] [8s][8s][8s]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_3, 1);}
+            {put(JanPai.MAN_4, 1);}
+            {put(JanPai.SOU_6, 2);}}, mentsuList);
         // あがり：[5m]ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_5, 3, CompleteType.RON_NOT_MENZEN);
         // 自風：東
