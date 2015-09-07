@@ -610,6 +610,9 @@ public enum ChmYaku {
             yakuList.add(ALL_PUNGS);
             yakuList.add(CONCEALED_HAND);
             break;
+        case PURE_TERMINAL_CHOWS:
+            yakuList.add(FULL_FLUSH);
+            break;
         case QUADRUPLE_CHOW:
             yakuList.add(TILE_HOG);
             yakuList.add(TILE_HOG);
@@ -646,6 +649,9 @@ public enum ChmYaku {
             yakuList.add(NO_HONORS);
             break;
         case LOWER_TILES:
+            yakuList.add(NO_HONORS);
+            break;
+        case THREE_SUITED_TERMINAL_CHOWS:
             yakuList.add(NO_HONORS);
             break;
         case ALL_FIVES:

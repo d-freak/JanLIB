@@ -94,10 +94,6 @@ public final class ChmHandCheckUtil {
         
         List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
         
-        if (ChmYakuCheckUtil.isMeldedHand(hand, completePai)) {
-            yakuList.add(ChmYaku.MELDED_HAND);
-        }
-        
         if (isCompleteZenhukou(allPaiMap)) {
             if (ChmYakuCheckUtil.isGreaterHonorsAndKnittedTiles(allPaiMap)) {
                 yakuList.add(ChmYaku.GREATER_HONORS_AND_KNITTED_TILES);
@@ -119,15 +115,6 @@ public final class ChmHandCheckUtil {
         
         if (isCompleteKokushi(allPaiMap)) {
             yakuList.add(ChmYaku.THIRTEEN_ORPHANS);
-            yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
-            removeExcludeYaku(yakuList, isDouble);
-            
-            return new ChmCompleteInfo(yakuList, completePai.getType());
-        }
-        final ChmYaku terminalChows = ChmYakuCheckUtil.getTerminalChows(allPaiMap);
-        
-        if (terminalChows != ChmYaku.FLOWER) {
-            yakuList.add(terminalChows);
             yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
             removeExcludeYaku(yakuList, isDouble);
             
@@ -256,6 +243,10 @@ public final class ChmHandCheckUtil {
         
         for (int count = 0; count < ChmYakuCheckUtil.getTileHogCount(hand, allPaiMap); count++) {
             yakuList.add(ChmYaku.TILE_HOG);
+        }
+        
+        if (ChmYakuCheckUtil.isMeldedHand(hand, completePai)) {
+            yakuList.add(ChmYaku.MELDED_HAND);
         }
         yakuList.addAll(ChmYakuCheckUtil.getCompleteJanPaiYaku(completePai));
         removeExcludeYaku(yakuList, isDouble);
@@ -792,6 +783,16 @@ public final class ChmHandCheckUtil {
                 newYakuList.addAll(threeShunTsuYakuList);
                 break;
             case 4:
+                final Map<JanPai, Integer> allPaiMap = hand.getAllJanPaiMap();
+                JanPaiUtil.addJanPai(allPaiMap, completePai.getJanPai(), 1);
+                JanPaiUtil.cleanJanPaiMap(allPaiMap);
+                
+                final ChmYaku terminalChows = ChmYakuCheckUtil.getTerminalChows(allPaiMap);
+                
+                if (terminalChows != ChmYaku.FLOWER) {
+                    newYakuList.add(terminalChows);
+                    break;
+                }
                 final List<MenTsu> fourShunTsuList = pattern.getShunTsuList();
                 final List<ChmYaku> fourShunTsuYakuList = getFourShunTsuYakuList(fourShunTsuList);
                 newYakuList.addAll(fourShunTsuYakuList);
@@ -831,10 +832,10 @@ public final class ChmHandCheckUtil {
             else if (ChmYakuCheckUtil.isOutsideHand(pattern)) {
                 newYakuList.add(ChmYaku.OUTSIDE_HAND);
             }
-            final Map<JanPai, Integer> allPaiMap = hand.getMenZenMap();
-            JanPaiUtil.cleanJanPaiMap(allPaiMap);
+            final Map<JanPai, Integer> menzenMap = hand.getMenZenMap();
+            JanPaiUtil.cleanJanPaiMap(menzenMap);
             
-            final List<JanPai> completablePaiList = getCompletableJanPaiList(allPaiMap);
+            final List<JanPai> completablePaiList = getCompletableJanPaiList(menzenMap);
             final ChmYaku waitYaku = ChmYakuCheckUtil.getWaitYaku(pattern, completePai, completablePaiList);
             
             if (!waitYaku.equals(ChmYaku.FLOWER)) {

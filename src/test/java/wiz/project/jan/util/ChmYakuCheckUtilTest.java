@@ -1872,6 +1872,34 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(一色双龍会、坎張)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsPureTerminalChowsAndClosedWait() {
+        // あがり役：一色双龍会、坎張
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.PURE_TERMINAL_CHOWS, ChmYaku.CLOSED_WAIT);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_1, JanPai.MAN_2, JanPai.MAN_3), MenTsuType.CHI));
+        // 手牌：[1m] [3m] [5m] [5m] [7m] [7m] [8m] [8m] [9m] [9m]  [1m][2m][3m]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 1);}
+            {put(JanPai.MAN_3, 1);}
+            {put(JanPai.MAN_5, 2);}
+            {put(JanPai.MAN_7, 2);}
+            {put(JanPai.MAN_8, 2);}
+            {put(JanPai.MAN_9, 2);}}, mentsuList);
+        // あがり：[2m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_2, 2, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(一色三同順、平和)
      */
     @SuppressWarnings("serial")
@@ -2342,6 +2370,37 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.SOU_8, 1);}}, mentsuList);
         // あがり：[9s]ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_9, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(三色双龍会、辺張)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsThreeSuitedTerminalChowsAndEdgeWait() {
+        // あがり役：三色双龍会、辺張
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.THREE_SUITED_TERMINAL_CHOWS, ChmYaku.EDGE_WAIT);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_1, JanPai.MAN_2, JanPai.MAN_3), MenTsuType.CHI));
+        // 手牌：[7m] [8m] [9m] [5p] [5p] [1s] [2s] [3s] [8s] [9s]  [1m][2m][3m]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_7, 1);}
+            {put(JanPai.MAN_8, 1);}
+            {put(JanPai.MAN_9, 1);}
+            {put(JanPai.PIN_5, 2);}
+            {put(JanPai.SOU_1, 1);}
+            {put(JanPai.SOU_2, 1);}
+            {put(JanPai.SOU_3, 1);}
+            {put(JanPai.SOU_8, 1);}
+            {put(JanPai.SOU_9, 1);}}, mentsuList);
+        // あがり：[7s]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_7, 3, CompleteType.RON_NOT_MENZEN);
         // 自風：東
         final Wind playerWind = Wind.TON;
         // 場風：東
