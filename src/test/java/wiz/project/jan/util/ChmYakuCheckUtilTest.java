@@ -1930,6 +1930,34 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(一色双龍会、門前清)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsPureTerminalChowsAndConcealedHand() {
+        // あがり役：一色双龍会、門前清
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.PURE_TERMINAL_CHOWS, ChmYaku.CONCEALED_HAND);
+        // 手牌：[1m] [2m] [2m] [3m] [3m] [5m] [5m] [7m] [7m] [8m] [8m] [9m] [9m]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 1);}
+            {put(JanPai.MAN_2, 2);}
+            {put(JanPai.MAN_3, 2);}
+            {put(JanPai.MAN_5, 2);}
+            {put(JanPai.MAN_7, 2);}
+            {put(JanPai.MAN_8, 2);}
+            {put(JanPai.MAN_9, 2);}
+        });
+        // あがり：[1m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_1, 3, CompleteType.RON_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(一色三同順、平和)
      */
     @SuppressWarnings("serial")
