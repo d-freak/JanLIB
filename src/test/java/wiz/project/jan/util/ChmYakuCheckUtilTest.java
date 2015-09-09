@@ -1409,6 +1409,36 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(清龍、九連宝燈、四帰一)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsNineGates() {
+        // あがり役：清龍、九連宝燈、四帰一
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.PURE_STRAIGHT, ChmYaku.NINE_GATES, ChmYaku.TILE_HOG);
+        // 手牌：[1m] [1m] [1m] [2m] [3m] [4m] [5m] [6m] [7m] [8m] [9m] [9m] [9m]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 3);}
+            {put(JanPai.MAN_2, 1);}
+            {put(JanPai.MAN_3, 1);}
+            {put(JanPai.MAN_4, 1);}
+            {put(JanPai.MAN_5, 1);}
+            {put(JanPai.MAN_6, 1);}
+            {put(JanPai.MAN_7, 1);}
+            {put(JanPai.MAN_8, 1);}
+            {put(JanPai.MAN_9, 3);}
+        });
+        // あがり：[1m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_1, 3, CompleteType.RON_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(無字)
      */
     @SuppressWarnings("serial")

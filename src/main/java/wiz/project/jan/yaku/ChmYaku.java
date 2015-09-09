@@ -549,6 +549,7 @@ public enum ChmYaku {
                               ChmYaku.BIG_FOUR_WINDS,
                               ChmYaku.BIG_THREE_DRAGONS,
                               ChmYaku.ALL_GREEN,
+                              ChmYaku.NINE_GATES,
                               ChmYaku.FOUR_KONGS,
                               ChmYaku.SEVEN_SHIFTED_PAIRS,
                               ChmYaku.THIRTEEN_ORPHANS);
@@ -574,6 +575,12 @@ public enum ChmYaku {
             break;
         case BIG_THREE_DRAGONS:
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            break;
+        case NINE_GATES:
+            yakuList.add(FULL_FLUSH);
+            yakuList.add(CONCEALED_HAND);
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             break;

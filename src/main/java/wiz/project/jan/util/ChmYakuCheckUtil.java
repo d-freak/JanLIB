@@ -24,6 +24,7 @@ import wiz.project.jan.MenTsu;
 import wiz.project.jan.Wind;
 import wiz.project.jan.yaku.Chinryu;
 import wiz.project.jan.yaku.ChmYaku;
+import wiz.project.jan.yaku.Churen;
 import wiz.project.jan.yaku.IsshokuSouryukai;
 import wiz.project.jan.yaku.Karyu;
 import wiz.project.jan.yaku.Kumiairyu;
@@ -752,6 +753,23 @@ public final class ChmYakuCheckUtil {
                         }
                     }
                 }
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * 九連宝燈か
+     * 
+     * @param hand 手牌。
+     * @return 判定結果。
+     */
+    public static boolean isNineGates(final Map<JanPai, Integer> hand) {
+        for (final Churen churen : Churen.values()) {
+            final Map<JanPai, Integer> churenMap = churen.getPaiMap();
+            
+            if (hand.equals(churenMap)) {
+                return true;
             }
         }
         return false;

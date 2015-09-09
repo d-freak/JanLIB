@@ -835,6 +835,9 @@ public final class ChmHandCheckUtil {
             final Map<JanPai, Integer> menzenMap = hand.getMenZenMap();
             JanPaiUtil.cleanJanPaiMap(menzenMap);
             
+            if (ChmYakuCheckUtil.isNineGates(menzenMap)) {
+                newYakuList.add(ChmYaku.NINE_GATES);
+            }
             final List<JanPai> completablePaiList = getCompletableJanPaiList(menzenMap);
             final ChmYaku waitYaku = ChmYakuCheckUtil.getWaitYaku(pattern, completePai, completablePaiList);
             
