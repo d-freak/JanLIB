@@ -120,9 +120,8 @@ public final class ChmHandCheckUtil {
             
             return new ChmCompleteInfo(yakuList, completePai.getType());
         }
-        final ChmYaku terminalChows = ChmYakuCheckUtil.getTerminalChows(allPaiMap);
         
-        if (isCompleteNanatsui(allPaiMap) && hand.isMenZen() && terminalChows == ChmYaku.FLOWER) {
+        if (isCompleteNanatsui(hand, completePai)) {
             if (ChmYakuCheckUtil.isSevenShiftedPairs(allPaiMap)) {
                 yakuList.add(ChmYaku.SEVEN_SHIFTED_PAIRS);
             }
@@ -1010,6 +1009,35 @@ public final class ChmHandCheckUtil {
             typeCount += entry.getValue() / 2;
         }
         return typeCount == 7;
+    }
+    
+    /**
+     * 七対和了か
+     * 
+     * @param hand 手牌。
+     * @param completePai 和了牌。
+     * @return 判定結果。
+     */
+    private static boolean isCompleteNanatsui(final Hand hand, final CompleteJanPai completePai) {
+        if (!hand.isMenZen()) {
+            return false;
+        }
+        final Map<JanPai, Integer> allPaiMap = hand.getAllJanPaiMap();
+        JanPaiUtil.addJanPai(allPaiMap, completePai.getJanPai(), 1);
+        JanPaiUtil.cleanJanPaiMap(allPaiMap);
+        
+        if (!isCompleteNanatsui(allPaiMap)) {
+            return false;
+        }
+        
+        if (ChmYakuCheckUtil.isPureTerminalChows(allPaiMap)) {
+            return false;
+        }
+        
+        if (ChmYakuCheckUtil.isQuadrupleChow(hand, completePai)) {
+            return false;
+        }
+        return true;
     }
     
     /**

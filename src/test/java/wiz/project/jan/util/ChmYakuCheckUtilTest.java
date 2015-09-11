@@ -2012,6 +2012,31 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(一色四同順、混一色、門前清)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsQuadrupleChowAndConcealedHand() {
+        // あがり役：一色四同順、混一色、門前清
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.QUADRUPLE_CHOW, ChmYaku.HALF_FLUSH, ChmYaku.CONCEALED_HAND);
+        // 手牌：[2m] [2m] [2m] [3m] [3m] [3m] [3m] [4m] [4m] [4m] [4m] [東] [東]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_2, 3);}
+            {put(JanPai.MAN_3, 4);}
+            {put(JanPai.MAN_4, 4);}
+            {put(JanPai.TON, 2);}
+        });
+        // あがり：[2m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_2, 3, CompleteType.RON_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(七対、推不倒)
      */
     @SuppressWarnings("serial")

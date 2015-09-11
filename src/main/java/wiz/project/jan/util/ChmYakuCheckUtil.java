@@ -14,6 +14,7 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.CompletePattern;
@@ -1036,6 +1037,48 @@ public final class ChmYakuCheckUtil {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * 一色四同順か
+     * 
+     * @param hand 手牌。
+     * @param completePai 和了牌。
+     * @return 判定結果。
+     */
+    public static boolean isQuadrupleChow(final Hand hand, final CompleteJanPai completePai) {
+        final JanPai completeJanPai = completePai.getJanPai();
+        final Map<JanPai, Integer> paiMap = hand.getCleanMenZenMap(completeJanPai);
+        final List<JanPai> tileHogJanPaiList = new ArrayList<>();
+        
+        for (final Entry<JanPai, Integer> entry : paiMap.entrySet()) {
+            final int paiCount = entry.getValue();
+            
+            if (paiCount == 4) {
+                final JanPai pai = entry.getKey();
+                tileHogJanPaiList.add(pai);
+            }
+        }
+        
+        if (tileHogJanPaiList.size() != 3) {
+            return false;
+        }
+        final JanPai first = tileHogJanPaiList.get(0);
+        
+        if (first.isJi()) {
+            return false;
+        }
+        final JanPai second = first.getNext();
+        
+        if (second.getType() != first.getType() || !tileHogJanPaiList.contains(second)) {
+            return false;
+        }
+        final JanPai third = second.getNext();
+        
+        if (third.getType() != second.getType() || !tileHogJanPaiList.contains(third)) {
+            return false;
+        }
+        return true;
     }
     
     /**
