@@ -8,7 +8,6 @@
 package wiz.project.jan.yaku;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -471,93 +470,6 @@ public enum ChmYaku {
     
     
     /**
-     * 実装済みの役を取得
-     * 
-     * @return 実装済みの役。
-     */
-    public static List<ChmYaku> getReleased() {
-        return Arrays.asList (ChmYaku.PURE_DOUBLE_CHOW,
-                              ChmYaku.MIXED_DOUBLE_CHOW,
-                              ChmYaku.SHORT_STRAIGHT,
-                              ChmYaku.TWO_TERMINAL_CHOWS,
-                              ChmYaku.PUNG_OF_TERMINALS_OR_HONORS,
-                              ChmYaku.MELDED_KONG,
-                              ChmYaku.ONE_VOIDED_SUIT,
-                              ChmYaku.NO_HONORS,
-                              ChmYaku.EDGE_WAIT,
-                              ChmYaku.CLOSED_WAIT,
-                              ChmYaku.SINGLE_WAIT,
-                              ChmYaku.SELF_DRAWN,
-                              ChmYaku.DRAGON_PUNG,
-                              ChmYaku.PREVALENT_WIND,
-                              ChmYaku.SEAT_WIND,
-                              ChmYaku.CONCEALED_HAND,
-                              ChmYaku.ALL_CHOWS,
-                              ChmYaku.TILE_HOG,
-                              ChmYaku.DOUBLE_PUNG,
-                              ChmYaku.TWO_CONCEALED_PUNGS,
-                              ChmYaku.CONCEALED_KONG,
-                              ChmYaku.ALL_SIMPLES,
-                              ChmYaku.OUTSIDE_HAND,
-                              ChmYaku.FULLY_CONCEALED,
-                              ChmYaku.TWO_MELDED_KONGS,
-                              ChmYaku.LAST_TILE,
-                              ChmYaku.ALL_PUNGS,
-                              ChmYaku.HALF_FLUSH,
-                              ChmYaku.MIXED_SHIFTED_CHOWS,
-                              ChmYaku.ALL_TYPES,
-                              ChmYaku.MELDED_HAND,
-                              ChmYaku.TWO_DRAGON_PUNGS,
-                              ChmYaku.MIXED_STRAIGHT,
-                              ChmYaku.REVERSIBLE_TILES,
-                              ChmYaku.MIXED_TRIPLE_CHOW,
-                              ChmYaku.MIXED_SHIFTED_PUNGS,
-                              ChmYaku.CHICKEN_HAND,
-                              ChmYaku.LAST_TILE_DRAW,
-                              ChmYaku.LAST_TILE_CLAIM,
-                              ChmYaku.OUT_WITH_REPLACEMENT_TILE,
-                              ChmYaku.TWO_CONCEALED_KONGS,
-                              ChmYaku.LESSER_HONORS_AND_KNITTED_TILES,
-                              ChmYaku.KNITTED_STRAIGHT,
-                              ChmYaku.UPPER_FOUR,
-                              ChmYaku.LOWER_FOUR,
-                              ChmYaku.BIG_THREE_WINDS,
-                              ChmYaku.PURE_STRAIGHT,
-                              ChmYaku.THREE_SUITED_TERMINAL_CHOWS,
-                              ChmYaku.PURE_SHIFTED_CHOWS,
-                              ChmYaku.ALL_FIVES,
-                              ChmYaku.TRIPLE_PUNG,
-                              ChmYaku.THREE_CONCEALED_PUNGS,
-                              ChmYaku.SEVEN_PAIRS,
-                              ChmYaku.GREATER_HONORS_AND_KNITTED_TILES,
-                              ChmYaku.ALL_EVEN_PUNGS,
-                              ChmYaku.FULL_FLUSH,
-                              ChmYaku.PURE_TRIPLE_CHOW,
-                              ChmYaku.PURE_SHIFTED_PUNGS,
-                              ChmYaku.UPPER_TILES,
-                              ChmYaku.MIDDLE_TILES,
-                              ChmYaku.LOWER_TILES,
-                              ChmYaku.FOUR_SHIFTED_CHOWS,
-                              ChmYaku.THREE_KONGS,
-                              ChmYaku.ALL_TERMINALS_AND_HONORS,
-                              ChmYaku.QUADRUPLE_CHOW,
-                              ChmYaku.FOUR_PURE_SHIFTED_PUNGS,
-                              ChmYaku.ALL_TERMINALS,
-                              ChmYaku.ALL_HONORS,
-                              ChmYaku.FOUR_CONCEALED_PUNGS,
-                              ChmYaku.PURE_TERMINAL_CHOWS,
-                              ChmYaku.BIG_FOUR_WINDS,
-                              ChmYaku.BIG_THREE_DRAGONS,
-                              ChmYaku.ALL_GREEN,
-                              ChmYaku.NINE_GATES,
-                              ChmYaku.FOUR_KONGS,
-                              ChmYaku.SEVEN_SHIFTED_PAIRS,
-                              ChmYaku.THIRTEEN_ORPHANS);
-    }
-    
-    
-    
-    /**
      * 除外役リストを取得
      * 
      * @return 除外役リスト。
@@ -568,13 +480,13 @@ public enum ChmYaku {
         switch (this) {
         case BIG_FOUR_WINDS:
             yakuList.add(ALL_PUNGS);
-            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
-            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(PREVALENT_WIND);
+            yakuList.add(SEAT_WIND);
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             break;
         case BIG_THREE_DRAGONS:
-            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(DRAGON_PUNG);
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             break;
@@ -604,6 +516,10 @@ public enum ChmYaku {
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             yakuList.add(NO_HONORS);
+            break;
+        case LITTLE_THREE_DRAGONS:
+            yakuList.add(DRAGON_PUNG);
+            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             break;
         case ALL_HONORS:
             yakuList.add(ALL_PUNGS);
@@ -681,7 +597,7 @@ public enum ChmYaku {
             yakuList.add(SINGLE_WAIT);
             break;
         case TWO_DRAGON_PUNGS:
-            yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
+            yakuList.add(DRAGON_PUNG);
             yakuList.add(PUNG_OF_TERMINALS_OR_HONORS);
             break;
         case DRAGON_PUNG:

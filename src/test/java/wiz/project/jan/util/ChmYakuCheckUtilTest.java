@@ -367,7 +367,7 @@ public final class ChmYakuCheckUtilTest {
     @Test
     public void testIsBigThreeWinds() {
         // あがり役：三風刻、箭刻、圈風刻、門風刻、字一色
-        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.BIG_THREE_WINDS, ChmYaku.DRAGON_PUNG, ChmYaku.PREVALENT_WIND, ChmYaku.SEAT_WIND, ChmYaku.ALL_HONORS);
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.BIG_THREE_WINDS, ChmYaku.PREVALENT_WIND, ChmYaku.SEAT_WIND, ChmYaku.DRAGON_PUNG, ChmYaku.ALL_HONORS);
         final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
         mentsuList.add(new MenTsu(Arrays.asList(JanPai.TON, JanPai.TON, JanPai.TON), MenTsuType.PON));
         mentsuList.add(new MenTsu(Arrays.asList(JanPai.NAN, JanPai.NAN, JanPai.NAN), MenTsuType.PON));
@@ -1114,6 +1114,58 @@ public final class ChmYakuCheckUtilTest {
         });
         // あがり：[白]面前ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 3, CompleteType.RON_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(小四喜、箭刻、圈風刻、門風刻、字一色)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsLittleFourWinds() {
+        // あがり役：小四喜、箭刻、圈風刻、門風刻、字一色
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.LITTLE_FOUR_WINDS, ChmYaku.PREVALENT_WIND, ChmYaku.SEAT_WIND, ChmYaku.DRAGON_PUNG, ChmYaku.ALL_HONORS);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.TON, JanPai.TON, JanPai.TON), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.NAN, JanPai.NAN, JanPai.NAN), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.SHA, JanPai.SHA, JanPai.SHA), MenTsuType.PON));
+        // 手牌：[北] [北] [白] [白]  [東][東][東] [南][南][南] [西][西][西]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.PEI, 2);}
+            {put(JanPai.HAKU, 2);}}, mentsuList);
+        // あがり：[白]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.HAKU, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(小三元、圈風刻、門風刻、字一色)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsLittleThreeDragons() {
+        // あがり役：小三元、圈風刻、門風刻、字一色
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.LITTLE_THREE_DRAGONS, ChmYaku.PREVALENT_WIND, ChmYaku.SEAT_WIND, ChmYaku.ALL_HONORS);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.TON, JanPai.TON, JanPai.TON), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.HAKU, JanPai.HAKU, JanPai.HAKU), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.HATU, JanPai.HATU, JanPai.HATU), MenTsuType.PON));
+        // 手牌：[南] [南] [中] [中]  [東][東][東] [白][白][白] [發][發][發]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.NAN, 2);}
+            {put(JanPai.CHUN, 2);}}, mentsuList);
+        // あがり：[南]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.NAN, 3, CompleteType.RON_NOT_MENZEN);
         // 自風：東
         final Wind playerWind = Wind.TON;
         // 場風：東

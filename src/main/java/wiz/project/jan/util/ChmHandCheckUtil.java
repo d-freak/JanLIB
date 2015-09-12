@@ -19,6 +19,7 @@ import wiz.project.jan.CompleteJanPai;
 import wiz.project.jan.CompletePattern;
 import wiz.project.jan.Hand;
 import wiz.project.jan.JanPai;
+import wiz.project.jan.JanPaiType;
 import wiz.project.jan.MenTsu;
 import wiz.project.jan.MenTsuType;
 import wiz.project.jan.TenpaiPattern;
@@ -157,58 +158,16 @@ public final class ChmHandCheckUtil {
             yakuList.add(ChmYaku.ALL_SIMPLES);
         }
         
-        if (ChmYakuCheckUtil.isBigFourWinds(hand, allPaiMap)) {
-            yakuList.add(ChmYaku.BIG_FOUR_WINDS);
+        if (ChmYakuCheckUtil.isPrevalentWind(hand, allPaiMap, fieldWind)) {
+            yakuList.add(ChmYaku.PREVALENT_WIND);
         }
-        else if (ChmYakuCheckUtil.isBigThreeDragons(hand, allPaiMap)) {
-            yakuList.add(ChmYaku.BIG_THREE_DRAGONS);
-            
-            if (ChmYakuCheckUtil.isPrevalentWind(hand, allPaiMap, fieldWind)) {
-                yakuList.add(ChmYaku.PREVALENT_WIND);
-            }
-            
-            if (ChmYakuCheckUtil.isSeatWind(hand, allPaiMap, playerWind)) {
-                yakuList.add(ChmYaku.SEAT_WIND);
-            }
+        
+        if (ChmYakuCheckUtil.isSeatWind(hand, allPaiMap, playerWind)) {
+            yakuList.add(ChmYaku.SEAT_WIND);
         }
-        else if (ChmYakuCheckUtil.isBigThreeWinds(hand, allPaiMap)) {
-            yakuList.add(ChmYaku.BIG_THREE_WINDS);
-            
-            if (ChmYakuCheckUtil.isDragonPung(hand, allPaiMap)) {
-                yakuList.add(ChmYaku.DRAGON_PUNG);
-            }
-            
-            if (ChmYakuCheckUtil.isPrevalentWind(hand, allPaiMap, fieldWind)) {
-                yakuList.add(ChmYaku.PREVALENT_WIND);
-            }
-            
-            if (ChmYakuCheckUtil.isSeatWind(hand, allPaiMap, playerWind)) {
-                yakuList.add(ChmYaku.SEAT_WIND);
-            }
-        }
-        else if (ChmYakuCheckUtil.isTwoDragonPungs(hand, allPaiMap)) {
-            yakuList.add(ChmYaku.TWO_DRAGON_PUNGS);
-            
-            if (ChmYakuCheckUtil.isPrevalentWind(hand, allPaiMap, fieldWind)) {
-                yakuList.add(ChmYaku.PREVALENT_WIND);
-            }
-            
-            if (ChmYakuCheckUtil.isSeatWind(hand, allPaiMap, playerWind)) {
-                yakuList.add(ChmYaku.SEAT_WIND);
-            }
-        }
-        else {
-            if (ChmYakuCheckUtil.isDragonPung(hand, allPaiMap)) {
-                yakuList.add(ChmYaku.DRAGON_PUNG);
-            }
-            
-            if (ChmYakuCheckUtil.isPrevalentWind(hand, allPaiMap, fieldWind)) {
-                yakuList.add(ChmYaku.PREVALENT_WIND);
-            }
-            
-            if (ChmYakuCheckUtil.isSeatWind(hand, allPaiMap, playerWind)) {
-                yakuList.add(ChmYaku.SEAT_WIND);
-            }
+        
+        if (ChmYakuCheckUtil.isDragonPung(hand, allPaiMap)) {
+            yakuList.add(ChmYaku.DRAGON_PUNG);
         }
         
         if (ChmYakuCheckUtil.isAllTerminals(allPaiMap)) {
@@ -618,6 +577,39 @@ public final class ChmHandCheckUtil {
     }
     
     /**
+     * 三元牌役を取得
+     * 
+     * @param pattern 和了パターン。
+     * @return 三元牌役。
+     */
+    private static ChmYaku getDragonYaku(final CompletePattern pattern) {
+        final List<MenTsu> kohtsuList = pattern.getKohTsuList();
+        int dragonCount = 0;
+        
+        for (final MenTsu kohtsu : kohtsuList) {
+            final JanPaiType paiType = kohtsu.getHead().getType();
+            
+            if (paiType.equals(JanPaiType.JI_DORAGON)) {
+                dragonCount++;
+            }
+        }
+        
+        switch (dragonCount) {
+        case 3:
+            return ChmYaku.BIG_THREE_DRAGONS;
+        case 2:
+            final JanPaiType headType = pattern.getHead().getType();
+            
+            if (headType.equals(JanPaiType.JI_DORAGON)) {
+                return ChmYaku.LITTLE_THREE_DRAGONS;
+            }
+            return ChmYaku.TWO_DRAGON_PUNGS;
+        default:
+            return ChmYaku.FLOWER;
+        }
+    }
+    
+    /**
      * 槓子数の役を取得
      * 
      * @param kohtsuList 刻子リスト。
@@ -738,6 +730,26 @@ public final class ChmHandCheckUtil {
     }
     
     /**
+     * 字牌役を取得
+     * 
+     * @param pattern 和了パターン。
+     * @return 字牌役。
+     */
+    private static ChmYaku getJihaiYaku(final CompletePattern pattern) {
+        final ChmYaku windYaku = getWindYaku(pattern);
+        
+        if (!windYaku.equals(ChmYaku.FLOWER)) {
+            return windYaku;
+        }
+        final ChmYaku dragonYaku = getDragonYaku(pattern);
+        
+        if (!dragonYaku.equals(ChmYaku.FLOWER)) {
+            return dragonYaku;
+        }
+        return ChmYaku.FLOWER;
+    }
+    
+    /**
      * 面子役リストを取得
      * 
      * @param hand 手牌。
@@ -803,6 +815,11 @@ public final class ChmHandCheckUtil {
                 break;
             default:
                 break;
+            }
+            final ChmYaku jihaiYaku = getJihaiYaku(pattern);
+            
+            if (!jihaiYaku .equals(ChmYaku.FLOWER)) {
+                newYakuList.add(jihaiYaku);
             }
             final ChmYaku kantsuYaku = getKanTsuYaku(pattern.getKohTsuList());
             
@@ -965,6 +982,39 @@ public final class ChmHandCheckUtil {
             }
         }
         return yakuList;
+    }
+    
+    /**
+     * 風牌役を取得
+     * 
+     * @param pattern 和了パターン。
+     * @return 風牌役。
+     */
+    private static ChmYaku getWindYaku(final CompletePattern pattern) {
+        final List<MenTsu> kohtsuList = pattern.getKohTsuList();
+        int windCount = 0;
+        
+        for (final MenTsu kohtsu : kohtsuList) {
+            final JanPaiType paiType = kohtsu.getHead().getType();
+            
+            if (paiType.equals(JanPaiType.JI_WIND)) {
+                windCount++;
+            }
+        }
+        
+        switch (windCount) {
+        case 4:
+            return ChmYaku.BIG_FOUR_WINDS;
+        case 3:
+            final JanPaiType headType = pattern.getHead().getType();
+            
+            if (headType.equals(JanPaiType.JI_WIND)) {
+                return ChmYaku.LITTLE_FOUR_WINDS;
+            }
+            return ChmYaku.BIG_THREE_WINDS;
+        default:
+            return ChmYaku.FLOWER;
+        }
     }
     
     /**
