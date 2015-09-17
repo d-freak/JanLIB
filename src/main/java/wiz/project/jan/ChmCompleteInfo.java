@@ -28,6 +28,13 @@ public final class ChmCompleteInfo {
     public ChmCompleteInfo(final List<ChmYaku> yakuList, final CompleteType type) {
         setYakuList(yakuList);
         setCompleteType(type);
+        
+        int totalPoint = 0;
+        
+        for (final ChmYaku yaku : yakuList) {
+            totalPoint += yaku.getPoint();
+        }
+        setTotalPoint(totalPoint);
     }
     
     /**
@@ -37,8 +44,9 @@ public final class ChmCompleteInfo {
      */
     public ChmCompleteInfo(final ChmCompleteInfo source) {
         if (source != null) {
-            _yakuList = deepCopyList(source._yakuList);
             _completeType = source._completeType;
+            _totalPoint = source._totalPoint;
+            _yakuList = deepCopyList(source._yakuList);
         }
     }
     
@@ -83,6 +91,15 @@ public final class ChmCompleteInfo {
      */
     public List<ChmYaku> getYakuList() {
         return deepCopyList(_yakuList);
+    }
+    
+    /**
+     * 合計得点を取得
+     * 
+     * @return 役の得点。
+     */
+    public int getTotalPoint() {
+        return _totalPoint;
     }
     
     /**
@@ -132,6 +149,15 @@ public final class ChmCompleteInfo {
     }
     
     /**
+     * 合計得点を設定
+     * 
+     * @param totalPoint 合計得点。
+     */
+    private void setTotalPoint(final int totalPoint) {
+        _totalPoint = totalPoint;
+    }
+    
+    /**
      * 役リストを設定
      * 
      * @param yakuList 役リスト。
@@ -148,14 +174,19 @@ public final class ChmCompleteInfo {
     
     
     /**
-     * 役リスト
-     */
-    private List<ChmYaku> _yakuList = new ArrayList<ChmYaku>();
-    
-    /**
      * 和了タイプ
      */
     private CompleteType _completeType = CompleteType.UNKNOWN;
+    
+    /**
+     * 合計得点
+     */
+    private int _totalPoint = 0;
+    
+    /**
+     * 役リスト
+     */
+    private List<ChmYaku> _yakuList = new ArrayList<ChmYaku>();
     
 }
 
