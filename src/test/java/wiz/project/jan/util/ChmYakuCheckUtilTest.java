@@ -1376,7 +1376,7 @@ public final class ChmYakuCheckUtilTest {
      */
     @SuppressWarnings("serial")
     @Test
-    public void testIsMixedShiftedPungs() {
+    public void testIsMixedShiftedPungs1() {
         // あがり役：三色三節高、断幺
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.MIXED_SHIFTED_PUNGS, ChmYaku.ALL_SIMPLES);
         final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
@@ -1384,6 +1384,33 @@ public final class ChmYakuCheckUtilTest {
         mentsuList.add(new MenTsu(Arrays.asList(JanPai.PIN_3, JanPai.PIN_3, JanPai.PIN_3), MenTsuType.PON));
         mentsuList.add(new MenTsu(Arrays.asList(JanPai.SOU_4, JanPai.SOU_4, JanPai.SOU_4), MenTsuType.PON));
         // 手牌：[3m] [4m] [8s] [8s]  [2m][2m][2m] [3p][3p][3p] [4s][4s][4s]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_3, 1);}
+            {put(JanPai.MAN_4, 1);}
+            {put(JanPai.SOU_8, 2);}}, mentsuList);
+        // あがり：[5m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_5, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(三色三節高、幺九刻、無字)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsMixedShiftedPungs2() {
+        // あがり役：三色三節高、幺九刻、無字
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.MIXED_SHIFTED_PUNGS, ChmYaku.PUNG_OF_TERMINALS_OR_HONORS, ChmYaku.NO_HONORS);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_7, JanPai.MAN_7, JanPai.MAN_7), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.PIN_8, JanPai.PIN_8, JanPai.PIN_8), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.SOU_9, JanPai.SOU_9, JanPai.SOU_9), MenTsuType.PON));
+        // 手牌：[3m] [4m] [8s] [8s]  [7m][7m][7m] [8p][8p][8p] [9s][9s][9s]
         final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
             {put(JanPai.MAN_3, 1);}
             {put(JanPai.MAN_4, 1);}

@@ -186,6 +186,12 @@ public enum JanPai {
         case MAN_6:
             paiList.addAll(Arrays.asList(PIN_7, SOU_7));
             break;
+        case MAN_7:
+            paiList.addAll(Arrays.asList(PIN_8, SOU_8));
+            break;
+        case MAN_8:
+            paiList.addAll(Arrays.asList(PIN_9, SOU_9));
+            break;
         case PIN_1:
             paiList.addAll(Arrays.asList(SOU_2, MAN_2));
             break;
@@ -204,6 +210,12 @@ public enum JanPai {
         case PIN_6:
             paiList.addAll(Arrays.asList(SOU_7, MAN_7));
             break;
+        case PIN_7:
+            paiList.addAll(Arrays.asList(SOU_8, MAN_8));
+            break;
+        case PIN_8:
+            paiList.addAll(Arrays.asList(SOU_9, MAN_9));
+            break;
         case SOU_1:
             paiList.addAll(Arrays.asList(MAN_2, PIN_2));
             break;
@@ -221,6 +233,12 @@ public enum JanPai {
             break;
         case SOU_6:
             paiList.addAll(Arrays.asList(MAN_7, PIN_7));
+            break;
+        case SOU_7:
+            paiList.addAll(Arrays.asList(MAN_8, PIN_8));
+            break;
+        case SOU_8:
+            paiList.addAll(Arrays.asList(MAN_9, PIN_9));
             break;
         default:
             break;
