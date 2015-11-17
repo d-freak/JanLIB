@@ -2117,6 +2117,34 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(七対、推不倒、清一色)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsReversibleTilesAndFullFlush() {
+        // あがり役：七対、清一色、推不倒
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.FULL_FLUSH, ChmYaku.REVERSIBLE_TILES);
+        // 手牌：[1p] [1p] [2p] [2p] [3p] [3p] [4p] [4p] [5p] [5p] [8p] [8p] [9p]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.PIN_1, 2);}
+            {put(JanPai.PIN_2, 2);}
+            {put(JanPai.PIN_3, 2);}
+            {put(JanPai.PIN_4, 2);}
+            {put(JanPai.PIN_5, 2);}
+            {put(JanPai.PIN_8, 2);}
+            {put(JanPai.PIN_9, 1);}
+        });
+        // あがり：[9p]面前ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.PIN_9, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(七対)
      */
     @SuppressWarnings("serial")
