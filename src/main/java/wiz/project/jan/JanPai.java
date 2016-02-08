@@ -463,6 +463,11 @@ public enum JanPai {
         if (!shuntsu.isShunTsu()) {
             return false;
         }
+        final boolean isCalled = shuntsu.getMenTsuType().isCalled();
+        
+        if (isCalled) {
+            return false;
+        }
         final JanPai middle = shuntsu.getMiddle();
         
         if (this.equals(middle)) {
@@ -479,6 +484,11 @@ public enum JanPai {
      */
     public boolean isEdge(final MenTsu shuntsu) {
         if (!shuntsu.isShunTsu()) {
+            return false;
+        }
+        final boolean isCalled = shuntsu.getMenTsuType().isCalled();
+        
+        if (isCalled) {
             return false;
         }
         final JanPai head = shuntsu.getHead();

@@ -999,7 +999,7 @@ public final class ChmYakuCheckUtilTest {
      */
     @SuppressWarnings("serial")
     @Test
-    public void testIsKnittedStraight() {
+    public void testIsKnittedStraight1() {
         // あがり役：組合龍、箭刻
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.KNITTED_STRAIGHT, ChmYaku.DRAGON_PUNG);
         final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
@@ -1014,6 +1014,68 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.SOU_3, 1);}
             {put(JanPai.SOU_6, 1);}
             {put(JanPai.SOU_9, 3);}}, mentsuList);
+        // あがり：[7m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(組合龍)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsKnittedStraight2() {
+        // あがり役：組合龍
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.KNITTED_STRAIGHT);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_7, JanPai.MAN_8, JanPai.MAN_9), MenTsuType.CHI));
+        // 手牌：[1m] [4m] [2p] [5p] [8p] [3s] [6s] [9s] [白] [白]  [7m][8m][9m]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 1);}
+            {put(JanPai.MAN_4, 1);}
+            {put(JanPai.PIN_2, 1);}
+            {put(JanPai.PIN_5, 1);}
+            {put(JanPai.PIN_8, 1);}
+            {put(JanPai.SOU_3, 1);}
+            {put(JanPai.SOU_6, 1);}
+            {put(JanPai.SOU_9, 1);}
+            {put(JanPai.HAKU, 2);}}, mentsuList);
+        // あがり：[7m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(組合龍)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsKnittedStraight3() {
+        // あがり役：組合龍
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.KNITTED_STRAIGHT);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_6, JanPai.MAN_7, JanPai.MAN_8), MenTsuType.CHI));
+        // 手牌：[1m] [4m] [2p] [5p] [8p] [3s] [6s] [9s] [白] [白]  [6m][7m][8m]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_1, 1);}
+            {put(JanPai.MAN_4, 1);}
+            {put(JanPai.PIN_2, 1);}
+            {put(JanPai.PIN_5, 1);}
+            {put(JanPai.PIN_8, 1);}
+            {put(JanPai.SOU_3, 1);}
+            {put(JanPai.SOU_6, 1);}
+            {put(JanPai.SOU_9, 1);}
+            {put(JanPai.HAKU, 2);}}, mentsuList);
         // あがり：[7m]ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_7, 3, CompleteType.RON_NOT_MENZEN);
         // 自風：東
@@ -1046,6 +1108,70 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.SOU_7, 3);}}, mentsuList);
         // あがり：[8m]ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_8, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(組合龍、坎張)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsKnittedStraightAndClosedWait() {
+        // あがり役：組合龍、平和、坎張、面前清
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.KNITTED_STRAIGHT, ChmYaku.ALL_CHOWS, ChmYaku.CLOSED_WAIT, ChmYaku.CONCEALED_HAND);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        // 手牌：[2m] [5m] [7m] [8m] [9m] [3p] [6p] [9p] [1s] [4s] [7s] [7s] [7s]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_2, 1);}
+            {put(JanPai.MAN_5, 1);}
+            {put(JanPai.MAN_7, 1);}
+            {put(JanPai.MAN_8, 1);}
+            {put(JanPai.MAN_9, 1);}
+            {put(JanPai.PIN_3, 1);}
+            {put(JanPai.PIN_6, 1);}
+            {put(JanPai.PIN_9, 1);}
+            {put(JanPai.SOU_1, 1);}
+            {put(JanPai.SOU_4, 1);}
+            {put(JanPai.SOU_7, 3);}}, mentsuList);
+        // あがり：[8m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_8, 2, CompleteType.RON_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(組合龍、辺張)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsKnittedStraightAndEdgeWait() {
+        // あがり役：組合龍、平和、辺張、面前清
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.KNITTED_STRAIGHT, ChmYaku.ALL_CHOWS, ChmYaku.EDGE_WAIT, ChmYaku.CONCEALED_HAND);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        // 手牌：[2m] [5m] [8m] [1p] [2p] [3p] [6p] [9p] [1s] [4s] [7s] [7s] [7s]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_2, 1);}
+            {put(JanPai.MAN_5, 1);}
+            {put(JanPai.MAN_8, 1);}
+            {put(JanPai.PIN_1, 1);}
+            {put(JanPai.PIN_2, 1);}
+            {put(JanPai.PIN_3, 1);}
+            {put(JanPai.PIN_6, 1);}
+            {put(JanPai.PIN_9, 1);}
+            {put(JanPai.SOU_1, 1);}
+            {put(JanPai.SOU_4, 1);}
+            {put(JanPai.SOU_7, 3);}}, mentsuList);
+        // あがり：[3p]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.PIN_3, 2, CompleteType.RON_MENZEN);
         // 自風：東
         final Wind playerWind = Wind.TON;
         // 場風：東
