@@ -1718,6 +1718,34 @@ public final class ChmYakuCheckUtilTest {
     }
     
     /**
+     * getCompleteInfo()のテスト(幺九刻、混一色、四帰一)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsPungOfTerminalsOrHonorsAndTileHog() {
+        // あがり役：幺九刻、混一色、四帰一
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.PUNG_OF_TERMINALS_OR_HONORS, ChmYaku.HALF_FLUSH, ChmYaku.TILE_HOG);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.PEI, JanPai.PEI, JanPai.PEI), MenTsuType.PON));
+        // 手牌：[1s] [1s] [2s] [3s] [3s] [3s] [3s] [4s] [5s] [6s]  [北][北][北]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.SOU_1, 2);}
+            {put(JanPai.SOU_2, 1);}
+            {put(JanPai.SOU_3, 4);}
+            {put(JanPai.SOU_4, 1);}
+            {put(JanPai.SOU_5, 1);}
+            {put(JanPai.SOU_6, 1);}}, mentsuList);
+        // あがり：[4s]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_4, 2, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
      * getCompleteInfo()のテスト(一般高)
      */
     @SuppressWarnings("serial")
@@ -2549,7 +2577,7 @@ public final class ChmYakuCheckUtilTest {
      */
     @SuppressWarnings("serial")
     @Test
-    public void testIsTileHong() {
+    public void testIsTileHog() {
         // あがり役：七対、四帰一、四帰一
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.TILE_HOG, ChmYaku.TILE_HOG);
         // 手牌：[1m] [1m] [1m] [1m] [4p] [4p] [4p] [4p] [6s] [6s] [白] [中] [中] 

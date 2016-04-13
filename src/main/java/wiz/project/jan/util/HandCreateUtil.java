@@ -106,27 +106,29 @@ public final class HandCreateUtil {
      * 刻子リストを取得
      * 
      * @param source 取得元。取得分の牌が削除される。
+     * @param completePai 和了牌。
      * @return 刻子リスト。
      */
     public static List<MenTsu> getKohTsuList(final Map<JanPai, Integer> source, final CompleteJanPai completePai) {
         final List<MenTsu> resultList = new ArrayList<MenTsu>();
+        
         for (final JanPai pai : JanPai.values()) {
             if (!source.containsKey(pai)) {
                 continue;
             }
             final int count = source.get(pai);
+            
             if (count == 3) {
+                final boolean isRon = pai.equals(completePai.getJanPai()) && completePai.getType().isRon();
+                
+                resultList.add(getKohTsu(pai, isRon));
                 source.remove(pai);
-                final List<JanPai> kohTsu = new ArrayList<JanPai>();
-                for (int i = 0; i < 3; i++) {
-                    kohTsu.add(pai);
-                }
-                if (pai.equals(completePai.getJanPai()) && completePai.getType().isRon()) {
-                	resultList.add(new MenTsu(kohTsu, MenTsuType.PON));
-                }
-                else {
-                    resultList.add(new MenTsu(kohTsu, MenTsuType.STANDARD_KOU_TSU));
-                }
+            }
+            else if (count == 4) {
+                final boolean isRon = pai.equals(completePai.getJanPai()) && completePai.getType().isRon();
+                
+                resultList.add(getKohTsu(pai, isRon));
+                source.put(pai, 1);
             }
         }
         return resultList;
@@ -248,6 +250,30 @@ public final class HandCreateUtil {
         }
         while (foundShunTsu && !source.isEmpty());
         return resultList;
+    }
+    
+    
+    
+    /**
+     * 指定牌の刻子を取得
+     * 
+     * @param pai 指定牌。
+     * @param isRon 指定牌がロン牌か。
+     * @return 刻子。
+     */
+    private static MenTsu getKohTsu(final JanPai pai, final boolean isRon) {
+        final List<JanPai> kohTsu = new ArrayList<JanPai>();
+        
+        for (int i = 0; i < 3; i++) {
+            kohTsu.add(pai);
+        }
+        
+        if (isRon) {
+            return new MenTsu(kohTsu, MenTsuType.PON);
+        }
+        else {
+            return new MenTsu(kohTsu, MenTsuType.STANDARD_KOU_TSU);
+        }
     }
     
 }
