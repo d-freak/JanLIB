@@ -183,9 +183,6 @@ public final class ChmHandCheckUtil {
         if (ChmYakuCheckUtil.isFullFlush(allPaiMap)) {
             yakuList.add(ChmYaku.FULL_FLUSH);
         }
-        else if (ChmYakuCheckUtil.isReversibleTiles(allPaiMap)) {
-            yakuList.add(ChmYaku.REVERSIBLE_TILES);
-        }
         else if (ChmYakuCheckUtil.isHalfFlush(allPaiMap)) {
             yakuList.add(ChmYaku.HALF_FLUSH);
         }
@@ -194,6 +191,10 @@ public final class ChmHandCheckUtil {
         }
         else if (ChmYakuCheckUtil.isOneVoidedSuit(allPaiMap)) {
             yakuList.add(ChmYaku.ONE_VOIDED_SUIT);
+        }
+        
+        if (ChmYakuCheckUtil.isReversibleTiles(allPaiMap)) {
+            yakuList.add(ChmYaku.REVERSIBLE_TILES);
         }
         
         if (ChmYakuCheckUtil.isNoHonors(allPaiMap)) {

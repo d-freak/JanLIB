@@ -589,6 +589,9 @@ public enum ChmYaku {
         case LOWER_FOUR:
             yakuList.add(NO_HONORS);
             break;
+        case REVERSIBLE_TILES:
+            yakuList.add(ONE_VOIDED_SUIT);
+            break;
         case TWO_CONCEALED_KONGS:
             yakuList.add(TWO_MELDED_KONGS);
             yakuList.add(TWO_CONCEALED_PUNGS);
