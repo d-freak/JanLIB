@@ -7,6 +7,7 @@
 
 package wiz.project.jan.util;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import wiz.project.jan.JanPai;
+import wiz.project.jan.JanPaiType;
 import wiz.project.jan.Wind;
 
 
@@ -106,6 +108,28 @@ public final class JanPaiUtil {
             final int count = entry.getValue();
             for (int i = 0; i < count; i++) {
                 resultList.add(pai);
+            }
+        }
+        return resultList;
+    }
+    
+    /**
+     * 赤牌インデックスリストを生成
+     * 
+     * @return 赤牌インデックスリスト。
+     */
+    public static List<Integer> createAkaUIndexList(final List<JanPai> deck) {
+        final List<Integer> resultList = new ArrayList<Integer>();
+        
+        for (final JanPaiType type : JanPaiType.values()) {
+            final List<Integer> UIndexList = getUIndexList(deck, type);
+            
+            Collections.shuffle(UIndexList, new SecureRandom());
+            
+            try {
+                resultList.add(UIndexList.get(0));
+            }
+            catch (IndexOutOfBoundsException e) {
             }
         }
         return resultList;
@@ -226,6 +250,25 @@ public final class JanPaiUtil {
         else {
             source.put(key, count - value);
         }
+    }
+    
+    
+    
+    private static List<Integer> getUIndexList(final List<JanPai> deck, final JanPaiType type) {
+        final List<Integer> resultList = new ArrayList<>();
+        final JanPai U = type.getU();
+        final boolean isFive = U.isFive();
+        int index = 0;
+        
+        if (isFive) {
+            for (final JanPai pai : deck) {
+                if (U.equals(pai)) {
+                    resultList.add(index);
+                }
+                index++;
+            }
+        }
+        return resultList;
     }
     
     

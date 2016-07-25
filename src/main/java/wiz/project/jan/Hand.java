@@ -43,6 +43,19 @@ public final class Hand implements Cloneable {
      * 
      * @param menZen 面前手牌。
      */
+    public Hand(final List<JanPai> menZen, final boolean hasAkaMan, final boolean hasAkaPin, final boolean hasAkaSou) {
+        this();
+        setJanPaiList(menZen);
+        _hasAkaMan = hasAkaMan;
+        _hasAkaPin = hasAkaPin;
+        _hasAkaSou = hasAkaSou;
+    }
+    
+    /**
+     * コンストラクタ
+     * 
+     * @param menZen 面前手牌。
+     */
     public Hand(final Map<JanPai, Integer> menZen) {
         this();
         setJanPaiMap(menZen);
@@ -469,6 +482,21 @@ public final class Hand implements Cloneable {
      * 確定面子リスト
      */
     private List<MenTsu> _fixedMenTsuList = new ArrayList<MenTsu>();
+    
+    /**
+     * 赤五萬があるか
+     */
+    private boolean _hasAkaMan = false;
+    
+    /**
+     * 赤五筒があるか
+     */
+    private boolean _hasAkaPin = false;
+    
+    /**
+     * 赤五索があるか
+     */
+    private boolean _hasAkaSou = false;
     
 }
 
