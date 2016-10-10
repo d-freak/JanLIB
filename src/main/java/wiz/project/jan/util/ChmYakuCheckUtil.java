@@ -467,14 +467,8 @@ public final class ChmYakuCheckUtil {
      * @return 判定結果。
      */
     public static boolean isMeldedHand(final Hand hand, final CompleteJanPai completePai) {
-        if (hand.getFixedMenTsuCount() != 4) {
+        if (hand.getCalledMenTsuCount() != 4) {
             return false;
-        }
-        
-        for (final MenTsu mentsu : hand.getFixedMenTsuList()) {
-            if (!mentsu.getMenTsuType().isCalled()) {
-                return false;
-            }
         }
         return completePai.getType().isRon();
     }

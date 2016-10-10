@@ -453,7 +453,7 @@ public final class ChmYakuCheckUtilTest {
      */
     @SuppressWarnings("serial")
     @Test
-    public void testIsConcealedKong() {
+    public void testIsConcealedKong1() {
         // あがり役：暗槓、断幺
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.CONCEALED_KONG, ChmYaku.ALL_SIMPLES);
         final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
@@ -467,6 +467,32 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.SOU_3, 1);}}, mentsuList);
         // あがり：[4s]ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_4, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+    
+    /**
+     * getCompleteInfo()のテスト(碰碰和、暗槓、単調将、断幺) ※ 全求人を含まないことを確認するテスト
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsConcealedKong2() {
+        // あがり役：碰碰和、暗槓、単調将、断幺
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.ALL_PUNGS, ChmYaku.CONCEALED_KONG, ChmYaku.SINGLE_WAIT, ChmYaku.ALL_SIMPLES);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_2, JanPai.MAN_2, JanPai.MAN_2, JanPai.MAN_2), MenTsuType.KAN_DARK));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_3, JanPai.MAN_3, JanPai.MAN_3), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.PIN_5, JanPai.PIN_5, JanPai.PIN_5), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.PIN_6, JanPai.PIN_6, JanPai.PIN_6), MenTsuType.PON));
+        // 手牌：[4s]  [■][2m][2m][■] [3m][3m][3m] [5p][5p][5p] [6p][6p][6p]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.SOU_4, 1);}}, mentsuList);
+        // あがり：[4s]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_4, 2, CompleteType.RON_NOT_MENZEN);
         // 自風：東
         final Wind playerWind = Wind.TON;
         // 場風：東

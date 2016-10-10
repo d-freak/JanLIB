@@ -204,6 +204,22 @@ public final class Hand implements Cloneable {
     }
     
     /**
+     * 副露面子数を取得
+     * 
+     * @return 副露面子数。
+     */
+    public int getCalledMenTsuCount() {
+        int fixedMenTsuCount = 0;
+        
+        for (final MenTsu mentsu : getFixedMenTsuList()) {
+            if (mentsu.getMenTsuType().isCalled()) {
+                fixedMenTsuCount++;
+            }
+        }
+        return fixedMenTsuCount;
+    }
+    
+    /**
      * 存在しない牌を削除済みで指定牌込みの面前手牌マップを取得
      * 
      * @param source 手牌に追加する牌。
@@ -350,12 +366,7 @@ public final class Hand implements Cloneable {
      * @return 判定結果。
      */
     public boolean isMenZen() {
-        for (final MenTsu mentsu : getFixedMenTsuList()) {
-            if (mentsu.getMenTsuType().isCalled()) {
-                return false;
-            }
-        }
-        return true;
+        return getCalledMenTsuCount() == 0;
     }
     
     /**
