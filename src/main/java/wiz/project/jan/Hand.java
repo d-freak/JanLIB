@@ -148,25 +148,6 @@ public final class Hand implements Cloneable {
     }
     
     /**
-     * 台湾麻雀の牌を追加
-     * 
-     * @param pai 追加する台湾麻雀の牌。
-     */
-    public void addTwmJanPai(final JanPai pai) {
-        if (pai == null) {
-            return;
-        }
-        
-        if (isTwmLimitSize()) {
-            return;
-        }
-        if (getJanPaiCount(pai) >= 4) {
-            return;
-        }
-        JanPaiUtil.addJanPai(_core, pai, 1);
-    }
-    
-    /**
      * フィールドを全消去
      */
     public void clear() {
@@ -312,16 +293,6 @@ public final class Hand implements Cloneable {
     }
     
     /**
-     * 台湾麻雀の面前手牌の上限枚数を取得
-     * 
-     * @return 台湾麻雀の面前手牌の上限枚数。
-     */
-    public int getTwmLimitSize() {
-        final int fixedCount = _fixedMenTsuList.size() * 3;
-        return 17 - fixedCount;
-    }
-    
-    /**
      * 空き枚数を取得
      * 
      * @return 空き枚数。
@@ -348,16 +319,6 @@ public final class Hand implements Cloneable {
     public boolean isLimitSize() {
         final int menZenCount = JanPaiUtil.getJanPaiTotalCount(_core);
         return menZenCount >= getLimitSize();
-    }
-    
-    /**
-     * 台湾麻雀の面前手牌の枚数上限に達しているか
-     * 
-     * @return 判定結果。
-     */
-    public boolean isTwmLimitSize() {
-        final int menZenCount = JanPaiUtil.getJanPaiTotalCount(_core);
-        return menZenCount >= getTwmLimitSize();
     }
     
     /**
