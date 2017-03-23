@@ -1,6 +1,6 @@
 /**
  * ChmYakuCheckUtilTest.java
- * 
+ *
  * @Author
  *   Masasutzu
  */
@@ -31,7 +31,7 @@ import wiz.project.jan.yaku.ChmYaku;
  * ChmHandCheckUtilのテスト
  */
 public final class ChmYakuCheckUtilTest {
-    
+
     /**
      * getCompleteInfo()のテスト(平和)
      */
@@ -61,7 +61,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(全双刻、双同刻、双同刻)
      */
@@ -87,7 +87,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(全帯五)
      */
@@ -115,7 +115,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、緑一色、混一色、四帰一)
      */
@@ -142,7 +142,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、字一色)
      */
@@ -170,7 +170,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(碰碰和、断幺)
      */
@@ -196,7 +196,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、断幺)
      */
@@ -224,7 +224,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、清幺九、四帰一)
      */
@@ -251,7 +251,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、混幺九)
      */
@@ -279,7 +279,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、五門斉)
      */
@@ -307,7 +307,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(大四喜、字一色)
      */
@@ -333,7 +333,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(大三元、圈風刻、門風刻、字一色)
      */
@@ -359,7 +359,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三風刻、箭刻、圈風刻、門風刻、字一色)
      */
@@ -385,7 +385,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(無番和)
      */
@@ -416,7 +416,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(坎張)
      */
@@ -447,7 +447,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(暗槓、断幺)
      */
@@ -474,7 +474,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(碰碰和、暗槓、単調将、断幺) ※ 全求人を含まないことを確認するテスト
      */
@@ -500,7 +500,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(暗槓、四暗刻、断幺、不求人)
      */
@@ -526,7 +526,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(暗槓、三暗刻、断幺)
      */
@@ -553,7 +553,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双同刻)
      */
@@ -580,7 +580,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双同刻、幺九刻、幺九刻)
      */
@@ -607,7 +607,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(暗槓、双暗刻、断幺)
      */
@@ -634,7 +634,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(辺張)
      */
@@ -665,7 +665,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(四暗刻、断幺、不求人)
      */
@@ -691,7 +691,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(四槓、断幺)
      */
@@ -717,7 +717,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(四槓、暗槓、断幺)
      */
@@ -743,7 +743,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(四槓、四暗刻、断幺)
      */
@@ -769,7 +769,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(四槓、三暗刻、断幺)
      */
@@ -795,7 +795,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(四槓、双暗槓、断幺)
      */
@@ -821,7 +821,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色四節高、混一色)
      */
@@ -847,7 +847,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色四歩高、平和、缺一門)
      */
@@ -875,7 +875,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色四歩高、平和、清一色)
      */
@@ -904,7 +904,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、緑一色、断幺、清一色、四帰一、四帰一)
      */
@@ -930,7 +930,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、不求人)
      */
@@ -958,7 +958,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七星不靠)
      */
@@ -992,7 +992,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、緑一色、混一色、四帰一)
      */
@@ -1019,7 +1019,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(組合龍)
      */
@@ -1049,7 +1049,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(組合龍)
      */
@@ -1080,7 +1080,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(組合龍)
      */
@@ -1111,7 +1111,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(組合龍、平和)
      */
@@ -1141,7 +1141,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(組合龍、坎張)
      */
@@ -1173,7 +1173,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(組合龍、辺張)
      */
@@ -1205,7 +1205,65 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
+    /**
+     * getCompleteInfo()のテスト(平和、断幺、和絶張)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsLastTile1() {
+        // あがり役：平和、断幺、和絶張
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.ALL_CHOWS, ChmYaku.ALL_SIMPLES, ChmYaku.LAST_TILE);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_2, JanPai.MAN_3, JanPai.MAN_4), MenTsuType.CHI));
+        // 手牌：[4m] [5m] [4p] [5p] [6p] [6s] [6s] [6s] [7s] [8s]  [2m][3m][4m]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_4, 1);}
+            {put(JanPai.MAN_5, 1);}
+            {put(JanPai.PIN_4, 1);}
+            {put(JanPai.PIN_5, 1);}
+            {put(JanPai.PIN_6, 1);}
+            {put(JanPai.SOU_6, 3);}
+            {put(JanPai.SOU_7, 1);}
+            {put(JanPai.SOU_8, 1);}}, mentsuList);
+        // あがり：[3m]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_3, 0, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+
+    /**
+     * getCompleteInfo()のテスト(双同刻、幺九刻、幺九刻、単調将 ※ 和絶張を含まないことを確認するテスト)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsLastTile2() {
+        // あがり役：双同刻、幺九刻、幺九刻、単調将
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.DOUBLE_PUNG, ChmYaku.PUNG_OF_TERMINALS_OR_HONORS, ChmYaku.PUNG_OF_TERMINALS_OR_HONORS, ChmYaku.SINGLE_WAIT);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.MAN_9, JanPai.MAN_9, JanPai.MAN_9), MenTsuType.PON));
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.SOU_2, JanPai.SOU_2, JanPai.SOU_2), MenTsuType.PON));
+        // 手牌：[9p] [9p] [9p] [3s] [4s] [5s] [發]  [9m][9m][9m] [2s][2s][2s]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.PIN_9, 3);}
+            {put(JanPai.SOU_3, 1);}
+            {put(JanPai.SOU_4, 1);}
+            {put(JanPai.SOU_5, 1);}
+            {put(JanPai.HATU, 1);}}, mentsuList);
+        // あがり：[發]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.HATU, 0, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+
     /**
      * getCompleteInfo()のテスト(全不靠)
      */
@@ -1239,7 +1297,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(全不靠、組合龍)
      */
@@ -1273,7 +1331,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(小四喜、箭刻、圈風刻、門風刻、字一色)
      */
@@ -1299,7 +1357,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(小三元、圈風刻、門風刻、字一色)
      */
@@ -1325,7 +1383,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、小于五)
      */
@@ -1353,7 +1411,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、全小)
      */
@@ -1381,7 +1439,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(全求人)
      */
@@ -1407,7 +1465,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(明槓、断幺)
      */
@@ -1434,7 +1492,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、全中)
      */
@@ -1462,7 +1520,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(喜相逢)
      */
@@ -1491,7 +1549,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三色三歩高)
      */
@@ -1522,7 +1580,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三色三節高、断幺)
      */
@@ -1549,7 +1607,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三色三節高、幺九刻、無字)
      */
@@ -1576,7 +1634,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(花龍)
      */
@@ -1607,7 +1665,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三色三同順)
      */
@@ -1638,7 +1696,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(清龍、九連宝燈、四帰一)
      */
@@ -1668,7 +1726,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(無字)
      */
@@ -1697,7 +1755,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、缺一門)
      */
@@ -1725,7 +1783,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、缺一門)
      */
@@ -1753,7 +1811,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、缺一門)
      */
@@ -1781,7 +1839,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(老少副、喜相逢、喜相逢、全帯幺、缺一門)
      */
@@ -1812,7 +1870,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(圈風刻、門風刻、幺九刻)
      */
@@ -1839,7 +1897,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(圈風刻、門風刻、幺九刻)
      */
@@ -1866,7 +1924,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(幺九刻)
      */
@@ -1895,7 +1953,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(幺九刻、混一色、四帰一)
      */
@@ -1923,7 +1981,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一般高)
      */
@@ -1952,7 +2010,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一般高、喜相逢)
      */
@@ -1983,7 +2041,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一般高、喜相逢)
      */
@@ -2014,7 +2072,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色三歩高、平和)
      */
@@ -2044,7 +2102,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色三歩高、缺一門)
      */
@@ -2074,7 +2132,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(碰碰和、一色三節高、双同刻、断幺)
      */
@@ -2100,7 +2158,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(清龍、平和)
      */
@@ -2131,7 +2189,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色双龍会)
      */
@@ -2159,7 +2217,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色双龍会、坎張)
      */
@@ -2187,7 +2245,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色双龍会、門前清)
      */
@@ -2215,7 +2273,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色三同順、平和)
      */
@@ -2243,7 +2301,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色四同順、混一色)
      */
@@ -2269,7 +2327,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(一色四同順、混一色、門前清)
      */
@@ -2294,7 +2352,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、推不倒)
      */
@@ -2322,7 +2380,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、推不倒、清一色)
      */
@@ -2350,7 +2408,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対)
      */
@@ -2378,7 +2436,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(連七対)
      */
@@ -2406,7 +2464,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(連六)
      */
@@ -2437,7 +2495,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(単調将)
      */
@@ -2469,7 +2527,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(十三幺、不求人)
      */
@@ -2503,7 +2561,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三暗刻、断幺、門前清)
      */
@@ -2530,7 +2588,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三槓、断幺)
      */
@@ -2557,7 +2615,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三槓、暗槓、断幺)
      */
@@ -2584,7 +2642,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(碰碰和、三槓、暗槓、双暗刻、断幺、自摸)
      */
@@ -2610,7 +2668,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三槓、四暗刻、断幺、不求人)
      */
@@ -2636,7 +2694,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三槓、三暗刻、断幺、門前清)
      */
@@ -2663,7 +2721,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三槓、双暗槓、断幺)
      */
@@ -2690,7 +2748,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(碰碰和、三槓、双暗槓、三暗刻、断幺、自摸)
      */
@@ -2716,7 +2774,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三色双龍会)
      */
@@ -2747,7 +2805,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三色双龍会、辺張)
      */
@@ -2778,7 +2836,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、四帰一、四帰一)
      */
@@ -2787,7 +2845,7 @@ public final class ChmYakuCheckUtilTest {
     public void testIsTileHog() {
         // あがり役：七対、四帰一、四帰一
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.SEVEN_PAIRS, ChmYaku.TILE_HOG, ChmYaku.TILE_HOG);
-        // 手牌：[1m] [1m] [1m] [1m] [4p] [4p] [4p] [4p] [6s] [6s] [白] [中] [中] 
+        // 手牌：[1m] [1m] [1m] [1m] [4p] [4p] [4p] [4p] [6s] [6s] [白] [中] [中]
         final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
             {put(JanPai.MAN_1, 4);}
             {put(JanPai.PIN_4, 4);}
@@ -2804,7 +2862,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三同刻、断幺)
      */
@@ -2831,7 +2889,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(三同刻、断幺)
      */
@@ -2858,7 +2916,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双箭刻)
      */
@@ -2888,7 +2946,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双暗槓、断幺)
      */
@@ -2915,7 +2973,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双暗槓、四暗刻、断幺、不求人)
      */
@@ -2941,7 +2999,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双暗槓、三暗刻、断幺、門前清)
      */
@@ -2968,7 +3026,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双暗刻、断幺)
      */
@@ -2995,7 +3053,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双明槓、断幺)
      */
@@ -3022,7 +3080,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双明槓、暗槓、断幺)
      */
@@ -3049,7 +3107,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(碰碰和、双明槓、暗槓、三暗刻、断幺、自摸)
      */
@@ -3075,7 +3133,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(双明槓、暗槓、双暗刻、断幺)
      */
@@ -3102,7 +3160,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(老少副)
      */
@@ -3133,7 +3191,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、大于五)
      */
@@ -3161,7 +3219,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、大于五、断幺)
      */
@@ -3189,7 +3247,7 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
     /**
      * getCompleteInfo()のテスト(七対、全大)
      */
@@ -3217,6 +3275,6 @@ public final class ChmYakuCheckUtilTest {
         final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
         assertTrue(resultList.equals(expectedResultList));
     }
-    
+
 }
 

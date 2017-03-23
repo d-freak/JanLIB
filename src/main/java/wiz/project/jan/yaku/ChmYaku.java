@@ -1,6 +1,6 @@
 /**
  * ChmYaku.java
- * 
+ *
  * @Author
  *   Masasutzu
  */
@@ -16,29 +16,29 @@ import java.util.List;
  * 役 (中国麻雀)
  */
 public enum ChmYaku {
-    
+
     // 1点役
-    
+
     /**
      * 一般高
      */
     PURE_DOUBLE_CHOW,
-    
+
     /**
      * 喜相逢
      */
     MIXED_DOUBLE_CHOW,
-    
+
     /**
      * 連六
      */
     SHORT_STRAIGHT,
-    
+
     /**
      * 老少副
      */
     TWO_TERMINAL_CHOWS,
-    
+
     /**
      * 幺九刻
      */
@@ -47,436 +47,436 @@ public enum ChmYaku {
      * 明槓
      */
     MELDED_KONG,
-    
+
     /**
      * 缺一門
      */
     ONE_VOIDED_SUIT,
-    
+
     /**
      * 無字
      */
     NO_HONORS,
-    
+
     /**
      * 辺張
      */
     EDGE_WAIT,
-    
+
     /**
      * 坎張
      */
     CLOSED_WAIT,
-    
+
     /**
      * 単調将
      */
     SINGLE_WAIT,
-    
+
     /**
      * 自摸
      */
     SELF_DRAWN,
-    
+
     /**
      * 花牌
      */
     FLOWER,
-    
-    
-    
+
+
+
     // 2点役
-    
+
     /**
      * 箭刻
      */
     DRAGON_PUNG,
-    
+
     /**
      * 圈風刻
      */
     PREVALENT_WIND,
-    
+
     /**
      * 門風刻
      */
     SEAT_WIND,
-    
+
     /**
      * 門前清
      */
     CONCEALED_HAND,
-    
+
     /**
      * 平和
      */
     ALL_CHOWS,
-    
+
     /**
      * 四帰一
      */
     TILE_HOG,
-    
+
     /**
      * 双同刻
      */
     DOUBLE_PUNG,
-    
+
     /**
      * 双暗刻
      */
     TWO_CONCEALED_PUNGS,
-    
+
     /**
      * 暗槓
      */
     CONCEALED_KONG,
-    
+
     /**
      * 断幺
      */
     ALL_SIMPLES,
-    
-    
-    
+
+
+
     // 4点役
-    
+
     /**
      * 全帯幺
      */
     OUTSIDE_HAND,
-    
+
     /**
      * 不求人
      */
     FULLY_CONCEALED,
-    
+
     /**
      * 双明槓
      */
     TWO_MELDED_KONGS,
-    
+
     /**
      * 和絶張
      */
     LAST_TILE,
-    
-    
-    
+
+
+
     // 6点役
-    
+
     /**
      * 碰碰和
      */
     ALL_PUNGS,
-    
+
     /**
      * 混一色
      */
     HALF_FLUSH,
-    
+
     /**
      * 三色三歩高
      */
     MIXED_SHIFTED_CHOWS,
-    
+
     /**
      * 五門斉
      */
     ALL_TYPES,
-    
+
     /**
      * 全求人
      */
     MELDED_HAND,
-    
+
     /**
      * 双箭刻
      */
     TWO_DRAGON_PUNGS,
-    
-    
-    
+
+
+
     // 8点役
-    
+
     /**
      * 花龍
      */
     MIXED_STRAIGHT,
-    
+
     /**
      * 推不倒
      */
     REVERSIBLE_TILES,
-    
+
     /**
      * 三色三同順
      */
     MIXED_TRIPLE_CHOW,
-    
+
     /**
      * 三色三節高
      */
     MIXED_SHIFTED_PUNGS,
-    
+
     /**
      * 無番和
      */
     CHICKEN_HAND,
-    
+
     /**
      * 妙手回春
      */
     LAST_TILE_DRAW,
-    
+
     /**
      * 海底撈月
      */
     LAST_TILE_CLAIM,
-    
+
     /**
      * 槓上開花
      */
     OUT_WITH_REPLACEMENT_TILE,
-    
+
     /**
      * 搶槓和
      */
     ROBBING_THE_KONGS,
-    
+
     /**
      * 双暗槓
      */
     TWO_CONCEALED_KONGS,
-    
-    
-    
+
+
+
     // 12点役
-    
+
     /**
      * 全不靠
      */
     LESSER_HONORS_AND_KNITTED_TILES,
-    
+
     /**
      * 組合龍
      */
     KNITTED_STRAIGHT,
-    
+
     /**
      * 大于五
      */
     UPPER_FOUR,
-    
+
     /**
      * 小于五
      */
     LOWER_FOUR,
-    
+
     /**
      * 三風刻
      */
     BIG_THREE_WINDS,
-    
-    
-    
+
+
+
     // 16点役
-    
+
     /**
      * 清龍
      */
     PURE_STRAIGHT,
-    
+
     /**
      * 三色双龍会
      */
     THREE_SUITED_TERMINAL_CHOWS,
-    
+
     /**
      * 一色三歩高
      */
     PURE_SHIFTED_CHOWS,
-    
+
     /**
      * 全帯五
      */
     ALL_FIVES,
-    
+
     /**
      * 三同刻
      */
     TRIPLE_PUNG,
-    
+
     /**
      * 三暗刻
      */
     THREE_CONCEALED_PUNGS,
-    
-    
-    
+
+
+
     // 24点役
-    
+
     /**
      * 七対
      */
     SEVEN_PAIRS,
-    
+
     /**
      * 七星不靠
      */
     GREATER_HONORS_AND_KNITTED_TILES,
-    
+
     /**
      * 全双刻
      */
     ALL_EVEN_PUNGS,
-    
+
     /**
      * 清一色
      */
     FULL_FLUSH,
-    
+
     /**
      * 一色三同順
      */
     PURE_TRIPLE_CHOW,
-    
+
     /**
      * 一色三節高
      */
     PURE_SHIFTED_PUNGS,
-    
+
     /**
      * 全大
      */
     UPPER_TILES,
-    
+
     /**
      * 全中
      */
     MIDDLE_TILES,
-    
+
     /**
      * 全小
      */
     LOWER_TILES,
-    
-    
-    
+
+
+
     // 32点役
-    
+
     /**
      * 一色四歩高
      */
     FOUR_SHIFTED_CHOWS,
-    
+
     /**
      * 三槓
      */
     THREE_KONGS,
-    
+
     /**
      * 混幺九
      */
     ALL_TERMINALS_AND_HONORS,
-    
-    
-    
+
+
+
     // 48点役
-    
+
     /**
      * 一色四同順
      */
     QUADRUPLE_CHOW,
-    
+
     /**
      * 一色四節高
      */
     FOUR_PURE_SHIFTED_PUNGS,
-    
-    
-    
+
+
+
     // 64点役
-    
+
     /**
      * 清幺九
      */
     ALL_TERMINALS,
-    
+
     /**
      * 小四喜
      */
     LITTLE_FOUR_WINDS,
-    
+
     /**
      * 小三元
      */
     LITTLE_THREE_DRAGONS,
-    
+
     /**
      * 字一色
      */
     ALL_HONORS,
-    
+
     /**
      * 四暗刻
      */
     FOUR_CONCEALED_PUNGS,
-    
+
     /**
      * 一色双龍会
      */
     PURE_TERMINAL_CHOWS,
-    
-    
-    
+
+
+
     // 88点役
-    
+
     /**
      * 大四喜
      */
     BIG_FOUR_WINDS,
-    
+
     /**
      * 大三元
      */
     BIG_THREE_DRAGONS,
-    
+
     /**
      * 緑一色
      */
     ALL_GREEN,
-    
+
     /**
      * 九連宝燈
      */
     NINE_GATES,
-    
+
     /**
      * 四槓
      */
     FOUR_KONGS,
-    
+
     /**
      * 連七対
      */
     SEVEN_SHIFTED_PAIRS,
-    
+
     /**
      * 十三幺
      */
     THIRTEEN_ORPHANS;
-    
-    
-    
+
+
+
     /**
      * 除外役リストを取得
-     * 
+     *
      * @return 除外役リスト。
      */
     public List<ChmYaku> getExcludeChmYaku() {
         final List<ChmYaku> yakuList = new ArrayList<ChmYaku>();
-        
+
         switch (this) {
         case BIG_FOUR_WINDS:
             yakuList.add(ALL_PUNGS);
@@ -621,15 +621,18 @@ public enum ChmYaku {
         case ALL_SIMPLES:
             yakuList.add(NO_HONORS);
             break;
+        case SINGLE_WAIT:
+            yakuList.add(LAST_TILE);
+            break;
         default:
             break;
         }
         return yakuList;
     }
-    
+
     /**
      * 点数を取得
-     * 
+     *
      * @return 点数。
      */
     public int getPoint() {
@@ -731,10 +734,10 @@ public enum ChmYaku {
             throw new InternalError();
         }
     }
-    
+
     /**
      * 面前限定役か
-     * 
+     *
      * @return 判定結果。
      */
     public boolean isMenZenOnly() {
@@ -753,10 +756,10 @@ public enum ChmYaku {
             return false;
         }
     }
-    
+
     /**
      * 文字列に変換
-     * 
+     *
      * @return 変換結果。
      */
     @Override
@@ -928,15 +931,15 @@ public enum ChmYaku {
             throw new InternalError();
         }
     }
-    
+
     /**
      * 英語名の文字列に変換
-     * 
+     *
      * @return 変換結果。
      */
     public String toStringUS() {
         String string = "";
-        
+
         for (String splited : name().split("_")) {
             if (splited.equals("ALL")) {
                 splited = "A_LL";
@@ -945,5 +948,5 @@ public enum ChmYaku {
         }
         return string;
     }
-    
+
 }
