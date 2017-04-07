@@ -803,5 +803,85 @@ public enum JanPai {
         }
     }
     
+    /**
+     * 括弧なしの文字列に変換
+     * 
+     * @return 変換結果。
+     */
+    public String toStringWithoutBracket() {
+        switch (this) {
+        case MAN_1:
+            return "1m";
+        case MAN_2:
+            return "2m";
+        case MAN_3:
+            return "3m";
+        case MAN_4:
+            return "4m";
+        case MAN_5:
+            return "5m";
+        case MAN_6:
+            return "6m";
+        case MAN_7:
+            return "7m";
+        case MAN_8:
+            return "8m";
+        case MAN_9:
+            return "9m";
+        case PIN_1:
+            return "1p";
+        case PIN_2:
+            return "2p";
+        case PIN_3:
+            return "3p";
+        case PIN_4:
+            return "4p";
+        case PIN_5:
+            return "5p";
+        case PIN_6:
+            return "6p";
+        case PIN_7:
+            return "7p";
+        case PIN_8:
+            return "8p";
+        case PIN_9:
+            return "9p";
+        case SOU_1:
+            return "1s";
+        case SOU_2:
+            return "2s";
+        case SOU_3:
+            return "3s";
+        case SOU_4:
+            return "4s";
+        case SOU_5:
+            return "5s";
+        case SOU_6:
+            return "6s";
+        case SOU_7:
+            return "7s";
+        case SOU_8:
+            return "8s";
+        case SOU_9:
+            return "9s";
+        case TON:
+            return "ton";
+        case NAN:
+            return "nan";
+        case SHA:
+            return "sha";
+        case PEI:
+            return "pe";
+        case HAKU:
+            return "haku";
+        case HATU:
+            return "hatu";
+        case CHUN:
+            return "chun";
+        default:
+            throw new InternalError();
+        }
+    }
+    
 }
 
