@@ -731,59 +731,59 @@ public enum JanPai {
     public String toString() {
         switch (this) {
         case MAN_1:
-            return "[1m]";
+            return "[一]";
         case MAN_2:
-            return "[2m]";
+            return "[二]";
         case MAN_3:
-            return "[3m]";
+            return "[三]";
         case MAN_4:
-            return "[4m]";
+            return "[四]";
         case MAN_5:
-            return "[5m]";
+            return "[五]";
         case MAN_6:
-            return "[6m]";
+            return "[六]";
         case MAN_7:
-            return "[7m]";
+            return "[七]";
         case MAN_8:
-            return "[8m]";
+            return "[八]";
         case MAN_9:
-            return "[9m]";
+            return "[九]";
         case PIN_1:
-            return "[1p]";
+            return "[①]";
         case PIN_2:
-            return "[2p]";
+            return "[②]";
         case PIN_3:
-            return "[3p]";
+            return "[③]";
         case PIN_4:
-            return "[4p]";
+            return "[④]";
         case PIN_5:
-            return "[5p]";
+            return "[⑤]";
         case PIN_6:
-            return "[6p]";
+            return "[⑥]";
         case PIN_7:
-            return "[7p]";
+            return "[⑦]";
         case PIN_8:
-            return "[8p]";
+            return "[⑧]";
         case PIN_9:
-            return "[9p]";
+            return "[⑨]";
         case SOU_1:
-            return "[1s]";
+            return "[１]";
         case SOU_2:
-            return "[2s]";
+            return "[２]";
         case SOU_3:
-            return "[3s]";
+            return "[３]";
         case SOU_4:
-            return "[4s]";
+            return "[４]";
         case SOU_5:
-            return "[5s]";
+            return "[５]";
         case SOU_6:
-            return "[6s]";
+            return "[６]";
         case SOU_7:
-            return "[7s]";
+            return "[７]";
         case SOU_8:
-            return "[8s]";
+            return "[８]";
         case SOU_9:
-            return "[9s]";
+            return "[９]";
         case TON:
             return "[東]";
         case NAN:
