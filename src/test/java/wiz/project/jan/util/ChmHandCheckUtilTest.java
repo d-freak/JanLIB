@@ -7,7 +7,7 @@
 
 package wiz.project.jan.util;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +25,29 @@ import wiz.project.jan.JanPai;
  * ChmHandCheckUtilのテスト
  */
 public final class ChmHandCheckUtilTest {
+    
+    /**
+     * isComplete()のテスト(清一色の潜在バグ)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsComplete() {
+        // あがり牌：[2m] [3m] [6m] [9m]
+        List<JanPai> expectedResultList = Arrays.asList(JanPai.MAN_2, JanPai.MAN_3, JanPai.MAN_6, JanPai.MAN_9);
+        // 手牌：[2m] [2m] [3m] [3m] [3m] [4m] [5m] [5m] [6m] [6m] [7m] [7m] [8m]
+        Map<JanPai, Integer> hand = new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_2, 2);}
+            {put(JanPai.MAN_3, 3);}
+            {put(JanPai.MAN_4, 1);}
+            {put(JanPai.MAN_5, 2);}
+            {put(JanPai.MAN_6, 2);}
+            {put(JanPai.MAN_7, 2);}
+            {put(JanPai.MAN_8, 1);}
+        };
+        List<JanPai> resultList = new ArrayList<JanPai>();
+        resultList = ChmHandCheckUtil.getCompletableJanPaiList(hand);
+        assertTrue(resultList.equals(expectedResultList));
+    }
     
     /**
      * isComplete()のテスト(組合龍、余剰面子が順子)
