@@ -7,7 +7,7 @@
 
 package wiz.project.jan.util;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1143,7 +1143,7 @@ public final class ChmYakuCheckUtilTest {
     }
 
     /**
-     * getCompleteInfo()のテスト(組合龍、坎張)
+     * getCompleteInfo()のテスト(組合龍、坎張、面前清)
      */
     @SuppressWarnings("serial")
     @Test
@@ -1164,7 +1164,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.SOU_1, 1);}
             {put(JanPai.SOU_4, 1);}
             {put(JanPai.SOU_7, 3);}}, mentsuList);
-        // あがり：[8m]ロン
+        // あがり：[8m]面前ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_8, 2, CompleteType.RON_MENZEN);
         // 自風：東
         final Wind playerWind = Wind.TON;
@@ -1175,7 +1175,7 @@ public final class ChmYakuCheckUtilTest {
     }
 
     /**
-     * getCompleteInfo()のテスト(組合龍、辺張)
+     * getCompleteInfo()のテスト(組合龍、辺張、面前清)
      */
     @SuppressWarnings("serial")
     @Test
@@ -1196,7 +1196,7 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.SOU_1, 1);}
             {put(JanPai.SOU_4, 1);}
             {put(JanPai.SOU_7, 3);}}, mentsuList);
-        // あがり：[3p]ロン
+        // あがり：[3p]面前ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.PIN_3, 2, CompleteType.RON_MENZEN);
         // 自風：東
         final Wind playerWind = Wind.TON;
@@ -2138,7 +2138,7 @@ public final class ChmYakuCheckUtilTest {
      */
     @SuppressWarnings("serial")
     @Test
-    public void testIsPureShiftedPungs() {
+    public void testIsPureShiftedPungs1() {
         // あがり役：碰碰和、一色三節高、双同刻、断幺
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.ALL_PUNGS, ChmYaku.PURE_SHIFTED_PUNGS, ChmYaku.DOUBLE_PUNG, ChmYaku.ALL_SIMPLES);
         final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
@@ -2151,6 +2151,32 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.SOU_8, 2);}}, mentsuList);
         // あがり：[4m]ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_4, 1, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+
+    /**
+     * getCompleteInfo()のテスト(碰碰和、一色三節高、双同刻、断幺、面前清)
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsPureShiftedPungs2() {
+        // あがり役：碰碰和、一色三節高、双同刻、断幺、面前清
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.ALL_PUNGS, ChmYaku.PURE_SHIFTED_PUNGS, ChmYaku.DOUBLE_PUNG, ChmYaku.ALL_SIMPLES, ChmYaku.CONCEALED_HAND);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        // 手牌：[2m] [2m] [2m] [3m] [3m] [3m] [4m] [4m] [2p] [2p] [2p] [8s] [8s]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.MAN_2, 3);}
+            {put(JanPai.MAN_3, 3);}
+            {put(JanPai.MAN_4, 2);}
+            {put(JanPai.PIN_2, 3);}
+            {put(JanPai.SOU_8, 2);}}, mentsuList);
+        // あがり：[4m]面前ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.MAN_4, 1, CompleteType.RON_MENZEN);
         // 自風：東
         final Wind playerWind = Wind.TON;
         // 場風：東
