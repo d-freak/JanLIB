@@ -117,7 +117,7 @@ public enum Yaku {
     /**
      * 三色同刻 (サンショクドーコー)
      */
-    SHAN_SHOKU_DOU_KOU,
+    SAN_SHOKU_DOU_KOU,
     
     /**
      * 三槓子 (サンカンツ)
@@ -270,7 +270,7 @@ public enum Yaku {
         case TOI_TOI:
         case SAN_AN_KOU:
         case HON_ROU_TOU:
-        case SHAN_SHOKU_DOU_KOU:
+        case SAN_SHOKU_DOU_KOU:
         case SAN_KAN_TSU:
         case SHOU_SAN_GEN:
         case DOUBLE_RICHI:
@@ -442,7 +442,7 @@ public enum Yaku {
             return "三暗刻";
         case HON_ROU_TOU:
             return "混老頭";
-        case SHAN_SHOKU_DOU_KOU:
+        case SAN_SHOKU_DOU_KOU:
             return "三色同刻";
         case SAN_KAN_TSU:
             return "三槓子";
