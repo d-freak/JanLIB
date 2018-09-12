@@ -2160,7 +2160,7 @@ public final class ChmYakuCheckUtilTest {
     }
 
     /**
-     * getCompleteInfo()のテスト(碰碰和、一色三節高、双同刻、断幺、面前清)
+     * getCompleteInfo()のテスト(碰碰和、一色三節高、双同刻、断幺、面前清) ※ 一色三同順と判定するバグ
      */
     @SuppressWarnings("serial")
     @Test
@@ -3058,7 +3058,7 @@ public final class ChmYakuCheckUtilTest {
      */
     @SuppressWarnings("serial")
     @Test
-    public void testIsTwoConcealedPungs() {
+    public void testIsTwoConcealedPungs1() {
         // あがり役：双暗刻、断幺
         final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.TWO_CONCEALED_PUNGS, ChmYaku.ALL_SIMPLES);
         final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
@@ -3072,6 +3072,32 @@ public final class ChmYakuCheckUtilTest {
             {put(JanPai.SOU_3, 1);}}, mentsuList);
         // あがり：[4s]ロン
         final CompleteJanPai pai = new CompleteJanPai(JanPai.SOU_4, 3, CompleteType.RON_NOT_MENZEN);
+        // 自風：東
+        final Wind playerWind = Wind.TON;
+        // 場風：東
+        final Wind fieldWind = Wind.TON;
+        final List<ChmYaku> resultList = ChmHandCheckUtil.getCompleteInfo(hand, pai, playerWind, fieldWind).getYakuList();
+        assertTrue(resultList.equals(expectedResultList));
+    }
+
+    /**
+     * getCompleteInfo()のテスト(双暗刻、断幺、清一色、四帰一、四帰一) ※ 双暗刻が判定されないバグ
+     */
+    @SuppressWarnings("serial")
+    @Test
+    public void testIsTwoConcealedPungs2() {
+        // あがり役：双暗刻、断幺、清一色、四帰一、四帰一
+        final List<ChmYaku> expectedResultList = Arrays.asList(ChmYaku.TWO_CONCEALED_KONGS, ChmYaku.ALL_SIMPLES, ChmYaku.FULL_FLUSH, ChmYaku.TILE_HOG, ChmYaku.TILE_HOG);
+        final List<MenTsu> mentsuList = new ArrayList<MenTsu>();
+        mentsuList.add(new MenTsu(Arrays.asList(JanPai.PIN_5, JanPai.PIN_5, JanPai.PIN_5), MenTsuType.PON));
+        // 手牌：[2p] [2p] [6p] [7p] [7p] [7p] [7p] [8p] [8p] [8p]  [5p][5p][5p]
+        final Hand hand = new Hand(new HashMap<JanPai, Integer>() {
+            {put(JanPai.PIN_2, 2);}
+            {put(JanPai.PIN_6, 1);}
+            {put(JanPai.PIN_7, 4);}
+            {put(JanPai.PIN_8, 3);}}, mentsuList);
+        // あがり：[8p]ロン
+        final CompleteJanPai pai = new CompleteJanPai(JanPai.PIN_8, 3, CompleteType.RON_NOT_MENZEN);
         // 自風：東
         final Wind playerWind = Wind.TON;
         // 場風：東
